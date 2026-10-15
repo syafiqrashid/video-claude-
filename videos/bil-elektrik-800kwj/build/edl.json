@@ -1,0 +1,85 @@
+{
+ "total": 110.15,
+ "pieces": [
+  {
+   "src_in": 8.5,
+   "src_out": 11.0,
+   "out_start": 0.0
+  },
+  {
+   "src_in": 11.85,
+   "src_out": 14.0,
+   "out_start": 2.5
+  },
+  {
+   "src_in": 14.35,
+   "src_out": 15.8,
+   "out_start": 4.65
+  },
+  {
+   "src_in": 16.3,
+   "src_out": 17.85,
+   "out_start": 6.1
+  },
+  {
+   "src_in": 18.5,
+   "src_out": 20.45,
+   "out_start": 7.65
+  },
+  {
+   "src_in": 20.9,
+   "src_out": 27.1,
+   "out_start": 9.6
+  },
+  {
+   "src_in": 27.8,
+   "src_out": 37.2,
+   "out_start": 15.8
+  },
+  {
+   "src_in": 37.95,
+   "src_out": 39.85,
+   "out_start": 25.2
+  },
+  {
+   "src_in": 40.15,
+   "src_out": 43.55,
+   "out_start": 27.1
+  },
+  {
+   "src_in": 45.1,
+   "src_out": 49.45,
+   "out_start": 30.5
+  },
+  {
+   "src_in": 50.25,
+   "src_out": 55.75,
+   "out_start": 34.85
+  },
+  {
+   "src_in": 65.0,
+   "src_out": 95.1,
+   "out_start": 40.35
+  },
+  {
+   "src_in": 133.15,
+   "src_out": 133.8,
+   "out_start": 70.45
+  },
+  {
+   "src_in": 134.15,
+   "src_out": 142.0,
+   "out_start": 71.1
+  },
+  {
+   "src_in": 142.65,
+   "src_out": 145.3,
+   "out_start": 78.95
+  },
+  {
+   "src_in": 199.45,
+   "src_out": 228.0,
+   "out_start": 81.6
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ms">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; font-family: Montserrat, sans-serif; color: #fff8e7; }
+#root {
+        --navy: #0e1b3d;
+        --navy2: #16285a;
+        --cream: #fff8e7;
+        --yellow: #ffd23f;
+        --green: #3ddc84;
+      }
+      /* captions */
+      .cap { position: absolute; left: 0; top: 1440px; width: 1080px; height: 220px; display: flex; justify-content: center; align-items: flex-start; }
+      .capin {
+        max-width: 960px; text-align: center; font-weight: 900; font-size: 68px; line-height: 1.15; letter-spacing: 0.01em;
+        color: var(--cream); background: rgba(14,27,61,0.78); padding: 10px 28px 14px; border-radius: 22px;
+      }
+      .w { display: inline-block; margin: 0 0.13em; }
+    
+      </style>
+      <div data-hf-id="hf-i7np" id="root" data-composition-id="caps" data-width="1080" data-height="1920" data-duration="{{TOTAL}}">
+{{CAPTIONS}}
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+{{JS}}
+        window.__timelines["caps"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

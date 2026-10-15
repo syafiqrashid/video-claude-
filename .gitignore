@@ -1,0 +1,4 @@
+src_dl/
+.hyperframes/
+**/preview/*.mp4
+node_modules/

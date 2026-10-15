@@ -44,7 +44,7 @@ PUNCH = {
 vids, js = [], []
 for s in E["edl"]:
     i = s["id"]
-    vids.append(f'''      <div class="vw" id="vw-{i}"><video id="{i}" class="clip vid" src="assets/footage/{s["src"]}.mp4" data-start="{s["start"]}" data-duration="{s["dur"]}" data-media-start="{s["mi"]}"{f' data-playback-rate="{s["rate"]}"' if s["rate"] != 1 else ""} data-track-index="0" playsinline data-has-audio="true"></video></div>''')
+    vids.append(f'''      <div class="vw" id="vw-{i}"><video id="{i}" class="clip vid" src="assets/footage/{s["src"]}.mp4" data-start="{s["start"]}" data-duration="{s["dur"]}" data-media-start="{s["mi"]}"{f' data-playback-rate="{s["rate"]}"' if s["rate"] != 1 else ""} data-track-index="0" playsinline data-has-audio="true" data-audio-group="voice"></video></div>''')
     for t, a, b, d in PUNCH[i]:
         if d:
             js.append(f'tl.fromTo("#vw-{i}", {{scale:{a}}}, {{scale:{b}, duration:{d}, ease:"power2.out"}}, {T(t)});')
@@ -78,6 +78,18 @@ for n, (t, f, v) in enumerate(SFX):
     t = T(t)
     d = min(SFX_DUR[f], TOTAL - t)
     sfx_html.append(f'      <audio id="sfx{n}" src="assets/sfx/{f}.mp3" data-start="{t}" data-duration="{d:.2f}" data-track-index="{9 + n % 2}" data-volume="{v}"></audio>')
+
+# ---------------------------------------------------------------- music bed (santai)
+import os
+music_html = ""
+if os.path.exists("assets/music/bed.mp3"):
+    UNDER, LIFT = 0.30, 0.62          # under speech / during mangga + sapu (no talking)
+    pts = [(0, 0.0), (0.6, UNDER)]
+    for a, b in ((T(42.6), T(49.45)), (T(77.2), T(88.75))):
+        pts += [(a, UNDER), (a + .5, LIFT), (b - .5, LIFT), (b, UNDER)]
+    pts += [(TOTAL - 1.6, UNDER), (TOTAL, 0.0)]
+    lane = json.dumps({"version": 1, "lanes": [{"target": "volume", "points": [{"t": round(t, 3), "v": v} for t, v in pts]}]}, separators=(",", ":"))
+    music_html = f"""      <audio id="music-bed" src="assets/music/bed.mp3" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="1" data-automation='{lane}'></audio>"""
 
 # ---------------------------------------------------------------- graphics
 G = []  # (id, start, end, inner_html, js_lines(t0)->list)
@@ -299,7 +311,9 @@ page = f'''<!doctype html>
 {chr(10).join(cap_html)}
       <!-- tracks 2-4: motion graphics -->
 {chr(10).join(g_html)}
-      <!-- track 9: sound fx -->
+      <!-- track 11: music bed -->
+{music_html}
+      <!-- track 9-10: sound fx -->
 {chr(10).join(sfx_html)}
     </div>
     <script>

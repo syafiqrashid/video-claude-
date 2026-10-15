@@ -31,8 +31,9 @@
 - Caption karaoke (perkataan aktif kuning). Transkripsi dibetulkan: "Ahmadiyah"→MADANI, "hak"→had, dll.
 - Punch-in zoom pada jump cut untuk sembunyikan potongan.
 - SFX: whoosh, pop, impact, ping, chime, notification (Pixabay license).
-- **Tiada muzik latar** — boleh tambah kalau nak (beritahu mood).
+- **Muzik latar (pilihan A, santai):** akustik/ukulele ~79 BPM, dijana sendiri dengan MusicGen (bebas lesen), di-loop ikut bar (8 bar) supaya rentak tak tersadung. Fail: `assets/music/bed.mp3`.
+  - Voiceover carve: muzik beri ruang pada frekuensi suara (160–630 Hz) dan turun bila bercakap; naik sedikit masa jolok mangga & sapu sampah. Fade in/out di awal & hujung.
 
 ## Fail
 - `index.html` — dijana oleh `tools/build.py` (grafik/SFX/caption) daripada `tools/edl.json` (`tools/edl.py` = senarai potongan).
-- Ubah potongan → edit `SEGS` dalam `tools/edl.py`, run `python3 tools/edl.py tools/transcripts` kemudian `python3 tools/build.py`.
+- Ubah potongan → edit `SEGS` dalam `tools/edl.py`, kemudian run `tools/build.sh` (bina semula + carve muzik; perlukan `@hyperframes/core`, set `CORE=<dir>`).

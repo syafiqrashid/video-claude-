@@ -7,7 +7,7 @@
    "mi": 7.25,
    "mo": 10.95,
    "start": 0.0,
-   "dur": 3.7,
+   "dur": 3.699,
    "rate": 1.0,
    "start1x": 0.0,
    "label": "hook-a"
@@ -18,7 +18,7 @@
    "mi": 11.65,
    "mo": 27.15,
    "start": 3.7,
-   "dur": 15.5,
+   "dur": 15.499,
    "rate": 1.0,
    "start1x": 3.7,
    "label": "berita-baik"
@@ -29,7 +29,7 @@
    "mi": 27.95,
    "mo": 37.25,
    "start": 19.2,
-   "dur": 9.3,
+   "dur": 9.299,
    "rate": 1.0,
    "start1x": 19.2,
    "label": "600-800"
@@ -40,7 +40,7 @@
    "mi": 38.7,
    "mo": 43.35,
    "start": 28.5,
-   "dur": 4.65,
+   "dur": 4.649,
    "rate": 1.0,
    "start1x": 28.5,
    "label": "panas"
@@ -51,7 +51,7 @@
    "mi": 45.2,
    "mo": 49.55,
    "start": 33.15,
-   "dur": 4.35,
+   "dur": 4.349,
    "rate": 1.0,
    "start1x": 33.15,
    "label": "aircon"
@@ -62,7 +62,7 @@
    "mi": 50.45,
    "mo": 55.55,
    "start": 37.5,
-   "dur": 5.1,
+   "dur": 5.099,
    "rate": 1.0,
    "start1x": 37.5,
    "label": "ruang-tambahan"
@@ -73,7 +73,7 @@
    "mi": 57.9,
    "mo": 77.85,
    "start": 42.6,
-   "dur": 19.95,
+   "dur": 19.949,
    "rate": 1.0,
    "start1x": 42.6,
    "label": "mangga+3caj"
@@ -84,7 +84,7 @@
    "mi": 80.1,
    "mo": 94.75,
    "start": 62.55,
-   "dur": 14.65,
+   "dur": 14.649,
    "rate": 1.0,
    "start1x": 62.55,
    "label": "3caj"
@@ -95,7 +95,7 @@
    "mi": 97.95,
    "mo": 105.4,
    "start": 77.2,
-   "dur": 4.967,
+   "dur": 4.966,
    "rate": 1.5,
    "start1x": 77.2,
    "label": "sapu-1"
@@ -106,7 +106,7 @@
    "mi": 115.5,
    "mo": 119.1,
    "start": 82.167,
-   "dur": 2.4,
+   "dur": 2.399,
    "rate": 1.5,
    "start1x": 84.65,
    "label": "sapu-2"
@@ -117,7 +117,7 @@
    "mi": 125.0,
    "mo": 131.25,
    "start": 84.567,
-   "dur": 4.167,
+   "dur": 4.165,
    "rate": 1.5,
    "start1x": 88.25,
    "label": "sapu-3"
@@ -128,7 +128,7 @@
    "mi": 131.25,
    "mo": 144.95,
    "start": 88.733,
-   "dur": 13.7,
+   "dur": 13.699,
    "rate": 1.0,
    "start1x": 94.5,
    "label": "pesan"
@@ -139,7 +139,7 @@
    "mi": 154.45,
    "mo": 155.45,
    "start": 102.433,
-   "dur": 1.0,
+   "dur": 0.999,
    "rate": 1.0,
    "start1x": 108.2,
    "label": "kesimpulannya"
@@ -150,7 +150,7 @@
    "mi": 13.0,
    "mo": 41.0,
    "start": 103.433,
-   "dur": 28.0,
+   "dur": 27.999,
    "rate": 1.0,
    "start1x": 109.2,
    "label": "kesimpulan-v2"

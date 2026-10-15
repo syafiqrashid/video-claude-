@@ -71,6 +71,10 @@ clean=[]
 for c in caps:
     if clean and c[0]=="kWh" and clean[-1][0]=="kWh": continue
     clean.append(c)
+# make clips butt exactly (rounded starts, durations as differences)
+for k,e in enumerate(edl):
+    nxt = edl[k+1]["start"] if k+1 < len(edl) else round(t,3)
+    e["dur"] = round(nxt - e["start"] - 0.001, 3)  # 1ms guard vs float overlap
 json.dump(dict(total=round(t,3),edl=edl,words=clean),open("tools/edl.json","w"),ensure_ascii=False,indent=1)
 print("TOTAL",round(t,2))
 for e in edl: print(f'{e["id"]:4} {e["src"]} {e["mi"]:7.2f}-{e["mo"]:7.2f} x{e["rate"]} -> out {e["start"]:7.2f} (+{e["dur"]:.2f}) {e["label"]}')

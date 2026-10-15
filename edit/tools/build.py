@@ -83,13 +83,13 @@ for n, (t, f, v) in enumerate(SFX):
 import os
 music_html = ""
 if os.path.exists("assets/music/bed.mp3"):
-    UNDER, LIFT = 0.30, 0.62          # under speech / during mangga + sapu (no talking)
+    UNDER, LIFT = 0.80, 1.0           # carve ducks under speech; small lift in mangga + sapu
     pts = [(0, 0.0), (0.6, UNDER)]
-    for a, b in ((T(42.6), T(49.45)), (T(77.2), T(88.75))):
+    for a, b in ((T(42.6), T(49.45)), (T(77.2), T(94.75))):
         pts += [(a, UNDER), (a + .5, LIFT), (b - .5, LIFT), (b, UNDER)]
     pts += [(TOTAL - 1.6, UNDER), (TOTAL, 0.0)]
     lane = json.dumps({"version": 1, "lanes": [{"target": "volume", "points": [{"t": round(t, 3), "v": v} for t, v in pts]}]}, separators=(",", ":"))
-    music_html = f"""      <audio id="music-bed" src="assets/music/bed.mp3" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="1" data-automation='{lane}'></audio>"""
+    music_html = f"""      <audio id="music-bed" src="assets/music/bed.mp3" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="0.5" data-automation='{lane}'></audio>"""
 
 # ---------------------------------------------------------------- graphics
 G = []  # (id, start, end, inner_html, js_lines(t0)->list)

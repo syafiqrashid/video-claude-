@@ -51,7 +51,7 @@ def o(src):
 # ---------------------------------------------------------------- captions
 FIX = {  # word start (src) -> corrected text ; None drops the word
     9.02: "bil", 10.14: "mendadak", 16.94: "MADANI", 25.18: "Disember",
-    38.78: "korang", 38.94: None, 41.70: "kering", 46.10: "aircond", 46.30: None,
+    38.78: "korang", 38.94: None, 41.70: "gila", 46.10: "aircond", 46.30: None,
     46.40: "korang", 46.60: None, 77.48: "ialah", 79.76: "caj", 82.54: "pelarasan",
     87.16: "caj", 90.28: "caj", 75.88: "caj", 91.14: "SST.", 93.86: "isi", 94.24: "dilindungi", 94.36: None,
     134.66: "had", 218.38: "dilindungi", 218.60: None, 221.90: "MADANI",

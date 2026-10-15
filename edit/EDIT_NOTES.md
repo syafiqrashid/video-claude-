@@ -26,13 +26,13 @@
 - **V2 0–13s** — kamera tengah set ("Apa lah, terbalik pula. Tengah-tengah").
 
 ## Teknikal
-- Audio suara: noise reduction ringan + loudness −15 LUFS.
+- Audio suara (v2): **DeepFilterNet3** (AI buang bunyi latar, SNR ~15 → ~43 dB) + EQ kejelasan (potong 220 Hz, naikkan 3.2 kHz & 6.5 kHz) + compressor + −15 LUFS. Skrip: `tools/voice.sh`.
 - Footage iPhone HDR (HLG) → tone-map ke SDR BT.709 supaya warna betul di semua platform.
 - Caption karaoke (perkataan aktif kuning). Transkripsi dibetulkan: "Ahmadiyah"→MADANI, "hak"→had, dll.
 - Punch-in zoom pada jump cut untuk sembunyikan potongan.
 - SFX: whoosh, pop, impact, ping, chime, notification (Pixabay license).
 - **Muzik latar (pilihan A, santai):** akustik/ukulele ~79 BPM, dijana sendiri dengan MusicGen (bebas lesen), di-loop ikut bar (8 bar) supaya rentak tak tersadung. Fail: `assets/music/bed.mp3`.
-  - Voiceover carve: muzik beri ruang pada frekuensi suara (160–630 Hz) dan turun bila bercakap; naik sedikit masa jolok mangga & sapu sampah. Fade in/out di awal & hujung.
+  - Voiceover carve: muzik beri ruang pada frekuensi suara (160–630 Hz) dan turun bila bercakap (carve 0.7, volume 0.42); naik sedikit masa jolok mangga & sapu sampah. Fade in/out di awal & hujung.
 
 ## Fail
 - `index.html` — dijana oleh `tools/build.py` (grafik/SFX/caption) daripada `tools/edl.json` (`tools/edl.py` = senarai potongan).

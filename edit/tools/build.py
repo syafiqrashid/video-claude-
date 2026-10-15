@@ -89,7 +89,7 @@ if os.path.exists("assets/music/bed.mp3"):
         pts += [(a, UNDER), (a + .5, LIFT), (b - .5, LIFT), (b, UNDER)]
     pts += [(TOTAL - 1.6, UNDER), (TOTAL, 0.0)]
     lane = json.dumps({"version": 1, "lanes": [{"target": "volume", "points": [{"t": round(t, 3), "v": v} for t, v in pts]}]}, separators=(",", ":"))
-    music_html = f"""      <audio id="music-bed" src="assets/music/bed.mp3" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="0.5" data-automation='{lane}'></audio>"""
+    music_html = f"""      <audio id="music-bed" src="assets/music/bed.mp3" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="0.42" data-automation='{lane}'></audio>"""
 
 # ---------------------------------------------------------------- graphics
 G = []  # (id, start, end, inner_html, js_lines(t0)->list)

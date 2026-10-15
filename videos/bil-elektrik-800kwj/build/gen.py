@@ -9,6 +9,8 @@ import json, html, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 W, H = 1080, 1920
+# HQ: use the AI-upscaled per-piece clips in assets/hq/ (built by build/upscale.py)
+HQ = os.path.exists(os.path.join(ROOT, "assets", "hq", "p%02d.mp4" % 15))
 
 # ---------------------------------------------------------------- cut list
 # (src_in, src_out, zoom) — retakes, false starts, b-roll and dead air removed.
@@ -363,7 +365,7 @@ for at in (n8, o(215.58)):  # emphasis punch on the 800 reveal
 
 # ---------------------------------------------------------------- assemble
 vid_html = "\n".join(
-    f'<video id="v{i}" class="vid" src="assets/source.mp4" data-start="{s:.3f}" data-duration="{(starts[i+1] if i+1<len(starts) else TOTAL)-s:.3f}" data-media-start="{a:.3f}" data-track-index="{i % 2}" playsinline data-has-audio="true"></video>'
+    f'<video id="v{i}" class="vid" src="{('assets/hq/p%02d.mp4' % i) if HQ else 'assets/source.mp4'}" data-start="{s:.3f}" data-duration="{(starts[i+1] if i+1<len(starts) else TOTAL)-s:.3f}" data-media-start="{0 if HQ else a:.3f}" data-track-index="{i % 2}" playsinline data-has-audio="true"></video>'
     for i, ((a, b, _), s) in enumerate(zip(PIECES, starts)))
 sfx_html = "\n".join(
     f'<audio id="sfx{i}" src="assets/sfx/{n}.mp3" data-start="{st:.3f}" data-duration="{min(d, TOTAL-st):.3f}" data-track-index="{20+i}" data-volume="{v}"></audio>'

@@ -3,3 +3,4 @@ src_dl/
 **/preview/*.mp4
 node_modules/
 **/renders/*.mp4
+**/assets/hq/

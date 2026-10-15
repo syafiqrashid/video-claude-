@@ -6,6 +6,21 @@ E = json.load(open("tools/edl.json"))
 TOTAL = E["total"]
 SEG = {s["id"]: s for s in E["edl"]}
 
+def T(x):
+    """map a time on the all-1x timeline to the real (speed-adjusted) timeline"""
+    if x >= 88.5:  # cues after the sweep were authored when sapu-2 ran to 119.35 (0.25s longer)
+        x -= 0.25
+    for e in E["edl"]:
+        d1 = e["mo"] - e["mi"]
+        if e["start1x"] - 1e-6 <= x < e["start1x"] + d1 + 1e-6:
+            return round(e["start"] + (x - e["start1x"]) / e["rate"], 3)
+    return TOTAL
+
+import re
+POS = re.compile(r", (-?\d+(?:\.\d+)?)\);$")
+def remap_js(line):
+    return POS.sub(lambda m: f", {T(float(m.group(1)))});", line)
+
 YEL, NAVY, GRN, RED, WHT = "#FFD60A", "#0A1A3A", "#22C55E", "#FF3B3B", "#FFFFFF"
 
 # ---------------------------------------------------------------- video
@@ -21,19 +36,20 @@ PUNCH = {
     "c7": [(62.55, 1.12, 1.12, 0), (68.85, 1.0, 1.0, 0), (74.0, 1.15, 1.15, 0)],
     "c8": [(77.20, 1.0, 1.0, 0)],
     "c9": [(84.65, 1.0, 1.0, 0)],
-    "c10": [(88.50, 1.0, 1.0, 0), (94.80, 1.14, 1.14, 0), (102.3, 1.0, 1.0, 0), (105.3, 1.18, 1.18, 0)],
-    "c11": [(108.45, 1.28, 1.28, 0)],
-    "c12": [(109.45, 1.0, 1.0, 0), (114.0, 1.12, 1.12, 0), (122.2, 1.0, 1.0, 0), (129.7, 1.12, 1.12, 0), (133.7, 1.0, 1.0, 0)],
+    "c10": [(88.50, 1.0, 1.0, 0)],
+    "c11": [(94.80, 1.14, 1.14, 0), (102.3, 1.0, 1.0, 0), (105.3, 1.18, 1.18, 0)],
+    "c12": [(108.45, 1.28, 1.28, 0)],
+    "c13": [(109.45, 1.0, 1.0, 0), (114.0, 1.12, 1.12, 0), (122.2, 1.0, 1.0, 0), (129.7, 1.12, 1.12, 0), (133.7, 1.0, 1.0, 0)],
 }
 vids, js = [], []
 for s in E["edl"]:
     i = s["id"]
-    vids.append(f'''      <div class="vw" id="vw-{i}"><video id="{i}" class="clip vid" src="assets/footage/{s["src"]}.mp4" data-start="{s["start"]}" data-duration="{s["dur"]}" data-media-start="{s["mi"]}" data-track-index="0" playsinline data-has-audio="true"></video></div>''')
+    vids.append(f'''      <div class="vw" id="vw-{i}"><video id="{i}" class="clip vid" src="assets/footage/{s["src"]}.mp4" data-start="{s["start"]}" data-duration="{s["dur"]}" data-media-start="{s["mi"]}"{f' data-playback-rate="{s["rate"]}"' if s["rate"] != 1 else ""} data-track-index="0" playsinline data-has-audio="true"></video></div>''')
     for t, a, b, d in PUNCH[i]:
         if d:
-            js.append(f'tl.fromTo("#vw-{i}", {{scale:{a}}}, {{scale:{b}, duration:{d}, ease:"power2.out"}}, {t});')
+            js.append(f'tl.fromTo("#vw-{i}", {{scale:{a}}}, {{scale:{b}, duration:{d}, ease:"power2.out"}}, {T(t)});')
         else:
-            js.append(f'tl.set("#vw-{i}", {{scale:{a}}}, {t});')
+            js.append(f'tl.set("#vw-{i}", {{scale:{a}}}, {T(t)});')
 
 # ---------------------------------------------------------------- sfx
 SFX_DUR = {"impact-bass-1": 2.12, "impact-bass-2": 2.59, "whoosh": .57, "whoosh-short": .57, "pop": .72,
@@ -59,6 +75,7 @@ SFX = [  # (output time, file, volume)
 ]
 sfx_html = []
 for n, (t, f, v) in enumerate(SFX):
+    t = T(t)
     d = min(SFX_DUR[f], TOTAL - t)
     sfx_html.append(f'      <audio id="sfx{n}" src="assets/sfx/{f}.mp3" data-start="{t}" data-duration="{d:.2f}" data-track-index="{9 + n % 2}" data-volume="{v}"></audio>')
 
@@ -223,9 +240,10 @@ card("g-share", 133.75, TOTAL, f'''
 
 g_html = []
 for n, (gid, a, b, inner, anim, cls) in enumerate(G):
-    g_html.append(f'      <div id="{gid}" class="clip gfx {cls}" data-start="{a}" data-duration="{round(b-a,3)}" data-track-index="{2 + n % 3}">{inner}\n      </div>')
+    ra, rb = T(a), (TOTAL if b >= TOTAL - 1e-6 else T(b))
+    g_html.append(f'      <div id="{gid}" class="clip gfx {cls}" data-start="{ra}" data-duration="{round(rb-ra,3)}" data-track-index="{2 + n % 3}">{inner}\n      </div>')
     if anim:
-        js.extend(anim(a, b))
+        js.extend(remap_js(l) for l in anim(a, b))
 
 # ---------------------------------------------------------------- captions
 W = E["words"]
@@ -238,7 +256,8 @@ for i, w in enumerate(W):
            or w[0][-1] in ",.?" )
     if brk:
         chunks.append(cur); cur = []
-CAPGAP_HIDE = [(42.6, 49.45), (53.75, 74.0), (77.2, 94.7), (108.2, 110.5), (110.5, 121.1), (122.25, 133.7)]  # mangga / sapu / section card: no captions
+CAPGAP_HIDE_1X = [(42.6, 49.45), (53.75, 74.0), (77.2, 94.7), (108.2, 110.5), (110.5, 121.1), (122.25, 133.7)]  # mangga / sapu / section card: no captions
+CAPGAP_HIDE = [(T(x), T(y)) for x, y in CAPGAP_HIDE_1X]
 cap_html = []
 for k, ch in enumerate(chunks):
     a = ch[0][1]

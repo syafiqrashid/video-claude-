@@ -1,6 +1,6 @@
 # Nota Edit — Perlindungan Bil Elektrik 800 kWh
 
-**Sumber:** Video 1 (3:06) + Video 2 (0:42) → **Edit: 2:17** (1080×1920, 30fps)
+**Sumber:** Video 1 (3:06) + Video 2 (0:42) → **Edit: 2:11** (1080×1920, 30fps)
 
 ## Struktur
 | Masa edit | Sumber | Isi | Grafik / SFX |
@@ -11,10 +11,10 @@
 | 0:28–0:42.6 | V1 38.7s | Cuaca panas, jerebu, kipas & aircon, ruang tambahan 800 | Chip panas/jerebu · kipas berpusing · *800 kWh* |
 | 0:42.6–0:49.5 | V1 57.9s | **JOLOK MANGGA (penuh, tak dipotong)** | Sticker *JAP… JOLOK MANGGA DULU* + mangga jatuh |
 | 0:49.5–1:17 | V1 64.8s | "Apa korang dapat?… 3 caj: AFA, peruncitan, SST… lebih ramai dilindungi" | Senarai 3 caj dengan tick satu-satu ikut sebutan |
-| 1:17–1:34.8 | V1 98s / 115.5s / 125s | **SAPU SAMPAH (semua 3 shot sapu dikekalkan)** | Tag *SAMBIL SAPU SAMPAH…* · *PESANAN PENTING* |
-| 1:34.8–1:48.5 | V1 131.3s | "Sekarang saya nak pesan… guna berhemah… jimat elektrik, jimat duit" | Kad had 800 · *GUNA ELEKTRIK SECARA BERHEMAH* · *JIMAT ELEKTRIK = JIMAT DUIT* |
-| 1:48.5–1:49.5 | V1 154.5s | "Kesimpulannya" | Band *KESIMPULANNYA* |
-| 1:49.5–2:17 | **V2** 13s | Kesimpulan penuh + "Share video ini…" | Pantau · seimbang · recap 600→800 · Ikhtiar MADANI · CTA *SHARE* |
+| 1:17–1:28.7 | V1 98s / 115.5s / 125s | **SAPU SAMPAH (semua 3 shot sapu dikekalkan, laju 1.5x)** | Tag *SAMBIL SAPU SAMPAH…* · *PESANAN PENTING* |
+| 1:28.7–1:42.4 | V1 131.3s | "Sekarang saya nak pesan… guna berhemah… jimat elektrik, jimat duit" | Kad had 800 · *GUNA ELEKTRIK SECARA BERHEMAH* · *JIMAT ELEKTRIK = JIMAT DUIT* |
+| 1:42.4–1:43.4 | V1 154.5s | "Kesimpulannya" | Band *KESIMPULANNYA* |
+| 1:43.4–2:11 | **V2** 13s | Kesimpulan penuh + "Share video ini…" | Pantau · seimbang · recap 600→800 · Ikhtiar MADANI · CTA *SHARE* |
 
 ## Yang dibuang
 - **V1 0–7s** — b-roll pokok + jalan masuk frame (hook terus ke ayat pertama).

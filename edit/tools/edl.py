@@ -13,9 +13,10 @@ SEGS = [
     ("v1",  50.45,  55.55, "ruang-tambahan"),
     ("v1",  57.90,  77.85, "mangga+3caj"),     # jolok mangga 57.9-64.8 kept whole
     ("v1",  80.10,  94.75, "3caj"),
-    ("v1",  97.95, 105.40, "sapu-1"),          # sapu sampah kept whole
-    ("v1", 115.50, 119.10, "sapu-2"),
-    ("v1", 125.00, 144.95, "sapu-3+pesan"),
+    ("v1",  97.95, 105.40, "sapu-1", 1.5),     # sapu sampah kept whole, 1.5x
+    ("v1", 115.50, 119.10, "sapu-2", 1.5),
+    ("v1", 125.00, 131.25, "sapu-3", 1.5),
+    ("v1", 131.25, 144.95, "pesan"),
     ("v1", 154.45, 155.45, "kesimpulannya"),
     ("v2",  13.00,  41.00, "kesimpulan-v2"),
 ]
@@ -55,14 +56,16 @@ def fixed(src):
     # merge "800 kWh" if whisper split oddly
     return out
 
-edl=[]; caps=[]; t=0.0
+edl=[]; caps=[]; t=0.0; t1=0.0
 WS={s:fixed(s) for s in ("v1","v2")}
-for i,(src,a,b,label) in enumerate(SEGS):
-    edl.append(dict(id=f"c{i}",src=src,mi=a,mo=b,start=round(t,3),dur=round(b-a,3),label=label))
+for i,seg in enumerate(SEGS):
+    src,a,b,label=seg[:4]; r=seg[4] if len(seg)>4 else 1.0
+    # t1 = start on the all-1x timeline (graphics in build.py are authored against it)
+    edl.append(dict(id=f"c{i}",src=src,mi=a,mo=b,start=round(t,3),dur=round((b-a)/r,3),rate=r,start1x=round(t1,3),label=label))
     for w,s,e in WS[src]:
         if s>=a-0.8 and s<b-0.05 and e>a+0.1:
-            caps.append([w, round(t+max(s,a)-a,3), round(t+min(e,b)-a,3)])
-    t+=b-a
+            caps.append([w, round(t+(max(s,a)-a)/r,3), round(t+(min(e,b)-a)/r,3)])
+    t+=(b-a)/r; t1+=b-a
 # drop duplicate kWh tokens ("kWh kWh")
 clean=[]
 for c in caps:
@@ -70,5 +73,5 @@ for c in caps:
     clean.append(c)
 json.dump(dict(total=round(t,3),edl=edl,words=clean),open("tools/edl.json","w"),ensure_ascii=False,indent=1)
 print("TOTAL",round(t,2))
-for e in edl: print(f'{e["id"]:4} {e["src"]} {e["mi"]:7.2f}-{e["mo"]:7.2f} -> out {e["start"]:7.2f} (+{e["dur"]:.2f}) {e["label"]}')
+for e in edl: print(f'{e["id"]:4} {e["src"]} {e["mi"]:7.2f}-{e["mo"]:7.2f} x{e["rate"]} -> out {e["start"]:7.2f} (+{e["dur"]:.2f}) {e["label"]}')
 print(" ".join(f"{w}@{s:.1f}" for w,s,e in clean))

@@ -40,11 +40,20 @@
   "label": "Bantuan awal persekolahan... RM200 bagi setiap murid."
  },
  {
+  "id": "santai-komputer",
+  "src": "A",
+  "media_start": 33.33,
+  "dur": 4.76,
+  "rate": 1.5,
+  "label": "Pusing ke komputer",
+  "start": 29.64
+ },
+ {
   "id": "i2a",
   "src": "A",
   "media_start": 40.47,
   "dur": 4.09,
-  "start": 29.64,
+  "start": 34.4,
   "label": "Kedua... Anak-anak sihat, ibu bapa lega."
  },
  {
@@ -52,15 +61,24 @@
   "src": "A",
   "media_start": 44.77,
   "dur": 15.86,
-  "start": 33.73,
+  "start": 38.49,
   "label": "Kedua... Anak-anak sihat, ibu bapa lega."
+ },
+ {
+  "id": "santai-minum",
+  "src": "A",
+  "media_start": 60.63,
+  "dur": 6.11,
+  "rate": 1.5,
+  "label": "Minum air (straw)",
+  "start": 54.35
  },
  {
   "id": "i3a",
   "src": "A",
   "media_start": 155.53,
   "dur": 3.37,
-  "start": 49.59,
+  "start": 60.46,
   "label": "Ketiga, pelajar tingkatan enam takkan dilupakan"
  },
  {
@@ -68,15 +86,24 @@
   "src": "A",
   "media_start": 161.39,
   "dur": 13.27,
-  "start": 52.96,
+  "start": 63.83,
   "label": "Peruntukan RM2,500... masa depan lebih cerah."
+ },
+ {
+  "id": "santai-jalan",
+  "src": "A",
+  "media_start": 174.66,
+  "dur": 6.1,
+  "rate": 1.25,
+  "label": "Bangun, jalan, datang dekat kamera",
+  "start": 77.1
  },
  {
   "id": "i4a",
   "src": "A",
   "media_start": 182.29,
   "dur": 0.86,
-  "start": 66.23,
+  "start": 83.2,
   "label": "Keempat... perbelanjaan seisi keluarga"
  },
  {
@@ -84,15 +111,24 @@
   "src": "A",
   "media_start": 183.62,
   "dur": 21.68,
-  "start": 67.09,
+  "start": 84.06,
   "label": "Keempat... perbelanjaan seisi keluarga"
+ },
+ {
+  "id": "santai-botol",
+  "src": "A",
+  "media_start": 147.55,
+  "dur": 5.32,
+  "rate": 1.5,
+  "label": "Minum air botol",
+  "start": 105.74
  },
  {
   "id": "i5a",
   "src": "A",
   "media_start": 229.67,
   "dur": 15.72,
-  "start": 88.77,
+  "start": 111.06,
   "label": "Kelima... kelayakan anda"
  },
  {
@@ -100,23 +136,23 @@
   "src": "A",
   "media_start": 245.68,
   "dur": 7.61,
-  "start": 104.49,
+  "start": 126.78,
   "label": "Kelima... kelayakan anda"
  },
  {
   "id": "i6",
   "src": "A",
-  "media_start": 255.36,
-  "dur": 27.02,
-  "start": 112.1,
-  "label": "Yang ke-6... lebih lega untuk keluarga"
+  "media_start": 253.85,
+  "dur": 28.53,
+  "start": 134.39,
+  "label": "Dukung anak + Yang ke-6..."
  },
  {
   "id": "outro1",
   "src": "B",
   "media_start": 0,
   "dur": 5.42,
-  "start": 139.12,
+  "start": 162.92,
   "label": "Itu adalah antara enam inisiatif..."
  },
  {
@@ -124,7 +160,7 @@
   "src": "B",
   "media_start": 6.29,
   "dur": 9.8,
-  "start": 144.54,
+  "start": 168.34,
   "label": "Ingat, bukan sekadar tahu..."
  },
  {
@@ -132,7 +168,7 @@
   "src": "B",
   "media_start": 16.57,
   "dur": 15.25,
-  "start": 154.34,
+  "start": 178.14,
   "label": "Belanjawan Madani kelima... Terima kasih!"
  }
 ]

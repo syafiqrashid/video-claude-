@@ -205,6 +205,29 @@
         opacity: 0;
       }
 
+      /* ---------- santai stickers ---------- */
+      .sticker {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1300px;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+      }
+      .sticker span {
+        display: block;
+        background: #fff;
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 64px;
+        letter-spacing: -0.02em;
+        padding: 18px 40px;
+        border-radius: 22px;
+        box-shadow: 10px 10px 0 var(--gold);
+        transform: rotate(-4deg);
+      }
+
       /* ---------- hook ---------- */
       #hook-flash {
         position: absolute;
@@ -481,6 +504,7 @@
         <div id="badges"></div>
         <div id="callouts"></div>
         <div id="chips"></div>
+        <div id="stickers"></div>
         <div id="hook-flash"></div>
         <div id="hook-title">
           <span class="eyebrow">KERAJAAN MADANI</span>
@@ -591,6 +615,14 @@
       });
       const chipsEnd = D.chips[D.chips.length - 1].s + 2.6;
       tl.to("#chips .chip", { opacity: 0, y: -20, duration: 0.25, stagger: 0.05 }, chipsEnd);
+
+      // ---------- santai stickers
+      D.stickers.forEach((st) => {
+        const el = mk("div", "sticker", `<span>${st.t}</span>`);
+        $("stickers").appendChild(el);
+        tl.fromTo(el, { opacity: 0, scale: 0.4, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)" }, st.s + 0.1);
+        tl.to(el, { opacity: 0, scale: 0.9, duration: 0.2, ease: "power2.in" }, st.e - 0.2);
+      });
 
       // ---------- outro recap, quote, CTA
       D.recap.forEach((r, i) => {

@@ -12,7 +12,7 @@ ffmpeg -i <original> -map 0:v:0 -map 0:a:0 -vf "scale=1080:1920,fps=30" -c:v lib
 Rebuild `index.html` after editing `build/edl.json`, `build/build.py` or `build/template.html`:
 `python3 -I build/build.py && npx hyperframes check`
 
-## Cut list (source seconds → timeline) — 5:16 combined → 2:50
+## Cut list (source seconds → timeline) — 5:16 combined → 3:13
 
 | # | Source | Kept | Why |
 |---|--------|------|-----|
@@ -20,11 +20,15 @@ Rebuild `index.html` after editing `build/edl.json`, `build/build.py` or `build/
 | Salam | A 0.8–3.5 | "Assalamualaikum dan salam Malaysia Madani." | |
 | Intro | A 11.3–19.7 | "…jom kita lihat 6 inisiatif…" | |
 | 1 | A 21.9–33.3 | BAP RM150 → RM200 | Pause before "Bantuan" trimmed |
-| 2 | A 40.5–60.6 | RMT RM870 juta | Removed 33–40s (turned away from camera) |
-| 3 | A 155.5–174.7 | Tingkatan 6 RM2,500 | **Removed 60–155s**: four failed takes ("Alamak", "Aduh habis saya", drinking break) |
-| 4 | A 182.3–205.3 | STR & SARA RM16 bilion | Removed 175–182s dead air, trimmed pause after "Keempat" |
+| Santai | A 33.3–40.5 @1.5× | Turns to the computer — sticker "Semak fakta jap…" | Kept on request (relaxed feel) |
+| 2 | A 40.5–60.6 | RMT RM870 juta | |
+| Santai | A 60.6–69.8 @1.5× | Drinks (straw) — "Rehat jap, minum dulu" | Kept on request |
+| 3 | A 155.5–174.7 | Tingkatan 6 RM2,500 | **Removed 70–147s**: four failed takes ("Alamak", "Aduh habis saya"); 99–107s second straw drink left out as a repeat |
+| Santai | A 174.7–182.3 @1.25× | Stands, walks, comes up to the camera — "Cek penampilan dulu!" | Kept on request |
+| 4 | A 182.3–205.3 | STR & SARA RM16 bilion | Trimmed pause after "Keempat" |
+| Santai | A 147.6–155.5 @1.5× | Drinks from a bottle — "Air dulu, baru sambung!" | Kept on request, moved here so the two drinks aren't back to back |
 | 5 | A 229.7–253.3 | SARA Madani RM100 × 2 | **Removed first take 207–229s** (flubbed "syarat pelangsanakan"); second take is complete |
-| 6 | A 255.4–282.4 | Jualan Rahmah & Agro Madani | |
+| 6 | A 253.9–282.4 | Holding the child, then Jualan Rahmah & Agro Madani | Starts on the child — "Bos kecil dah sampai!" |
 | Outro | B 0–31.8 | Recap, closing, CTA | |
 
 ## Graphics & sound

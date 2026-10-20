@@ -11,6 +11,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 B = os.path.join(ROOT, "build")
 EDL = json.load(open(os.path.join(B, "edl.json")))
 WORDS = {k: json.load(open(os.path.join(B, f"{k}.json"))) for k in "AB"}
+for c in EDL:  # "dur" is timeline seconds; a clip with "rate" consumes dur * rate of source
+    c.setdefault("rate", 1)
+    c["src_end"] = round(c["media_start"] + c["dur"] * c["rate"], 3)
 TOTAL = round(sum(c["dur"] for c in EDL), 2)
 W, H = 1080, 1920
 
@@ -18,21 +21,21 @@ W, H = 1080, 1920
 def tl_time(src, t):
     """Map a source time to timeline time; None if the moment was cut."""
     for c in EDL:
-        if c["src"] == src and c["media_start"] <= t < c["media_start"] + c["dur"]:
-            return round(c["start"] + t - c["media_start"], 3)
+        if c["src"] == src and c["media_start"] <= t < c["src_end"]:
+            return round(c["start"] + (t - c["media_start"]) / c["rate"], 3)
     return None
 
 
 def clip_of(src, t):
     for c in EDL:
-        if c["src"] == src and c["media_start"] <= t < c["media_start"] + c["dur"]:
+        if c["src"] == src and c["media_start"] <= t < c["src_end"]:
             return c
     return None
 
 
 def clip_at(src, t):
     for c in EDL:
-        if c["src"] == src and c["media_start"] - 0.5 <= t < c["media_start"] + c["dur"]:
+        if c["src"] == src and c["media_start"] - 0.5 <= t < c["src_end"]:
             return c
     return None
 
@@ -141,6 +144,10 @@ CALLOUTS = [
     ("A", 273.9, 279.0, "HARGA LEBIH MURAH", "30%", "melalui Jualan Agro Madani", "impact-bass-1"),
 ]
 CHIPS = [("A", 267.3, "Ayam"), ("A", 268.1, "Ikan"), ("A", 268.6, "Sayur"), ("A", 269.7, "Buah")]
+# casual (santai) beats kept on purpose: playful sticker over each one
+STICKERS = [("A", 33.6, 40.2, "Semak fakta jap…"), ("A", 61.0, 69.5, "Rehat jap, minum dulu"),
+            ("A", 175.0, 182.0, "Cek penampilan dulu!"), ("A", 147.8, 155.3, "Air dulu, baru sambung!"),
+            ("A", 253.9, 255.5, "Bos kecil dah sampai!")]
 HOOK_FLASH = ["RM200", "RM870 JUTA", "RM16 BILION", "30% MURAH"]
 RECAP = ["Bantuan Awal Persekolahan RM200", "RMT RM870 juta", "Tingkatan 6 RM2,500",
          "STR & SARA RM16 bilion", "SARA Madani RM100 × 2", "Jualan Rahmah & Agro Madani"]
@@ -168,15 +175,21 @@ def build():
     z = 1.0
     for i, c in enumerate(EDL):
         # alternate a punch-in whenever two pieces of the same take are butted together (hides the jump cut)
-        contiguous = prev_src_end is not None and abs(c["media_start"] - prev_src_end) < 2.0
-        z = (1.14 if z == 1.0 else 1.0) if contiguous else 1.0
-        prev_src_end = c["media_start"] + c["dur"]
+        gap = None if prev_src_end is None else abs(c["media_start"] - prev_src_end)
+        if gap is not None and gap < 0.05:
+            pass  # seamless continuation of the same take: keep the framing
+        elif gap is not None and gap < 2.0:
+            z = 1.14 if z == 1.0 else 1.0
+        else:
+            z = 1.0
+        prev_src_end = c["src_end"]
         if c["id"] == "salam":
             z = 1.14
         zooms.append(z)
+        rate = f'data-playback-rate="{c["rate"]}" data-volume="0.7" ' if c["rate"] != 1 else ""
         vids.append(
             f'<video id="v{i:02d}" class="clip vid" src="assets/{c["src"]}.mp4" data-start="{c["start"]}" '
-            f'data-duration="{c["dur"]}" data-media-start="{c["media_start"]}" data-track-index="0" '
+            f'data-duration="{c["dur"]}" data-media-start="{c["media_start"]}" data-track-index="0" {rate}'
             f'playsinline data-has-audio="true" style="transform: scale({z}); z-index: 1"></video>'
         )
 
@@ -194,6 +207,10 @@ def build():
     chips = [{"s": T(src, t), "t": txt} for src, t, txt in CHIPS]
     for c in chips:
         add_sfx("pop", c["s"], 0.28)
+
+    stickers = [{"s": T(src, a), "e": T(src, b), "t": txt} for src, a, b, txt in STICKERS]
+    for st in stickers:
+        add_sfx("pop", st["s"], 0.35)
 
     hook_end = EDL[0]["dur"]
     hook_flash = [{"s": round(0.55 + i * 0.95, 3), "t": t} for i, t in enumerate(HOOK_FLASH)]
@@ -218,7 +235,7 @@ def build():
     add_sfx("chime", cta_s, 0.35)
 
     data = {
-        "total": TOTAL, "caps": caps, "sections": sections, "callouts": callouts, "chips": chips,
+        "total": TOTAL, "caps": caps, "sections": sections, "callouts": callouts, "chips": chips, "stickers": stickers,
         "hookEnd": hook_end, "hookFlash": hook_flash, "hookTitle": hook_title_s, "six": six_s,
         "recap": recap, "recapEnd": recap_end, "quote": quote_s, "quote2": quote2_s, "cta": cta_s,
         "punches": [c["s"] for c in callouts],

@@ -12,7 +12,7 @@ ffmpeg -i <original> -map 0:v:0 -map 0:a:0 -vf "scale=1080:1920,fps=30" -c:v lib
 Rebuild `index.html` after editing `build/edl.json`, `build/build.py` or `build/template.html`:
 `python3 -I build/build.py && npx hyperframes check`
 
-## Cut list (source seconds → timeline) — 5:16 combined → 3:13
+## Cut list (source seconds → timeline) — 5:16 combined → 3:18
 
 | # | Source | Kept | Why |
 |---|--------|------|-----|
@@ -26,8 +26,9 @@ Rebuild `index.html` after editing `build/edl.json`, `build/build.py` or `build/
 | 3 | A 155.5–174.7 | Tingkatan 6 RM2,500 | **Removed 70–147s**: four failed takes ("Alamak", "Aduh habis saya"); 99–107s second straw drink left out as a repeat |
 | Santai | A 174.7–182.3 @1.25× | Stands, walks, comes up to the camera — "Cek penampilan dulu!" | Kept on request |
 | 4 | A 182.3–205.3 | STR & SARA RM16 bilion | Trimmed pause after "Keempat" |
-| Santai | A 147.6–155.5 @1.5× | Drinks from a bottle — "Air dulu, baru sambung!" | Kept on request, moved here so the two drinks aren't back to back |
-| 5 | A 229.7–253.3 | SARA Madani RM100 × 2 | **Removed first take 207–229s** (flubbed "syarat pelangsanakan"); second take is complete |
+| Santai | A 224.5–229.7 @1.25× | Writing notes on the paper — "Catat nota jap…" | Kept on request; flows straight into take 2 of #5 |
+| 5 | A 229.7–253.3 | SARA Madani RM100 × 2 | **Removed first take 205.8–224.4s** (flubbed "syarat pelangsanakan"); second take is complete |
+| Santai | A 147.6–155.5 @1.5× | Drinks from a bottle — "Air dulu, baru sambung!" | Kept on request, placed after #5 so the two drinks aren't back to back |
 | 6 | A 253.9–282.4 | Holding the child, then Jualan Rahmah & Agro Madani | Starts on the child — "Bos kecil dah sampai!" |
 | Outro | B 0–31.8 | Recap, closing, CTA | |
 

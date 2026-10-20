@@ -115,12 +115,12 @@
   "label": "Keempat... perbelanjaan seisi keluarga"
  },
  {
-  "id": "santai-botol",
+  "id": "santai-tulis",
   "src": "A",
-  "media_start": 147.55,
-  "dur": 5.32,
-  "rate": 1.5,
-  "label": "Minum air botol",
+  "media_start": 224.45,
+  "dur": 4.18,
+  "rate": 1.25,
+  "label": "Tunduk tulis/catat nota",
   "start": 105.74
  },
  {
@@ -128,7 +128,7 @@
   "src": "A",
   "media_start": 229.67,
   "dur": 15.72,
-  "start": 111.06,
+  "start": 109.92,
   "label": "Kelima... kelayakan anda"
  },
  {
@@ -136,15 +136,24 @@
   "src": "A",
   "media_start": 245.68,
   "dur": 7.61,
-  "start": 126.78,
+  "start": 125.64,
   "label": "Kelima... kelayakan anda"
+ },
+ {
+  "id": "santai-botol",
+  "src": "A",
+  "media_start": 147.55,
+  "dur": 5.32,
+  "rate": 1.5,
+  "label": "Minum air botol",
+  "start": 133.25
  },
  {
   "id": "i6",
   "src": "A",
   "media_start": 253.85,
   "dur": 28.53,
-  "start": 134.39,
+  "start": 138.57,
   "label": "Dukung anak + Yang ke-6..."
  },
  {
@@ -152,7 +161,7 @@
   "src": "B",
   "media_start": 0,
   "dur": 5.42,
-  "start": 162.92,
+  "start": 167.1,
   "label": "Itu adalah antara enam inisiatif..."
  },
  {
@@ -160,7 +169,7 @@
   "src": "B",
   "media_start": 6.29,
   "dur": 9.8,
-  "start": 168.34,
+  "start": 172.52,
   "label": "Ingat, bukan sekadar tahu..."
  },
  {
@@ -168,7 +177,7 @@
   "src": "B",
   "media_start": 16.57,
   "dur": 15.25,
-  "start": 178.14,
+  "start": 182.32,
   "label": "Belanjawan Madani kelima... Terima kasih!"
  }
 ]

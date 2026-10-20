@@ -147,7 +147,7 @@ CHIPS = [("A", 267.3, "Ayam"), ("A", 268.1, "Ikan"), ("A", 268.6, "Sayur"), ("A"
 # casual (santai) beats kept on purpose: playful sticker over each one
 STICKERS = [("A", 33.6, 40.2, "Semak fakta jap…"), ("A", 61.0, 69.5, "Rehat jap, minum dulu"),
             ("A", 175.0, 182.0, "Cek penampilan dulu!"), ("A", 147.8, 155.3, "Air dulu, baru sambung!"),
-            ("A", 253.9, 255.5, "Bos kecil dah sampai!")]
+            ("A", 253.9, 255.5, "Bos kecil dah sampai!"), ("A", 224.6, 229.6, "Catat nota jap…")]
 HOOK_FLASH = ["RM200", "RM870 JUTA", "RM16 BILION", "30% MURAH"]
 RECAP = ["Bantuan Awal Persekolahan RM200", "RMT RM870 juta", "Tingkatan 6 RM2,500",
          "STR & SARA RM16 bilion", "SARA Madani RM100 × 2", "Jualan Rahmah & Agro Madani"]

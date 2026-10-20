@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --navy: #0a2342;
+        --navy-90: rgba(10, 35, 66, 0.9);
+        --gold: #ffc629;
+        --red: #d7263d;
+        --ink: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: Montserrat, sans-serif;
+        color: var(--ink);
+      }
+      #cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+      .vid {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+        transform-origin: 50% 38%;
+      }
+      .shade {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 5;
+      }
+      #shade-top {
+        top: 0;
+        height: 620px;
+        background: linear-gradient(180deg, rgba(4, 14, 30, 0.72) 0%, rgba(4, 14, 30, 0) 100%);
+      }
+      #shade-bot {
+        bottom: 0;
+        height: 820px;
+        background: linear-gradient(0deg, rgba(4, 14, 30, 0.78) 0%, rgba(4, 14, 30, 0) 100%);
+      }
+      .layer {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      /* ---------- progress + section badge ---------- */
+      #progress {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 86px;
+        height: 12px;
+        display: flex;
+        gap: 10px;
+        opacity: 0;
+      }
+      .pseg {
+        flex: 1;
+        height: 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.28);
+        overflow: hidden;
+      }
+      .pfill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--gold);
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+      }
+      .badge {
+        position: absolute;
+        left: 70px;
+        top: 134px;
+        display: flex;
+        align-items: stretch;
+        opacity: 0;
+        max-width: 940px;
+      }
+      .badge .num {
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 64px;
+        line-height: 1;
+        padding: 20px 24px 16px;
+        border-radius: 18px 0 0 18px;
+        letter-spacing: -0.03em;
+      }
+      .badge .txt {
+        background: var(--navy-90);
+        padding: 14px 30px 14px 26px;
+        border-radius: 0 18px 18px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .badge .title {
+        font-weight: 900;
+        font-size: 44px;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+      .badge .sub {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-top: 4px;
+      }
+
+      /* ---------- number callout ---------- */
+      .callout {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 300px;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+      }
+      .callout .card {
+        background: var(--navy-90);
+        border-left: 14px solid var(--gold);
+        border-radius: 22px;
+        padding: 22px 40px 26px;
+        text-align: center;
+        max-width: 940px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+      .callout .k {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 28px;
+        color: var(--gold);
+        letter-spacing: 0.08em;
+      }
+      .callout .b {
+        display: block;
+        font-weight: 900;
+        font-size: 132px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin: 8px 0 6px;
+      }
+      .callout .f {
+        font-weight: 700;
+        font-size: 34px;
+        color: rgba(255, 255, 255, 0.86);
+      }
+      .callout .was {
+        font-weight: 700;
+        font-size: 34px;
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      /* ---------- chips ---------- */
+      #chips {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1120px;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+      }
+      .chip {
+        display: block;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 46px;
+        padding: 12px 30px;
+        border-radius: 999px;
+        opacity: 0;
+      }
+
+      /* ---------- hook ---------- */
+      #hook-flash {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 230px;
+        height: 260px;
+      }
+      .hf {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 170px;
+        letter-spacing: -0.05em;
+        color: var(--gold);
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+      }
+      #hook-title {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 170px;
+        text-align: center;
+        opacity: 0;
+      }
+      #hook-title .eyebrow {
+        display: inline-block;
+        background: var(--red);
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 30px;
+        letter-spacing: 0.1em;
+        padding: 8px 22px;
+        border-radius: 10px;
+      }
+      #hook-title .big {
+        display: block;
+        font-weight: 900;
+        font-size: 124px;
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+        margin-top: 18px;
+        color: var(--gold);
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+      }
+      #hook-title .small {
+        display: block;
+        font-weight: 900;
+        font-size: 58px;
+        letter-spacing: -0.02em;
+        margin-top: 14px;
+      }
+
+      /* ---------- "6 inisiatif" stamp ---------- */
+      #six {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 210px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 26px;
+        opacity: 0;
+      }
+      #six .ring {
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 190px;
+        line-height: 230px;
+        text-align: center;
+        letter-spacing: -0.04em;
+      }
+      #six .lbl {
+        font-weight: 900;
+        font-size: 84px;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        text-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      /* ---------- wipe ---------- */
+      .wipe {
+        position: absolute;
+        top: -200px;
+        bottom: -200px;
+        left: 0;
+        width: 1400px;
+        background: linear-gradient(90deg, rgba(255, 198, 41, 0) 0%, var(--gold) 30%, var(--gold) 70%, rgba(255, 198, 41, 0) 100%);
+        transform: rotate(14deg);
+        opacity: 0;
+        z-index: 30;
+      }
+
+      /* ---------- recap + outro ---------- */
+      #recap {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 130px;
+        background: var(--navy-90);
+        border-radius: 28px;
+        padding: 30px 36px 26px;
+        opacity: 0;
+      }
+      #recap h3 {
+        font-weight: 900;
+        font-size: 50px;
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+        color: var(--gold);
+      }
+      .rline {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-weight: 700;
+        font-size: 36px;
+        padding: 8px 0;
+        opacity: 0;
+      }
+      .rline .tick {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 46px;
+        text-align: center;
+      }
+      #quote {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 200px;
+        text-align: center;
+        opacity: 0;
+      }
+      #quote .q {
+        display: block;
+        font-family: "League Gothic", sans-serif;
+        font-size: 150px;
+        line-height: 0.95;
+        color: var(--gold);
+        text-transform: uppercase;
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
+      #quote2 {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 220px;
+        text-align: center;
+        opacity: 0;
+      }
+      #quote2 .m {
+        display: block;
+        font-weight: 900;
+        font-size: 104px;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      #quote2 .m b {
+        color: var(--gold);
+      }
+      #quote2 .s {
+        display: inline-block;
+        margin-top: 18px;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 32px;
+        letter-spacing: 0.06em;
+        background: var(--navy-90);
+        padding: 10px 24px;
+        border-radius: 12px;
+      }
+      #cta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 260px;
+        display: flex;
+        justify-content: center;
+        gap: 28px;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-weight: 900;
+        font-size: 56px;
+        padding: 22px 42px;
+        border-radius: 999px;
+        opacity: 0;
+      }
+      .btn svg {
+        display: block;
+        width: 56px;
+        height: 56px;
+      }
+      #btn-like {
+        background: var(--gold);
+        color: var(--navy);
+      }
+      #btn-share {
+        background: var(--red);
+        color: #fff;
+      }
+
+      /* ---------- captions ---------- */
+      #captions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1330px;
+        height: 260px;
+        z-index: 20;
+      }
+      .cg {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 0;
+        text-align: center;
+        font-weight: 900;
+        font-size: 84px;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        opacity: 0;
+        visibility: hidden;
+        text-shadow:
+          0 6px 0 rgba(4, 14, 30, 0.85),
+          0 0 28px rgba(4, 14, 30, 0.6);
+      }
+      .cw {
+        display: inline-block;
+        margin: 0 0.12em;
+        opacity: 0.5;
+      }
+      .cw.acc {
+        color: var(--gold);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="169.59"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="cam">
+      <video id="v00" class="clip vid" src="assets/A.mp4" data-start="0" data-duration="7.72" data-media-start="3.46" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v01" class="clip vid" src="assets/A.mp4" data-start="7.72" data-duration="2.69" data-media-start="0.76" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v02" class="clip vid" src="assets/A.mp4" data-start="10.41" data-duration="8.42" data-media-start="11.28" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v03" class="clip vid" src="assets/A.mp4" data-start="18.83" data-duration="3.11" data-media-start="21.93" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v04" class="clip vid" src="assets/A.mp4" data-start="21.94" data-duration="7.7" data-media-start="25.63" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v05" class="clip vid" src="assets/A.mp4" data-start="29.64" data-duration="4.09" data-media-start="40.47" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v06" class="clip vid" src="assets/A.mp4" data-start="33.73" data-duration="15.86" data-media-start="44.77" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v07" class="clip vid" src="assets/A.mp4" data-start="49.59" data-duration="3.37" data-media-start="155.53" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v08" class="clip vid" src="assets/A.mp4" data-start="52.96" data-duration="13.27" data-media-start="161.39" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v09" class="clip vid" src="assets/A.mp4" data-start="66.23" data-duration="0.86" data-media-start="182.29" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v10" class="clip vid" src="assets/A.mp4" data-start="67.09" data-duration="21.68" data-media-start="183.62" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v11" class="clip vid" src="assets/A.mp4" data-start="88.77" data-duration="15.72" data-media-start="229.67" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v12" class="clip vid" src="assets/A.mp4" data-start="104.49" data-duration="7.61" data-media-start="245.68" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v13" class="clip vid" src="assets/A.mp4" data-start="112.1" data-duration="27.02" data-media-start="255.36" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v14" class="clip vid" src="assets/B.mp4" data-start="139.12" data-duration="5.42" data-media-start="0" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      <video id="v15" class="clip vid" src="assets/B.mp4" data-start="144.54" data-duration="9.8" data-media-start="6.29" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.14); z-index: 1"></video>
+      <video id="v16" class="clip vid" src="assets/B.mp4" data-start="154.34" data-duration="15.25" data-media-start="16.57" data-track-index="0" playsinline data-has-audio="true" style="transform: scale(1.0); z-index: 1"></video>
+      </div>
+      <div id="shade-top" class="shade"></div>
+      <div id="shade-bot" class="shade"></div>
+
+      <div id="gfx" class="layer">
+        <div id="progress"></div>
+        <div id="badges"></div>
+        <div id="callouts"></div>
+        <div id="chips"></div>
+        <div id="hook-flash"></div>
+        <div id="hook-title">
+          <span class="eyebrow">KERAJAAN MADANI</span>
+          <span class="big">BELANJAWAN 2027</span>
+          <span class="small">Apa manfaat untuk keluarga anda?</span>
+        </div>
+        <div id="six"><div class="ring">6</div><div class="lbl">INISIATIF<br />MENARIK</div></div>
+        <div id="recap"><h3>6 Inisiatif Belanjawan Madani 2027</h3><div id="rlines"></div></div>
+        <div id="quote"><span class="q">Menggapai di langit,</span><span class="q">mengakar di bumi</span></div>
+        <div id="quote2">
+          <span class="m">Malaysia <b>MADANI</b></span>
+          <span class="s">KESEJAHTERAAN DINIKMATI</span>
+        </div>
+        <div id="cta">
+          <div class="btn" id="btn-like">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21h4V9H2v12zm20-11a2 2 0 0 0-2-2h-6.3l1-4.6v-.3c0-.4-.2-.8-.4-1.1L13.2 1 6.6 7.6C6.2 8 6 8.5 6 9v10a2 2 0 0 0 2 2h9c.8 0 1.5-.5 1.8-1.2l3-7.1c.1-.2.2-.5.2-.7v-2z"/></svg>
+            LIKE
+          </div>
+          <div class="btn" id="btn-share">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.1c-.8 0-1.4.3-2 .8l-7.1-4.2c.1-.2.1-.5.1-.7s0-.5-.1-.7L16 7.2c.5.5 1.2.8 2 .8a3 3 0 1 0-3-3c0 .2 0 .5.1.7L8 9.8A3 3 0 0 0 6 9a3 3 0 1 0 2 5.2l7.1 4.2c-.1.2-.1.4-.1.6a2.9 2.9 0 1 0 3-2.9z"/></svg>
+            SHARE
+          </div>
+        </div>
+        <div class="wipe" id="wipe"></div>
+      </div>
+      <div id="captions"></div>
+
+      <audio id="sfx-00-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="0.55" data-duration="0.37" data-track-index="20" data-volume="0.45"></audio>
+      <audio id="sfx-01-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="1.5" data-duration="0.37" data-track-index="21" data-volume="0.45"></audio>
+      <audio id="sfx-02-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="2.45" data-duration="0.37" data-track-index="22" data-volume="0.45"></audio>
+      <audio id="sfx-03-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="3.4" data-duration="0.37" data-track-index="23" data-volume="0.45"></audio>
+      <audio id="sfx-04-impact-bass-1" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="4.6" data-duration="2.12" data-track-index="20" data-volume="0.5"></audio>
+      <audio id="sfx-05-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="7.57" data-duration="0.60" data-track-index="21" data-volume="0.35"></audio>
+      <audio id="sfx-06-impact-bass-1" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="15.53" data-duration="2.12" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sfx-07-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="18.73" data-duration="0.60" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sfx-08-ping" class="clip" src="assets/sfx/ping.mp3" data-start="25.46" data-duration="1.32" data-track-index="20" data-volume="0.3"></audio>
+      <audio id="sfx-09-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="29.55" data-duration="0.60" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="sfx-10-ping" class="clip" src="assets/sfx/ping.mp3" data-start="34.26" data-duration="1.32" data-track-index="22" data-volume="0.3"></audio>
+      <audio id="sfx-11-pop" class="clip" src="assets/sfx/pop.mp3" data-start="43.26" data-duration="0.72" data-track-index="23" data-volume="0.3"></audio>
+      <audio id="sfx-12-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="49.49" data-duration="0.60" data-track-index="20" data-volume="0.4"></audio>
+      <audio id="sfx-13-ping" class="clip" src="assets/sfx/ping.mp3" data-start="54.17" data-duration="1.32" data-track-index="21" data-volume="0.3"></audio>
+      <audio id="sfx-14-pop" class="clip" src="assets/sfx/pop.mp3" data-start="55.97" data-duration="0.72" data-track-index="22" data-volume="0.3"></audio>
+      <audio id="sfx-15-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="66.17" data-duration="0.60" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sfx-16-impact-bass-1" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="72.87" data-duration="2.12" data-track-index="20" data-volume="0.45"></audio>
+      <audio id="sfx-17-ping" class="clip" src="assets/sfx/ping.mp3" data-start="78.47" data-duration="1.32" data-track-index="21" data-volume="0.3"></audio>
+      <audio id="sfx-18-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="88.68" data-duration="0.60" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sfx-19-ping" class="clip" src="assets/sfx/ping.mp3" data-start="94.0" data-duration="1.32" data-track-index="23" data-volume="0.3"></audio>
+      <audio id="sfx-20-pop" class="clip" src="assets/sfx/pop.mp3" data-start="97.3" data-duration="0.72" data-track-index="20" data-volume="0.3"></audio>
+      <audio id="sfx-21-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="112.02" data-duration="0.60" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="sfx-22-ping" class="clip" src="assets/sfx/ping.mp3" data-start="120.64" data-duration="1.32" data-track-index="22" data-volume="0.3"></audio>
+      <audio id="sfx-23-pop" class="clip" src="assets/sfx/pop.mp3" data-start="124.04" data-duration="0.72" data-track-index="23" data-volume="0.28"></audio>
+      <audio id="sfx-24-pop" class="clip" src="assets/sfx/pop.mp3" data-start="124.84" data-duration="0.72" data-track-index="20" data-volume="0.28"></audio>
+      <audio id="sfx-25-pop" class="clip" src="assets/sfx/pop.mp3" data-start="125.34" data-duration="0.72" data-track-index="21" data-volume="0.28"></audio>
+      <audio id="sfx-26-pop" class="clip" src="assets/sfx/pop.mp3" data-start="126.44" data-duration="0.72" data-track-index="22" data-volume="0.28"></audio>
+      <audio id="sfx-27-impact-bass-1" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="130.64" data-duration="2.12" data-track-index="23" data-volume="0.45"></audio>
+      <audio id="sfx-28-whoosh" class="clip" src="assets/sfx/whoosh.mp3" data-start="139.02" data-duration="0.60" data-track-index="20" data-volume="0.35"></audio>
+      <audio id="sfx-29-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="139.47" data-duration="0.37" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="sfx-30-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="140.02" data-duration="0.37" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sfx-31-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="140.57" data-duration="0.37" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sfx-32-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="141.12" data-duration="0.37" data-track-index="20" data-volume="0.4"></audio>
+      <audio id="sfx-33-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="141.67" data-duration="0.37" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="sfx-34-click-soft" class="clip" src="assets/sfx/click-soft.mp3" data-start="142.22" data-duration="0.37" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sfx-35-sparkle" class="clip" src="assets/sfx/sparkle.mp3" data-start="157.77" data-duration="1.80" data-track-index="23" data-volume="0.3"></audio>
+      <audio id="sfx-36-chime" class="clip" src="assets/sfx/chime.mp3" data-start="165.21" data-duration="2.50" data-track-index="20" data-volume="0.35"></audio>
+    </div>
+    <script>
+      const D = {"total": 169.59, "caps": [{"s": 0.14, "e": 1.9, "w": [{"t": "Tahukah", "s": 0.14}, {"t": "anda", "s": 0.58}, {"t": "apakah", "s": 1.48}]}, {"s": 1.92, "e": 4.66, "w": [{"t": "manfaat", "s": 1.92}, {"t": "Belanjawan", "s": 2.4}, {"t": "2027", "s": 2.96}]}, {"s": 4.68, "e": 6.28, "w": [{"t": "Kerajaan", "s": 4.68}, {"t": "Madani", "s": 5.8}, {"t": "untuk", "s": 5.94}]}, {"s": 6.3, "e": 7.78, "w": [{"t": "kita", "s": 6.3}, {"t": "dan", "s": 6.58}, {"t": "keluarga?", "s": 6.74}]}, {"s": 8.06, "e": 9.22, "w": [{"t": "Assalamualaikum", "s": 8.06}, {"t": "dan", "s": 8.74}, {"t": "salam", "s": 8.98}]}, {"s": 9.24, "e": 10.53, "w": [{"t": "Malaysia", "s": 9.24}, {"t": "Madani.", "s": 9.48}]}, {"s": 10.55, "e": 12.31, "w": [{"t": "Dari", "s": 10.55}, {"t": "bantuan", "s": 10.81}, {"t": "persekolahan", "s": 11.47}]}, {"s": 12.33, "e": 14.79, "w": [{"t": "sehinggalah", "s": 12.33}, {"t": "kos", "s": 13.79}, {"t": "sara", "s": 14.09}, {"t": "hidup,", "s": 14.43}]}, {"s": 14.81, "e": 15.53, "w": [{"t": "jom", "s": 14.81}, {"t": "kita", "s": 15.01}, {"t": "lihat", "s": 15.29}]}, {"s": 15.55, "e": 17.13, "w": [{"t": "6", "s": 15.55}, {"t": "inisiatif", "s": 15.97}, {"t": "yang", "s": 16.93}]}, {"s": 17.15, "e": 18.42, "w": [{"t": "menarik", "s": 17.15}, {"t": "untuk", "s": 17.51}, {"t": "kita", "s": 17.75}, {"t": "ketahui", "s": 17.99}]}, {"s": 18.9, "e": 19.98, "w": [{"t": "Pertama,", "s": 18.9}]}, {"s": 20.14, "e": 20.84, "w": [{"t": "berita", "s": 20.14}, {"t": "baik", "s": 20.3}, {"t": "untuk", "s": 20.6}]}, {"s": 20.86, "e": 22.0, "w": [{"t": "ibu", "s": 20.86}, {"t": "bapa.", "s": 21.14}]}, {"s": 22.09, "e": 24.11, "w": [{"t": "Bantuan", "s": 22.09}, {"t": "awal", "s": 22.55}, {"t": "persekolahan", "s": 23.03}]}, {"s": 24.13, "e": 25.49, "w": [{"t": "dah", "s": 24.13}, {"t": "dinaikkan", "s": 24.43}, {"t": "daripada", "s": 25.09}]}, {"s": 25.51, "e": 28.13, "w": [{"t": "RM150", "s": 25.51}, {"t": "ke", "s": 26.53}, {"t": "RM200", "s": 27.41}]}, {"s": 28.15, "e": 29.58, "w": [{"t": "bagi", "s": 28.15}, {"t": "setiap", "s": 28.69}, {"t": "murid.", "s": 28.97}]}, {"s": 29.71, "e": 30.79, "w": [{"t": "Kedua,", "s": 29.71}]}, {"s": 30.87, "e": 32.23, "w": [{"t": "kebajikan", "s": 30.87}, {"t": "murid", "s": 31.33}, {"t": "akan", "s": 31.85}]}, {"s": 32.25, "e": 33.36, "w": [{"t": "terus", "s": 32.25}, {"t": "diberi", "s": 32.51}, {"t": "perhatian.", "s": 32.91}]}, {"s": 33.38, "e": 36.43, "w": [{"t": "Sebanyak", "s": 33.38}, {"t": "RM870", "s": 34.33}, {"t": "juta", "s": 35.59}]}, {"s": 36.45, "e": 38.47, "w": [{"t": "diperuntukkan", "s": 36.45}, {"t": "untuk", "s": 37.79}, {"t": "rancangan", "s": 38.03}]}, {"s": 38.49, "e": 39.43, "w": [{"t": "makanan", "s": 38.49}, {"t": "tambahan", "s": 39.01}]}, {"s": 39.45, "e": 41.49, "w": [{"t": "iaitu", "s": 39.45}, {"t": "RMT", "s": 39.79}, {"t": "bagi", "s": 41.05}]}, {"s": 41.51, "e": 43.33, "w": [{"t": "membantu", "s": 41.51}, {"t": "lebih", "s": 42.13}, {"t": "daripada", "s": 42.77}]}, {"s": 43.35, "e": 44.89, "w": [{"t": "800", "s": 43.35}, {"t": "ribu", "s": 44.05}, {"t": "murid", "s": 44.59}]}, {"s": 44.91, "e": 46.05, "w": [{"t": "yang", "s": 44.91}, {"t": "layak", "s": 45.21}, {"t": "mendapatkan", "s": 45.55}]}, {"s": 46.07, "e": 47.21, "w": [{"t": "makanan", "s": 46.07}, {"t": "di", "s": 46.27}, {"t": "sekolah.", "s": 46.49}]}, {"s": 47.29, "e": 48.35, "w": [{"t": "Anak-anak", "s": 47.29}, {"t": "sihat,", "s": 47.65}]}, {"s": 48.55, "e": 49.64, "w": [{"t": "ibu", "s": 48.55}, {"t": "bapa", "s": 48.71}, {"t": "lega.", "s": 49.07}]}, {"s": 49.66, "e": 50.44, "w": [{"t": "Ketiga,", "s": 49.66}]}, {"s": 50.46, "e": 51.66, "w": [{"t": "pelajar", "s": 50.46}, {"t": "tingkatan", "s": 51.26}, {"t": "enam", "s": 51.54}]}, {"s": 51.68, "e": 52.45, "w": [{"t": "takkan", "s": 51.68}, {"t": "dilupakan", "s": 52.02}]}, {"s": 53.03, "e": 55.39, "w": [{"t": "Peruntukan", "s": 53.03}, {"t": "sebanyak", "s": 53.83}, {"t": "RM2,500", "s": 54.23}]}, {"s": 55.41, "e": 58.85, "w": [{"t": "kepada", "s": 55.41}, {"t": "90,000", "s": 56.03}, {"t": "murid", "s": 58.01}]}, {"s": 58.87, "e": 61.39, "w": [{"t": "untuk", "s": 58.87}, {"t": "menampung", "s": 59.87}, {"t": "perbelanjaan", "s": 60.69}]}, {"s": 61.41, "e": 63.13, "w": [{"t": "pengajian", "s": 61.41}, {"t": "mereka.", "s": 62.01}]}, {"s": 63.17, "e": 64.75, "w": [{"t": "Pendidikan", "s": 63.17}, {"t": "lebih", "s": 63.77}, {"t": "terjamin,", "s": 64.05}]}, {"s": 64.85, "e": 66.33, "w": [{"t": "masa", "s": 64.85}, {"t": "depan", "s": 64.99}, {"t": "lebih", "s": 65.23}, {"t": "cerah.", "s": 65.43}]}, {"s": 66.42, "e": 66.85, "w": [{"t": "Keempat,", "s": 66.42}]}, {"s": 67.37, "e": 68.69, "w": [{"t": "bantuan", "s": 67.37}, {"t": "untuk", "s": 67.67}, {"t": "meringankan", "s": 67.99}]}, {"s": 68.71, "e": 69.53, "w": [{"t": "beban", "s": 68.71}, {"t": "rakyat,", "s": 68.97}]}, {"s": 69.55, "e": 70.85, "w": [{"t": "peruntukan", "s": 69.55}, {"t": "STR", "s": 70.01}, {"t": "dan", "s": 70.65}]}, {"s": 70.87, "e": 71.71, "w": [{"t": "SARA", "s": 70.87}, {"t": "ditingkatkan", "s": 71.15}]}, {"s": 72.45, "e": 73.93, "w": [{"t": "kepada", "s": 72.45}, {"t": "RM16", "s": 72.95}, {"t": "bilion", "s": 73.35}]}, {"s": 73.95, "e": 75.75, "w": [{"t": "bagi", "s": 73.95}, {"t": "tahun", "s": 74.25}, {"t": "2027.", "s": 74.53}]}, {"s": 76.07, "e": 76.97, "w": [{"t": "Penerima", "s": 76.07}, {"t": "yang", "s": 76.41}, {"t": "layak", "s": 76.65}]}, {"s": 76.99, "e": 78.51, "w": [{"t": "boleh", "s": 76.99}, {"t": "menikmati", "s": 77.39}, {"t": "SARA", "s": 77.97}]}, {"s": 78.53, "e": 80.63, "w": [{"t": "sehingga", "s": 78.53}, {"t": "RM150", "s": 79.11}, {"t": "sebulan", "s": 79.79}]}, {"s": 80.65, "e": 82.51, "w": [{"t": "Untuk", "s": 80.65}, {"t": "membantu", "s": 81.11}, {"t": "membeli", "s": 81.99}]}, {"s": 82.53, "e": 83.89, "w": [{"t": "barangan", "s": 82.53}, {"t": "keperluan", "s": 83.07}, {"t": "asas", "s": 83.55}]}, {"s": 83.91, "e": 84.97, "w": [{"t": "sedikit", "s": 83.91}, {"t": "sebanyak,", "s": 84.31}]}, {"s": 85.23, "e": 87.33, "w": [{"t": "dapat", "s": 85.23}, {"t": "membantu", "s": 85.41}, {"t": "perbelanjaan", "s": 86.19}]}, {"s": 87.35, "e": 88.79, "w": [{"t": "seisi", "s": 87.35}, {"t": "keluarga", "s": 87.77}]}, {"s": 88.84, "e": 89.88, "w": [{"t": "kelima,", "s": 88.84}]}, {"s": 89.9, "e": 90.58, "w": [{"t": "ada", "s": 89.9}, {"t": "juga", "s": 90.18}, {"t": "berita", "s": 90.4}]}, {"s": 90.6, "e": 92.22, "w": [{"t": "baik", "s": 90.6}, {"t": "untuk", "s": 90.9}, {"t": "rakyat", "s": 91.32}, {"t": "Malaysia", "s": 91.6}]}, {"s": 92.24, "e": 93.56, "w": [{"t": "Bantuan", "s": 92.24}, {"t": "SARA", "s": 92.84}, {"t": "Madani", "s": 93.2}]}, {"s": 93.58, "e": 95.56, "w": [{"t": "sebanyak", "s": 93.58}, {"t": "RM100", "s": 94.12}, {"t": "untuk", "s": 94.84}]}, {"s": 95.58, "e": 96.72, "w": [{"t": "dua", "s": 95.58}, {"t": "kali", "s": 95.76}, {"t": "diumumkan", "s": 96.02}]}, {"s": 96.74, "e": 98.26, "w": [{"t": "bagi", "s": 96.74}, {"t": "rakyat", "s": 97.06}, {"t": "berumur", "s": 97.42}]}, {"s": 98.28, "e": 99.66, "w": [{"t": "18", "s": 98.28}, {"t": "tahun", "s": 98.74}, {"t": "ke", "s": 99.12}, {"t": "atas", "s": 99.4}]}, {"s": 99.68, "e": 100.74, "w": [{"t": "yang", "s": 99.68}, {"t": "bukan", "s": 99.92}, {"t": "penerima", "s": 100.28}]}, {"s": 100.76, "e": 102.74, "w": [{"t": "STR", "s": 100.76}, {"t": "tertakluk", "s": 101.24}, {"t": "kepada", "s": 101.86}]}, {"s": 102.76, "e": 103.99, "w": [{"t": "terma", "s": 102.76}, {"t": "dan", "s": 103.3}, {"t": "syarat", "s": 103.56}]}, {"s": 105.04, "e": 106.83, "w": [{"t": "jadi", "s": 105.04}, {"t": "jangan", "s": 105.33}, {"t": "lupa", "s": 105.89}]}, {"s": 106.85, "e": 108.85, "w": [{"t": "ikuti", "s": 106.85}, {"t": "pengumuman", "s": 107.57}, {"t": "rasmi", "s": 108.35}]}, {"s": 108.87, "e": 112.17, "w": [{"t": "untuk", "s": 108.87}, {"t": "mengetahui", "s": 109.29}, {"t": "kelayakan", "s": 110.49}, {"t": "anda", "s": 111.19}]}, {"s": 112.19, "e": 112.94, "w": [{"t": "Yang", "s": 112.19}, {"t": "ke-6,", "s": 112.48}]}, {"s": 112.96, "e": 114.02, "w": [{"t": "nak", "s": 112.96}, {"t": "berjimat", "s": 113.26}, {"t": "ketika", "s": 113.64}]}, {"s": 114.04, "e": 115.8, "w": [{"t": "membeli", "s": 114.04}, {"t": "barangan", "s": 114.4}, {"t": "dapur,", "s": 114.76}]}, {"s": 115.84, "e": 116.78, "w": [{"t": "jualan", "s": 115.84}, {"t": "Rahmah", "s": 116.04}, {"t": "Madani", "s": 116.32}]}, {"s": 116.8, "e": 117.9, "w": [{"t": "dan", "s": 116.8}, {"t": "jualan", "s": 117.14}, {"t": "Agro", "s": 117.64}]}, {"s": 117.92, "e": 120.24, "w": [{"t": "Madani", "s": 117.92}, {"t": "diperluas", "s": 118.5}, {"t": "dengan", "s": 119.86}]}, {"s": 120.26, "e": 122.8, "w": [{"t": "peruntukan", "s": 120.26}, {"t": "RM750", "s": 120.78}, {"t": "juta", "s": 121.84}]}, {"s": 122.82, "e": 124.76, "w": [{"t": "Barangan", "s": 122.82}, {"t": "terpilih", "s": 123.26}, {"t": "seperti", "s": 123.62}, {"t": "ayam,", "s": 124.06}]}, {"s": 124.84, "e": 125.3, "w": [{"t": "ikan,", "s": 124.84}]}, {"s": 125.4, "e": 126.44, "w": [{"t": "sayur-sayuran", "s": 125.4}, {"t": "dan", "s": 125.82}, {"t": "juga", "s": 126.1}]}, {"s": 126.46, "e": 128.22, "w": [{"t": "buah-buahan", "s": 126.46}, {"t": "boleh", "s": 127.3}, {"t": "ditawarkan", "s": 127.66}]}, {"s": 128.24, "e": 129.3, "w": [{"t": "dengan", "s": 128.24}, {"t": "harga", "s": 128.62}, {"t": "yang", "s": 129.12}]}, {"s": 129.32, "e": 130.74, "w": [{"t": "lebih", "s": 129.32}, {"t": "murah", "s": 129.64}, {"t": "sebanyak", "s": 130.26}]}, {"s": 130.76, "e": 133.44, "w": [{"t": "30%", "s": 130.76}, {"t": "lebih", "s": 132.52}, {"t": "rendah", "s": 132.84}]}, {"s": 133.46, "e": 135.66, "w": [{"t": "melalui", "s": 133.46}, {"t": "jualan", "s": 134.3}, {"t": "Agro", "s": 134.76}, {"t": "Madani", "s": 135.16}]}, {"s": 135.68, "e": 137.34, "w": [{"t": "lebih", "s": 135.68}, {"t": "jimat", "s": 136.16}, {"t": "berbelanja,", "s": 136.44}]}, {"s": 137.68, "e": 139.12, "w": [{"t": "lebih", "s": 137.68}, {"t": "lega", "s": 137.76}, {"t": "untuk", "s": 138.16}, {"t": "keluarga", "s": 138.44}]}, {"s": 139.14, "e": 140.96, "w": [{"t": "Itu", "s": 139.14}, {"t": "adalah", "s": 139.96}, {"t": "antara", "s": 140.48}]}, {"s": 140.98, "e": 142.94, "w": [{"t": "enam", "s": 140.98}, {"t": "inisiatif", "s": 141.36}, {"t": "Belanjawan", "s": 142.2}]}, {"s": 142.96, "e": 144.58, "w": [{"t": "Madani", "s": 142.96}, {"t": "2027", "s": 143.26}]}, {"s": 144.61, "e": 145.51, "w": [{"t": "Ingat,", "s": 144.61}]}, {"s": 145.81, "e": 146.83, "w": [{"t": "bukan", "s": 145.81}, {"t": "sekadar", "s": 146.19}, {"t": "tahu", "s": 146.57}]}, {"s": 146.85, "e": 148.85, "w": [{"t": "tapi", "s": 146.85}, {"t": "fahami", "s": 147.23}, {"t": "manfaatnya", "s": 148.11}]}, {"s": 148.87, "e": 151.23, "w": [{"t": "dan", "s": 148.87}, {"t": "kongsikan", "s": 149.13}, {"t": "kepada", "s": 149.85}]}, {"s": 151.25, "e": 154.39, "w": [{"t": "keluarga", "s": 151.25}, {"t": "dan", "s": 153.21}, {"t": "masyarakat", "s": 153.41}]}, {"s": 154.41, "e": 157.75, "w": [{"t": "Belanjawan", "s": 154.41}, {"t": "Madani", "s": 155.35}, {"t": "kelima", "s": 155.93}, {"t": "2027,", "s": 156.43}]}, {"s": 157.83, "e": 159.17, "w": [{"t": "menggapai", "s": 157.83}, {"t": "di", "s": 158.41}, {"t": "langit,", "s": 158.57}]}, {"s": 159.21, "e": 160.31, "w": [{"t": "mengakar", "s": 159.21}, {"t": "di", "s": 159.73}, {"t": "bumi", "s": 159.95}]}, {"s": 160.33, "e": 163.59, "w": [{"t": "Malaysia", "s": 160.33}, {"t": "MADANI", "s": 160.75}, {"t": "kesejahteraan", "s": 161.51}, {"t": "dinikmati", "s": 162.95}]}, {"s": 163.61, "e": 164.45, "w": [{"t": "Terima", "s": 163.61}, {"t": "kasih", "s": 164.03}, {"t": "dan", "s": 164.27}]}, {"s": 164.47, "e": 165.21, "w": [{"t": "jumpa", "s": 164.47}, {"t": "lagi", "s": 164.71}]}, {"s": 165.23, "e": 166.17, "w": [{"t": "Jika", "s": 165.23}, {"t": "anda", "s": 165.67}, {"t": "suka", "s": 165.93}]}, {"s": 166.19, "e": 167.01, "w": [{"t": "dengan", "s": 166.19}, {"t": "video", "s": 166.43}, {"t": "ini,", "s": 166.65}]}, {"s": 167.21, "e": 167.81, "w": [{"t": "anda", "s": 167.21}, {"t": "boleh", "s": 167.25}, {"t": "share", "s": 167.53}]}, {"s": 167.83, "e": 168.49, "w": [{"t": "dan", "s": 167.83}, {"t": "like.", "s": 168.17}]}, {"s": 168.51, "e": 169.51, "w": [{"t": "Terima", "s": 168.51}, {"t": "kasih!", "s": 168.83}]}], "sections": [{"n": 1, "title": "Bantuan Awal Persekolahan", "sub": "BAP", "s": 18.85, "e": 29.56}, {"n": 2, "title": "Rancangan Makanan Tambahan", "sub": "RMT", "s": 29.67, "e": 49.51}, {"n": 3, "title": "Pelajar Tingkatan 6", "sub": "Bantuan pengajian", "s": 49.61, "e": 66.12}, {"n": 4, "title": "STR & SARA", "sub": "Bantuan tunai rakyat", "s": 66.29, "e": 88.62}, {"n": 5, "title": "SARA Madani", "sub": "Bantuan one-off", "s": 88.8, "e": 111.96}, {"n": 6, "title": "Jualan Rahmah & Agro Madani", "sub": "Barangan dapur", "s": 112.14, "e": 138.99}], "callouts": [{"s": 25.46, "e": 29.56, "k": "BAP SETIAP MURID", "b": "RM200", "f": "dahulu RM150"}, {"s": 34.26, "e": 39.31, "k": "PERUNTUKAN RMT", "b": "RM870 JUTA", "f": "makanan tambahan di sekolah"}, {"s": 43.26, "e": 47.11, "k": "MANFAAT KEPADA", "b": "800 RIBU+", "f": "murid yang layak"}, {"s": 54.17, "e": 58.72, "k": "SETIAP PELAJAR", "b": "RM2,500", "f": "tingkatan 6"}, {"s": 55.97, "e": 62.82, "k": "MANFAAT KEPADA", "b": "90,000", "f": "murid"}, {"s": 72.87, "e": 75.82, "k": "STR + SARA 2027", "b": "RM16 BILION", "f": "ditingkatkan"}, {"s": 78.47, "e": 84.72, "k": "SARA SEHINGGA", "b": "RM150", "f": "sebulan · barangan asas"}, {"s": 94.0, "e": 97.25, "k": "SARA MADANI", "b": "RM100 × 2", "f": "dua kali bayaran"}, {"s": 97.3, "e": 104.35, "k": "LAYAK", "b": "18 TAHUN+", "f": "bukan penerima STR · tertakluk syarat"}, {"s": 120.64, "e": 123.59, "k": "PERUNTUKAN", "b": "RM750 JUTA", "f": "Jualan Rahmah & Agro Madani"}, {"s": 130.64, "e": 135.69, "k": "HARGA LEBIH MURAH", "b": "30%", "f": "melalui Jualan Agro Madani"}], "chips": [{"s": 124.04, "t": "Ayam"}, {"s": 124.84, "t": "Ikan"}, {"s": 125.34, "t": "Sayur"}, {"s": 126.44, "t": "Buah"}], "hookEnd": 7.72, "hookFlash": [{"s": 0.55, "t": "RM200"}, {"s": 1.5, "t": "RM870 JUTA"}, {"s": 2.45, "t": "RM16 BILION"}, {"s": 3.4, "t": "30% MURAH"}], "hookTitle": 4.6, "six": 15.53, "recap": [{"s": 139.47, "t": "Bantuan Awal Persekolahan RM200"}, {"s": 140.02, "t": "RMT RM870 juta"}, {"s": 140.57, "t": "Tingkatan 6 RM2,500"}, {"s": 141.12, "t": "STR & SARA RM16 bilion"}, {"s": 141.67, "t": "SARA Madani RM100 × 2"}, {"s": 142.22, "t": "Jualan Rahmah & Agro Madani"}], "recapEnd": 144.42, "quote": 157.77, "quote2": 160.27, "cta": 165.21, "punches": [25.46, 34.26, 43.26, 54.17, 55.97, 72.87, 78.47, 94.0, 97.3, 120.64, 130.64]};
+      const tl = gsap.timeline({ paused: true });
+      const $ = (id) => document.getElementById(id);
+      const mk = (tag, cls, html) => {
+        const el = document.createElement(tag);
+        if (cls) el.className = cls;
+        if (html !== undefined) el.innerHTML = html;
+        return el;
+      };
+      const pad = (n) => String(n).padStart(2, "0");
+
+      // ---------- hook: number flashes, then the title slam
+      D.hookFlash.forEach((h, i) => {
+        const el = mk("div", "hf", h.t);
+        $("hook-flash").appendChild(el);
+        const end = i < D.hookFlash.length - 1 ? D.hookFlash[i + 1].s : D.hookTitle;
+        tl.fromTo(el, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power4.out" }, h.s);
+        tl.to(el, { opacity: 0, scale: 0.85, duration: 0.12, ease: "power2.in" }, end - 0.12);
+      });
+      tl.fromTo("#hook-title", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, D.hookTitle);
+      tl.to("#hook-title", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, D.hookEnd - 0.25);
+
+      // ---------- "6 inisiatif"
+      tl.fromTo("#six .ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.8)" }, D.six);
+      tl.fromTo("#six", { opacity: 0 }, { opacity: 1, duration: 0.15 }, D.six);
+      tl.fromTo("#six .lbl", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, D.six + 0.12);
+      tl.to("#six", { opacity: 0, duration: 0.25 }, D.six + 3.0);
+
+      // ---------- progress bar + section badges + wipes
+      for (let i = 0; i < 6; i++) {
+        const seg = mk("div", "pseg");
+        const f = mk("span", "pfill");
+        f.id = "pf" + i;
+        seg.appendChild(f);
+        $("progress").appendChild(seg);
+      }
+      const first = D.sections[0].s;
+      const last = D.sections[D.sections.length - 1].e;
+      tl.fromTo("#progress", { opacity: 0 }, { opacity: 1, duration: 0.3 }, first);
+      tl.to("#progress", { opacity: 0, duration: 0.3 }, last);
+      D.sections.forEach((s, i) => {
+        tl.fromTo("#pf" + i, { scaleX: 0 }, { scaleX: 1, duration: s.e - s.s, ease: "none" }, s.s);
+        const b = mk("div", "badge");
+        b.innerHTML = `<div class="num">${pad(s.n)}</div><div class="txt"><div class="title">${s.title}</div><div class="sub">${s.sub}</div></div>`;
+        $("badges").appendChild(b);
+        tl.fromTo(b, { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, s.s + 0.1);
+        tl.fromTo(b.querySelector(".num"), { scale: 0.4 }, { scale: 1, duration: 0.45, ease: "back.out(2)" }, s.s + 0.15);
+        tl.to(b, { opacity: 0, x: -40, duration: 0.25, ease: "power2.in" }, s.e - 0.25);
+        // gold sweep across the cut into each section
+        tl.fromTo("#wipe", { opacity: 1, x: -1700, immediateRender: false }, { x: 1400, duration: 0.42, ease: "power2.inOut", immediateRender: false }, s.s - 0.2);
+        tl.set("#wipe", { opacity: 0 }, s.s + 0.23);
+      });
+      // sweep into the outro
+      tl.fromTo("#wipe", { opacity: 1, x: -1700, immediateRender: false }, { x: 1400, duration: 0.42, ease: "power2.inOut", immediateRender: false }, D.recap[0].s - 0.55);
+      tl.set("#wipe", { opacity: 0 }, D.recap[0].s - 0.12);
+
+      // ---------- number callouts (+ camera punch-in)
+      D.callouts.forEach((c, i) => {
+        const next = D.callouts[i + 1];
+        const end = next && next.s < c.e ? next.s : c.e;
+        const el = mk("div", "callout");
+        el.innerHTML = `<div class="card"><div class="k">${c.k}</div><span class="b">${c.b}</span><div class="f">${c.f}</div></div>`;
+        $("callouts").appendChild(el);
+        const big = el.querySelector(".b");
+        tl.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, c.s);
+        tl.fromTo(big, { scale: 1.5, color: "#ffc629" }, { scale: 1, color: "#ffffff", duration: 0.45, ease: "back.out(1.7)" }, c.s + 0.05);
+        tl.to(big, { color: "#ffc629", duration: 0.2 }, c.s + 0.5);
+        tl.to(el, { opacity: 0, y: -20, duration: 0.22, ease: "power2.in" }, end - 0.22);
+        tl.to("#cam", { scale: 1.07, duration: 0.35, ease: "power2.out" }, c.s);
+        tl.to("#cam", { scale: 1, duration: 0.5, ease: "power2.inOut" }, end - 0.3);
+      });
+
+      // ---------- chips (ayam / ikan / sayur / buah)
+      D.chips.forEach((c, i) => {
+        const el = mk("span", "chip", c.t);
+        $("chips").appendChild(el);
+        tl.fromTo(el, { opacity: 0, scale: 0.3, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(2.2)" }, c.s);
+      });
+      const chipsEnd = D.chips[D.chips.length - 1].s + 2.6;
+      tl.to("#chips .chip", { opacity: 0, y: -20, duration: 0.25, stagger: 0.05 }, chipsEnd);
+
+      // ---------- outro recap, quote, CTA
+      D.recap.forEach((r, i) => {
+        const el = mk("div", "rline", `<span class="tick">✓</span><span>${r.t}</span>`);
+        $("rlines").appendChild(el);
+        tl.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, r.s);
+      });
+      tl.fromTo("#recap", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, D.recap[0].s - 0.15);
+      tl.to("#recap", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, Math.max(D.recapEnd + 1.2, D.recap[5].s + 1.6));
+      tl.fromTo("#quote .q", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.55, ease: "power3.out" }, D.quote);
+      tl.fromTo("#quote", { opacity: 0 }, { opacity: 1, duration: 0.1 }, D.quote);
+      tl.to("#quote", { opacity: 0, duration: 0.25 }, D.quote2 - 0.25);
+      tl.fromTo("#quote2", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, D.quote2);
+      tl.to("#quote2", { opacity: 0, duration: 0.3 }, D.cta - 0.3);
+      tl.fromTo("#btn-like", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, D.cta + 0.4);
+      tl.fromTo("#btn-share", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, D.cta + 0.65);
+      tl.to("#btn-like", { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1 }, D.cta + 1.3);
+      tl.to("#btn-share", { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1 }, D.cta + 1.6);
+
+      // ---------- captions: one group visible at a time, words light up as spoken
+      const ACC = /^(RM[\d,]+|[\d,]+%?|juta|bilion|ribu|STR|SARA|RMT|MADANI|2027|enam|dua|ke-6)[,.?!]*$/i;
+      D.caps.forEach((g, gi) => {
+        const el = mk("div", "cg");
+        el.id = "cg-" + gi;
+        g.w.forEach((w) => {
+          const s = mk("span", "cw" + (ACC.test(w.t) ? " acc" : ""), w.t.replace(/[.,?!]$/, ""));
+          el.appendChild(s);
+        });
+        $("captions").appendChild(el);
+        const fit = window.__hyperframes && window.__hyperframes.fitTextFontSize
+          ? window.__hyperframes.fitTextFontSize(el.textContent.toUpperCase(), { fontFamily: "Montserrat", fontWeight: 900, maxWidth: 900, baseFontSize: 84, minFontSize: 56 })
+          : null;
+        if (fit) el.style.fontSize = fit.fontSize + "px";
+        tl.set(el, { visibility: "visible" }, g.s);
+        tl.fromTo(el, { opacity: 0, scale: 0.86, y: 18 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(1.8)" }, g.s);
+        el.querySelectorAll(".cw").forEach((s, wi) => {
+          tl.to(s, { opacity: 1, duration: 0.08 }, Math.max(g.s, g.w[wi].s));
+        });
+        tl.to(el, { opacity: 0, duration: 0.08 }, g.e - 0.08);
+        tl.set(el, { opacity: 0, visibility: "hidden" }, g.e);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

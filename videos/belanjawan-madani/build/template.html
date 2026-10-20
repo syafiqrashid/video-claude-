@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --navy: #0a2342;
+        --navy-90: rgba(10, 35, 66, 0.9);
+        --gold: #ffc629;
+        --red: #d7263d;
+        --ink: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: Montserrat, sans-serif;
+        color: var(--ink);
+      }
+      #cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+      .vid {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+        transform-origin: 50% 38%;
+      }
+      .shade {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 5;
+      }
+      #shade-top {
+        top: 0;
+        height: 620px;
+        background: linear-gradient(180deg, rgba(4, 14, 30, 0.72) 0%, rgba(4, 14, 30, 0) 100%);
+      }
+      #shade-bot {
+        bottom: 0;
+        height: 820px;
+        background: linear-gradient(0deg, rgba(4, 14, 30, 0.78) 0%, rgba(4, 14, 30, 0) 100%);
+      }
+      .layer {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      /* ---------- progress + section badge ---------- */
+      #progress {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 86px;
+        height: 12px;
+        display: flex;
+        gap: 10px;
+        opacity: 0;
+      }
+      .pseg {
+        flex: 1;
+        height: 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.28);
+        overflow: hidden;
+      }
+      .pfill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--gold);
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+      }
+      .badge {
+        position: absolute;
+        left: 70px;
+        top: 134px;
+        display: flex;
+        align-items: stretch;
+        opacity: 0;
+        max-width: 940px;
+      }
+      .badge .num {
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 64px;
+        line-height: 1;
+        padding: 20px 24px 16px;
+        border-radius: 18px 0 0 18px;
+        letter-spacing: -0.03em;
+      }
+      .badge .txt {
+        background: var(--navy-90);
+        padding: 14px 30px 14px 26px;
+        border-radius: 0 18px 18px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .badge .title {
+        font-weight: 900;
+        font-size: 44px;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+      .badge .sub {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-top: 4px;
+      }
+
+      /* ---------- number callout ---------- */
+      .callout {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 300px;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+      }
+      .callout .card {
+        background: var(--navy-90);
+        border-left: 14px solid var(--gold);
+        border-radius: 22px;
+        padding: 22px 40px 26px;
+        text-align: center;
+        max-width: 940px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+      .callout .k {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 28px;
+        color: var(--gold);
+        letter-spacing: 0.08em;
+      }
+      .callout .b {
+        display: block;
+        font-weight: 900;
+        font-size: 132px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin: 8px 0 6px;
+      }
+      .callout .f {
+        font-weight: 700;
+        font-size: 34px;
+        color: rgba(255, 255, 255, 0.86);
+      }
+      .callout .was {
+        font-weight: 700;
+        font-size: 34px;
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      /* ---------- chips ---------- */
+      #chips {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1120px;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+      }
+      .chip {
+        display: block;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 46px;
+        padding: 12px 30px;
+        border-radius: 999px;
+        opacity: 0;
+      }
+
+      /* ---------- hook ---------- */
+      #hook-flash {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 230px;
+        height: 260px;
+      }
+      .hf {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 170px;
+        letter-spacing: -0.05em;
+        color: var(--gold);
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+      }
+      #hook-title {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 170px;
+        text-align: center;
+        opacity: 0;
+      }
+      #hook-title .eyebrow {
+        display: inline-block;
+        background: var(--red);
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 30px;
+        letter-spacing: 0.1em;
+        padding: 8px 22px;
+        border-radius: 10px;
+      }
+      #hook-title .big {
+        display: block;
+        font-weight: 900;
+        font-size: 124px;
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+        margin-top: 18px;
+        color: var(--gold);
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+      }
+      #hook-title .small {
+        display: block;
+        font-weight: 900;
+        font-size: 58px;
+        letter-spacing: -0.02em;
+        margin-top: 14px;
+      }
+
+      /* ---------- "6 inisiatif" stamp ---------- */
+      #six {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 210px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 26px;
+        opacity: 0;
+      }
+      #six .ring {
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 190px;
+        line-height: 230px;
+        text-align: center;
+        letter-spacing: -0.04em;
+      }
+      #six .lbl {
+        font-weight: 900;
+        font-size: 84px;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        text-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      /* ---------- wipe ---------- */
+      .wipe {
+        position: absolute;
+        top: -200px;
+        bottom: -200px;
+        left: 0;
+        width: 1400px;
+        background: linear-gradient(90deg, rgba(255, 198, 41, 0) 0%, var(--gold) 30%, var(--gold) 70%, rgba(255, 198, 41, 0) 100%);
+        transform: rotate(14deg);
+        opacity: 0;
+        z-index: 30;
+      }
+
+      /* ---------- recap + outro ---------- */
+      #recap {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 130px;
+        background: var(--navy-90);
+        border-radius: 28px;
+        padding: 30px 36px 26px;
+        opacity: 0;
+      }
+      #recap h3 {
+        font-weight: 900;
+        font-size: 50px;
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+        color: var(--gold);
+      }
+      .rline {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-weight: 700;
+        font-size: 36px;
+        padding: 8px 0;
+        opacity: 0;
+      }
+      .rline .tick {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 46px;
+        text-align: center;
+      }
+      #quote {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 200px;
+        text-align: center;
+        opacity: 0;
+      }
+      #quote .q {
+        display: block;
+        font-family: "League Gothic", sans-serif;
+        font-size: 150px;
+        line-height: 0.95;
+        color: var(--gold);
+        text-transform: uppercase;
+        text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
+      #quote2 {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 220px;
+        text-align: center;
+        opacity: 0;
+      }
+      #quote2 .m {
+        display: block;
+        font-weight: 900;
+        font-size: 104px;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      #quote2 .m b {
+        color: var(--gold);
+      }
+      #quote2 .s {
+        display: inline-block;
+        margin-top: 18px;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 32px;
+        letter-spacing: 0.06em;
+        background: var(--navy-90);
+        padding: 10px 24px;
+        border-radius: 12px;
+      }
+      #cta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 260px;
+        display: flex;
+        justify-content: center;
+        gap: 28px;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-weight: 900;
+        font-size: 56px;
+        padding: 22px 42px;
+        border-radius: 999px;
+        opacity: 0;
+      }
+      .btn svg {
+        display: block;
+        width: 56px;
+        height: 56px;
+      }
+      #btn-like {
+        background: var(--gold);
+        color: var(--navy);
+      }
+      #btn-share {
+        background: var(--red);
+        color: #fff;
+      }
+
+      /* ---------- captions ---------- */
+      #captions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1330px;
+        height: 260px;
+        z-index: 20;
+      }
+      .cg {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 0;
+        text-align: center;
+        font-weight: 900;
+        font-size: 84px;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        opacity: 0;
+        visibility: hidden;
+        text-shadow:
+          0 6px 0 rgba(4, 14, 30, 0.85),
+          0 0 28px rgba(4, 14, 30, 0.6);
+      }
+      .cw {
+        display: inline-block;
+        margin: 0 0.12em;
+        opacity: 0.5;
+      }
+      .cw.acc {
+        color: var(--gold);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="{{TOTAL}}"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="cam">
+      {{VIDEOS}}
+      </div>
+      <div id="shade-top" class="shade"></div>
+      <div id="shade-bot" class="shade"></div>
+
+      <div id="gfx" class="layer">
+        <div id="progress"></div>
+        <div id="badges"></div>
+        <div id="callouts"></div>
+        <div id="chips"></div>
+        <div id="hook-flash"></div>
+        <div id="hook-title">
+          <span class="eyebrow">KERAJAAN MADANI</span>
+          <span class="big">BELANJAWAN 2027</span>
+          <span class="small">Apa manfaat untuk keluarga anda?</span>
+        </div>
+        <div id="six"><div class="ring">6</div><div class="lbl">INISIATIF<br />MENARIK</div></div>
+        <div id="recap"><h3>6 Inisiatif Belanjawan Madani 2027</h3><div id="rlines"></div></div>
+        <div id="quote"><span class="q">Menggapai di langit,</span><span class="q">mengakar di bumi</span></div>
+        <div id="quote2">
+          <span class="m">Malaysia <b>MADANI</b></span>
+          <span class="s">KESEJAHTERAAN DINIKMATI</span>
+        </div>
+        <div id="cta">
+          <div class="btn" id="btn-like">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21h4V9H2v12zm20-11a2 2 0 0 0-2-2h-6.3l1-4.6v-.3c0-.4-.2-.8-.4-1.1L13.2 1 6.6 7.6C6.2 8 6 8.5 6 9v10a2 2 0 0 0 2 2h9c.8 0 1.5-.5 1.8-1.2l3-7.1c.1-.2.2-.5.2-.7v-2z"/></svg>
+            LIKE
+          </div>
+          <div class="btn" id="btn-share">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.1c-.8 0-1.4.3-2 .8l-7.1-4.2c.1-.2.1-.5.1-.7s0-.5-.1-.7L16 7.2c.5.5 1.2.8 2 .8a3 3 0 1 0-3-3c0 .2 0 .5.1.7L8 9.8A3 3 0 0 0 6 9a3 3 0 1 0 2 5.2l7.1 4.2c-.1.2-.1.4-.1.6a2.9 2.9 0 1 0 3-2.9z"/></svg>
+            SHARE
+          </div>
+        </div>
+        <div class="wipe" id="wipe"></div>
+      </div>
+      <div id="captions"></div>
+
+{{SFX}}
+    </div>
+    <script>
+      const D = {{DATA}};
+      const tl = gsap.timeline({ paused: true });
+      const $ = (id) => document.getElementById(id);
+      const mk = (tag, cls, html) => {
+        const el = document.createElement(tag);
+        if (cls) el.className = cls;
+        if (html !== undefined) el.innerHTML = html;
+        return el;
+      };
+      const pad = (n) => String(n).padStart(2, "0");
+
+      // ---------- hook: number flashes, then the title slam
+      D.hookFlash.forEach((h, i) => {
+        const el = mk("div", "hf", h.t);
+        $("hook-flash").appendChild(el);
+        const end = i < D.hookFlash.length - 1 ? D.hookFlash[i + 1].s : D.hookTitle;
+        tl.fromTo(el, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power4.out" }, h.s);
+        tl.to(el, { opacity: 0, scale: 0.85, duration: 0.12, ease: "power2.in" }, end - 0.12);
+      });
+      tl.fromTo("#hook-title", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, D.hookTitle);
+      tl.to("#hook-title", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, D.hookEnd - 0.25);
+
+      // ---------- "6 inisiatif"
+      tl.fromTo("#six .ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.8)" }, D.six);
+      tl.fromTo("#six", { opacity: 0 }, { opacity: 1, duration: 0.15 }, D.six);
+      tl.fromTo("#six .lbl", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, D.six + 0.12);
+      tl.to("#six", { opacity: 0, duration: 0.25 }, D.six + 3.0);
+
+      // ---------- progress bar + section badges + wipes
+      for (let i = 0; i < 6; i++) {
+        const seg = mk("div", "pseg");
+        const f = mk("span", "pfill");
+        f.id = "pf" + i;
+        seg.appendChild(f);
+        $("progress").appendChild(seg);
+      }
+      const first = D.sections[0].s;
+      const last = D.sections[D.sections.length - 1].e;
+      tl.fromTo("#progress", { opacity: 0 }, { opacity: 1, duration: 0.3 }, first);
+      tl.to("#progress", { opacity: 0, duration: 0.3 }, last);
+      D.sections.forEach((s, i) => {
+        tl.fromTo("#pf" + i, { scaleX: 0 }, { scaleX: 1, duration: s.e - s.s, ease: "none" }, s.s);
+        const b = mk("div", "badge");
+        b.innerHTML = `<div class="num">${pad(s.n)}</div><div class="txt"><div class="title">${s.title}</div><div class="sub">${s.sub}</div></div>`;
+        $("badges").appendChild(b);
+        tl.fromTo(b, { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, s.s + 0.1);
+        tl.fromTo(b.querySelector(".num"), { scale: 0.4 }, { scale: 1, duration: 0.45, ease: "back.out(2)" }, s.s + 0.15);
+        tl.to(b, { opacity: 0, x: -40, duration: 0.25, ease: "power2.in" }, s.e - 0.25);
+        // gold sweep across the cut into each section
+        tl.fromTo("#wipe", { opacity: 1, x: -1700, immediateRender: false }, { x: 1400, duration: 0.42, ease: "power2.inOut", immediateRender: false }, s.s - 0.2);
+        tl.set("#wipe", { opacity: 0 }, s.s + 0.23);
+      });
+      // sweep into the outro
+      tl.fromTo("#wipe", { opacity: 1, x: -1700, immediateRender: false }, { x: 1400, duration: 0.42, ease: "power2.inOut", immediateRender: false }, D.recap[0].s - 0.55);
+      tl.set("#wipe", { opacity: 0 }, D.recap[0].s - 0.12);
+
+      // ---------- number callouts (+ camera punch-in)
+      D.callouts.forEach((c, i) => {
+        const next = D.callouts[i + 1];
+        const end = next && next.s < c.e ? next.s : c.e;
+        const el = mk("div", "callout");
+        el.innerHTML = `<div class="card"><div class="k">${c.k}</div><span class="b">${c.b}</span><div class="f">${c.f}</div></div>`;
+        $("callouts").appendChild(el);
+        const big = el.querySelector(".b");
+        tl.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, c.s);
+        tl.fromTo(big, { scale: 1.5, color: "#ffc629" }, { scale: 1, color: "#ffffff", duration: 0.45, ease: "back.out(1.7)" }, c.s + 0.05);
+        tl.to(big, { color: "#ffc629", duration: 0.2 }, c.s + 0.5);
+        tl.to(el, { opacity: 0, y: -20, duration: 0.22, ease: "power2.in" }, end - 0.22);
+        tl.to("#cam", { scale: 1.07, duration: 0.35, ease: "power2.out" }, c.s);
+        tl.to("#cam", { scale: 1, duration: 0.5, ease: "power2.inOut" }, end - 0.3);
+      });
+
+      // ---------- chips (ayam / ikan / sayur / buah)
+      D.chips.forEach((c, i) => {
+        const el = mk("span", "chip", c.t);
+        $("chips").appendChild(el);
+        tl.fromTo(el, { opacity: 0, scale: 0.3, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(2.2)" }, c.s);
+      });
+      const chipsEnd = D.chips[D.chips.length - 1].s + 2.6;
+      tl.to("#chips .chip", { opacity: 0, y: -20, duration: 0.25, stagger: 0.05 }, chipsEnd);
+
+      // ---------- outro recap, quote, CTA
+      D.recap.forEach((r, i) => {
+        const el = mk("div", "rline", `<span class="tick">✓</span><span>${r.t}</span>`);
+        $("rlines").appendChild(el);
+        tl.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, r.s);
+      });
+      tl.fromTo("#recap", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, D.recap[0].s - 0.15);
+      tl.to("#recap", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, Math.max(D.recapEnd + 1.2, D.recap[5].s + 1.6));
+      tl.fromTo("#quote .q", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.55, ease: "power3.out" }, D.quote);
+      tl.fromTo("#quote", { opacity: 0 }, { opacity: 1, duration: 0.1 }, D.quote);
+      tl.to("#quote", { opacity: 0, duration: 0.25 }, D.quote2 - 0.25);
+      tl.fromTo("#quote2", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, D.quote2);
+      tl.to("#quote2", { opacity: 0, duration: 0.3 }, D.cta - 0.3);
+      tl.fromTo("#btn-like", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, D.cta + 0.4);
+      tl.fromTo("#btn-share", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, D.cta + 0.65);
+      tl.to("#btn-like", { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1 }, D.cta + 1.3);
+      tl.to("#btn-share", { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1 }, D.cta + 1.6);
+
+      // ---------- captions: one group visible at a time, words light up as spoken
+      const ACC = /^(RM[\d,]+|[\d,]+%?|juta|bilion|ribu|STR|SARA|RMT|MADANI|2027|enam|dua|ke-6)[,.?!]*$/i;
+      D.caps.forEach((g, gi) => {
+        const el = mk("div", "cg");
+        el.id = "cg-" + gi;
+        g.w.forEach((w) => {
+          const s = mk("span", "cw" + (ACC.test(w.t) ? " acc" : ""), w.t.replace(/[.,?!]$/, ""));
+          el.appendChild(s);
+        });
+        $("captions").appendChild(el);
+        const fit = window.__hyperframes && window.__hyperframes.fitTextFontSize
+          ? window.__hyperframes.fitTextFontSize(el.textContent.toUpperCase(), { fontFamily: "Montserrat", fontWeight: 900, maxWidth: 900, baseFontSize: 84, minFontSize: 56 })
+          : null;
+        if (fit) el.style.fontSize = fit.fontSize + "px";
+        tl.set(el, { visibility: "visible" }, g.s);
+        tl.fromTo(el, { opacity: 0, scale: 0.86, y: 18 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "back.out(1.8)" }, g.s);
+        el.querySelectorAll(".cw").forEach((s, wi) => {
+          tl.to(s, { opacity: 1, duration: 0.08 }, Math.max(g.s, g.w[wi].s));
+        });
+        tl.to(el, { opacity: 0, duration: 0.08 }, g.e - 0.08);
+        tl.set(el, { opacity: 0, visibility: "hidden" }, g.e);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

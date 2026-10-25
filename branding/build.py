@@ -6,6 +6,7 @@ Requires: fonttools, Inter font family, Node + Playwright (for PNG export, see e
 import subprocess
 from pathlib import Path
 
+from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
@@ -41,9 +42,18 @@ class Font:
             x += g.width * s + tracking
         return pen.getCommands()
 
+    def bounds(self, char, x, baseline, cap_px):
+        s = cap_px / self.cap
+        pen = BoundsPen(self.gs)
+        self.gs[self.cmap[ord(char)]].draw(pen)
+        x0, y0, x1, y1 = pen.bounds
+        return x + x0 * s, baseline - y1 * s, x + x1 * s, baseline - y0 * s
+
 
 DISPLAY = Font(FONT_DIR / "InterDisplay-ExtraBold.otf")
 TEXT = Font(FONT_DIR / "Inter-SemiBold.otf")
+MIN_BOLD = Font(FONT_DIR / "InterDisplay-SemiBold.otf")
+MIN_LIGHT = Font(FONT_DIR / "InterDisplay-Light.otf")
 
 
 def icon(x, y, size, tile, mark, flap):
@@ -106,6 +116,47 @@ def app_icon(tile, mark, flap, bg):
     return svg(512, 512, body)
 
 
+def peel(x0, y0, x1, y1, fill):
+    """The folded-corner triangle: right angle at bottom-left."""
+    return f'\n  <path fill="{fill}" d="M{x0:.2f},{y0:.2f} L{x1:.2f},{y1:.2f} L{x0:.2f},{y1:.2f} Z"/>'
+
+
+def minimal(word, sub, accent, bg=None):
+    """Lowercase 'kupas daily'; the dot of the i is replaced by the peel triangle."""
+    pad, cap = 36, 60
+    gap = cap * 0.26
+    base = pad + cap * 1.05
+    kupas_w = MIN_BOLD.width("kupas", cap)
+    x2 = pad + kupas_w + gap
+    daily = "da\u0131ly"  # dotless i
+    body = (
+        f'\n  <path fill="{word}" d="{MIN_BOLD.path("kupas", pad, base, cap)}"/>'
+        f'\n  <path fill="{sub}" d="{MIN_LIGHT.path(daily, x2, base, cap)}"/>'
+    )
+    # Locate the i: its stem is the dotless glyph; its dot sits where the regular i's top is.
+    ix = x2 + MIN_LIGHT.width("da", cap)
+    sx0, stem_top, sx1, _ = MIN_LIGHT.bounds("\u0131", ix, base, cap)
+    _, dot_top, _, _ = MIN_LIGHT.bounds("i", ix, base, cap)
+    size = cap * 0.2
+    bottom = stem_top - (stem_top - dot_top) * 0.28
+    body += peel(sx0, bottom - size, sx0 + size, bottom, accent)
+    w = x2 + MIN_LIGHT.width(daily, cap) + pad
+    return svg(w, base + cap * 0.32 + pad, body, bg)
+
+
+def minimal_mark(mark, accent, size=120, pad=0, bg=None):
+    """The geometric k on its own, with the peel triangle in the top-right."""
+    k = (size - pad * 2) / 120
+    t = lambda px, py: f"{pad + px * k:.2f},{pad + py * k:.2f}"
+    body = (
+        f'\n  <path fill="{mark}" d="M{t(14,6)} L{t(34,6)} L{t(34,114)} L{t(14,114)} Z '
+        f'M{t(33,82)} L{t(69,46)} L{t(96,46)} L{t(33,109)} Z '
+        f'M{t(48,94)} L{t(62,80)} L{t(96,114)} L{t(68,114)} Z"/>'
+        f'\n  <path fill="{accent}" d="M{t(76,6)} L{t(106,36)} L{t(76,36)} Z"/>'
+    )
+    return svg(size, size, body, bg)
+
+
 FILES = {
     "kupas-daily-horizontal.svg": horizontal(NAVY, PAPER, AMBER, NAVY, SLATE),
     "kupas-daily-horizontal-dark.svg": horizontal(PAPER, NAVY, AMBER, PAPER, AMBER, bg=NAVY),
@@ -115,6 +166,10 @@ FILES = {
         ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Kupas Daily"><title>Kupas Daily</title>', "\n</svg>\n"]
     ),
     "kupas-daily-avatar.svg": app_icon(PAPER, NAVY, AMBER, NAVY),
+    "kupas-daily-minimal.svg": minimal(NAVY, NAVY, AMBER),
+    "kupas-daily-minimal-dark.svg": minimal(PAPER, PAPER, AMBER, bg=NAVY),
+    "kupas-daily-minimal-mark.svg": minimal_mark(NAVY, AMBER),
+    "kupas-daily-minimal-avatar.svg": minimal_mark(NAVY, AMBER, size=512, pad=136, bg=PAPER),
 }
 
 

@@ -13,6 +13,17 @@ lipatan, jadi ikon nampak satu sistem.
 | `kupas-daily-icon.svg` | Ikon sahaja (favicon, watermark video) |
 | `kupas-daily-avatar.svg` | Gambar profil (YouTube, TikTok, IG, FB) |
 
+### Set minimalis
+
+Tulisan huruf kecil `kupas daily` sahaja. Titik huruf **i** diganti dengan
+segi tiga amber — bucu terkupas yang sama dengan ikon utama, dikecilkan.
+
+| Fail | Guna untuk |
+|---|---|
+| `kupas-daily-minimal.svg` / `-dark.svg` | Logo minimalis (latar cerah / gelap) |
+| `kupas-daily-minimal-mark.svg` | Huruf **k** + segi tiga, tanpa latar |
+| `kupas-daily-minimal-avatar.svg` | Gambar profil minimalis (latar putih) |
+
 PNG (2x) ada dalam `png/`. Semua teks sudah ditukar ke *path*, jadi SVG
 dipaparkan sama di mana-mana tanpa perlu font.
 

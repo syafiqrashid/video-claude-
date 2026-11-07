@@ -44,3 +44,9 @@ Video menegak 1080x1920 (47.4s) dalam `video4/`, ikut storyboard `video4/raw/sto
 - `video4/index.html` — komposisi HyperFrames
 - `scripts/cut_voice4.py` — buang pause janggal dari rakaman semula `voice-raw-v2.m4a` (65.7s → 46.4s); rakaman lama `voice-raw.m4a` tak ada suara frame 4
 - `scripts/extract_art4.py` — potong foto, ilustrasi dan logo dari storyboard
+
+## Video penuh — 4 bahagian
+
+- `final/merdeka-4-bahagian-HD.mp4` — keempat-empat video digabung (1080x1920, 2:31)
+- `final/merdeka-4-bahagian-lowres.mp4` — preview low res
+- `scripts/enhance_and_join.py` — susun ikut skrip (Manfaat Merdeka → Warisan Perjuangan → Patriotisme → Kesejahteraan), bersihkan suara (noise reduction, EQ, de-esser, compressor, -14 LUFS) dan gabung

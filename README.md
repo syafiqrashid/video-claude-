@@ -37,9 +37,9 @@ Video menegak 1080x1920 (35.6s) dalam `video3/`, ikut storyboard patriotisme (`v
 
 ## Video 4 — Kesejahteraan
 
-Video menegak 1080x1920 (41.3s) dalam `video4/`, ikut storyboard `video4/raw/storyboard.png`.
+Video menegak 1080x1920 (47.4s) dalam `video4/`, ikut storyboard `video4/raw/storyboard.png`.
 
 - `video4/output/kesejahteraan-lowres.mp4` — preview low res (540x960)
 - `video4/index.html` — komposisi HyperFrames
-- `scripts/cut_voice4.py` — buang pause janggal + take berulang (57.2s → 29.9s)
+- `scripts/cut_voice4.py` — buang pause janggal dari rakaman semula `voice-raw-v2.m4a` (65.7s → 46.4s); rakaman lama `voice-raw.m4a` tak ada suara frame 4
 - `scripts/extract_art4.py` — potong foto, ilustrasi dan logo dari storyboard

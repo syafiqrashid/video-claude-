@@ -88,10 +88,10 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="41.3" data-width="1080" data-height="1920" data-fps="30">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="47.4" data-width="1080" data-height="1920" data-fps="30">
 
       <!-- ================= SCENE 1 : KEHIDUPAN LEBIH SEJAHTERA ================= -->
-      <div id="s1" class="scene clip" data-start="0" data-duration="8.5" data-track-index="1">
+      <div id="s1" class="scene clip" data-start="0" data-duration="9.05" data-track-index="1">
         <div class="cam">
           <img class="abs" id="s1-art" src="assets/art/f1-city.png" style="left:0; top:968px; width:1080px;" />
           <div class="abs" id="s1-count" style="left:120px; top:100px; font: 900 62px/1 var(--f-title); color: var(--red);">04 / 04</div>
@@ -103,11 +103,11 @@
           </div>
           <div class="abs" id="s1-bar" style="left:132px; top:938px; width:168px; height:18px; background:var(--ink); transform-origin:0 50%;"></div>
         </div>
-        <div class="caption abs" id="s1-cap" style="left:88px; top:1530px; width:927px; font-size:47px;">Kemerdekaan yang sebenar juga membawa makna apabila rakyat dapat menikmati kehidupan dengan lebih sejahtera.</div>
+        <div class="caption abs" id="s1-cap" style="left:88px; top:1530px; width:927px; font-size:47px;">Kemerdekaan yang sebenar juga membawa makna apabila rakyat dapat menikmati kehidupan yang lebih sejahtera.</div>
       </div>
 
       <!-- ================= SCENE 2 : AMAN & SELAMAT ================= -->
-      <div id="s2" class="scene clip" data-start="8.5" data-duration="12.0" data-track-index="1">
+      <div id="s2" class="scene clip" data-start="9.05" data-duration="12.95" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s2-bg">
             <div class="abs" style="left:104px; top:158px;"><div class="label" id="s2-label" style="font-size:54px; padding:16px 30px 18px;">Negara Yang Kita Mahu</div></div>
@@ -127,7 +127,7 @@
       </div>
 
       <!-- ================= SCENE 3 : KESEJAHTERAAN RAKYATNYA ================= -->
-      <div id="s3" class="scene clip" data-start="20.5" data-duration="9.8" data-track-index="1">
+      <div id="s3" class="scene clip" data-start="22.0" data-duration="9.85" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s3-bg">
             <div class="abs" style="left:97px; top:162px;"><div class="label dark" id="s3-label" style="font-size:72px; padding:16px 48px 18px;">Bukan Sekadar</div></div>
@@ -144,8 +144,8 @@
         <div class="caption abs" id="s3-cap" style="left:74px; top:1530px; width:946px; font-size:42px;">Kemajuan negara bukan sekadar diukur melalui bangunan yang tinggi atau pembangunan yang pesat, tetapi juga melalui kesejahteraan hidup rakyatnya.</div>
       </div>
 
-      <!-- ================= SCENE 4 : MALAYSIA MADANI (no narration) ================= -->
-      <div id="s4" class="scene clip" data-start="30.3" data-duration="11.0" data-track-index="1">
+      <!-- ================= SCENE 4 : MALAYSIA MADANI ================= -->
+      <div id="s4" class="scene clip" data-start="31.85" data-duration="15.55" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s4-bg">
             <div class="abs" style="left:88px; top:162px;"><div class="label" id="s4-label" style="font-size:70px; padding:16px 40px 18px;">Inilah Aspirasi</div></div>
@@ -161,7 +161,7 @@
           </div>
           <div class="photo" id="s4-c1" style="left:68px; top:1016px;"><img src="assets/art/f4-crowd.jpg" style="width:900px; height:399px;" /></div>
         </div>
-        <div class="caption abs" id="s4-cap" style="left:74px; top:1500px; width:942px; font-size:41px; line-height:1.3;">Inilah aspirasi Malaysia MADANI. Memastikan kemajuan dan pembangunan dapat dinikmati bersama, tanpa mengira latar belakang, demi membina kehidupan yang lebih baik untuk generasi akan datang.</div>
+        <div class="caption abs" id="s4-cap" style="left:74px; top:1500px; width:942px; font-size:41px; line-height:1.3;">Inilah aspirasi Malaysia MADANI. Memastikan kemajuan dan pembangunan dapat dinikmati bersama, tanpa mengira latar belakang, demi membina kehidupan yang lebih baik untuk generasi yang akan datang.</div>
       </div>
 
       <div id="wipes">
@@ -172,7 +172,7 @@
       <div id="grain"></div>
       <div id="fadeout"></div>
 
-      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="29.93" data-track-index="5" data-volume="1"></audio>
+      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="46.44" data-track-index="5" data-volume="1"></audio>
     </div>
 
     <script>
@@ -229,15 +229,12 @@
       }
 
       // caption script follows the voice: each word appears when it is spoken
-      // (times from video4/raw/words.json). Frame 4 has no narration, so its
-      // words appear at a steady reading pace instead.
-      const s4words = [];
-      for (let i = 0; i < 25; i++) s4words.push(+(33.15 + i * 0.22).toFixed(2));
+      // (times from video4/raw/words.json, a few onsets corrected from the waveform)
       const CAPTION_WORDS = {
-        "#s1-cap": [2.42, 2.84, 3.04, 3.42, 3.7, 4.34, 4.7, 5.24, 5.62, 6.04, 6.7, 7.22, 7.44, 7.76],
-        "#s2-cap": [8.68, 8.96, 9.38, 9.78, 10.14, 10.3, 10.7, 10.96, 11.6, 11.86, 12.18, 12.38, 12.86, 13.12, 14.1, 15.18, 16.26, 16.7, 17.06, 17.22, 17.8, 17.88, 18.56, 18.7, 19.14, 19.66, 19.9],
-        "#s3-cap": [20.66, 21.18, 21.64, 22.28, 22.7, 23.04, 23.38, 23.76, 23.88, 24.28, 24.82, 25.3, 25.34, 25.9, 26.26, 26.58, 27.5, 28.54, 28.92],
-        "#s4-cap": s4words,
+        "#s1-cap": [2.24, 2.66, 2.84, 3.24, 3.58, 4.28, 4.62, 5.12, 5.58, 5.96, 6.8, 7.56, 7.86, 8.16],
+        "#s2-cap": [9.25, 9.58, 10.06, 10.48, 10.8, 10.98, 11.38, 11.62, 12.32, 12.82, 13.24, 13.48, 13.98, 14.44, 15.4, 15.84, 17.24, 17.74, 18.12, 18.3, 18.62, 19.06, 19.94, 20.1, 20.56, 21.12, 21.32],
+        "#s3-cap": [22.35, 22.88, 23.58, 23.88, 24.32, 24.68, 25.04, 25.48, 25.58, 26.1, 26.38, 27.08, 27.2, 27.8, 28.14, 28.42, 29.26, 30.24, 30.8],
+        "#s4-cap": [32.1, 33.17, 34.2, 34.68, 35.3, 36.24, 36.88, 37.18, 37.92, 38.18, 38.94, 39.5, 39.88, 40.34, 40.74, 41.56, 41.74, 42.55, 43.04, 43.2, 43.48, 43.82, 44.24, 44.88, 45.16, 45.48],
       };
       function splitWords(el) {
         [...el.childNodes].forEach((n) => {
@@ -268,70 +265,70 @@
       gsap.set(["#s2-c1", "#s3-c1"], { x: 1250 });
       gsap.set(".stripe", { xPercent: -120, skewX: -14 });
 
-      /* ================= SCENE 1 (0 - 8.5) ================= */
+      /* ================= SCENE 1 (0 - 9.05) ================= */
       focusIn("#s1 .cam", 0);
       fadeUp("#s1-count", 0.3);
       tl.fromTo("#s1-art", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" }, 0.15);
-      tl.to("#s1-art", { scale: 1.05, duration: 7.3, ease: "none", transformOrigin: "60% 70%" }, 1.15);
-      brush("#s1-label", 1.2, 0.55);                 // "kesejahteraan"
-      captionIn("#s1-cap", 2.2);                     // "Kemerdekaan yang sebenar..."
-      stamp("#s1-w1", "#s1 .cam", 6.66);             // "kehidupan"
-      stamp("#s1-w2", "#s1 .cam", 7.4);              // "lebih"
-      stamp("#s1-w3", "#s1 .cam", 7.72, 1.5);        // "sejahtera"
-      highlight("#s1-hl", 7.98);
-      tl.to("#s1-bar", { scaleX: 1, duration: 0.35, ease: "power3.out" }, 8.0);
+      tl.to("#s1-art", { scale: 1.05, duration: 7.9, ease: "none", transformOrigin: "60% 70%" }, 1.15);
+      brush("#s1-label", 1.0, 0.55);                 // "kesejahteraan"
+      captionIn("#s1-cap", 2.0);                     // "Kemerdekaan yang sebenar..."
+      stamp("#s1-w1", "#s1 .cam", 6.76);             // "kehidupan"
+      stamp("#s1-w2", "#s1 .cam", 7.82);             // "lebih"
+      stamp("#s1-w3", "#s1 .cam", 8.12, 1.5);        // "sejahtera"
+      highlight("#s1-hl", 8.38);
+      tl.to("#s1-bar", { scaleX: 1, duration: 0.3, ease: "power3.out" }, 8.4);
 
-      flagWipe(8.5);
+      flagWipe(9.05);
 
-      /* ================= SCENE 2 (8.5 - 20.5) ================= */
-      focusIn("#s2 .cam", 8.55);
-      brush("#s2-label", 8.62, 0.55);                // "kita mahukan sebuah negara"
-      captionIn("#s2-cap", 8.6);
-      stamp("#s2-w1", "#s2 .cam", 10.26);            // "aman"
-      highlight("#s2-hl", 10.5);
-      stamp("#s2-w2", "#s2 .cam", 10.66);            // "dan"
-      stamp("#s2-w3", "#s2 .cam", 10.92, 1.5);       // "selamat"
-      blurBg("#s2-bg", 11.55, 18.9);
-      cardIn("#s2-c1", 11.55, false, -3);            // "sebuah negara"
-      cardIn("#s2-c2", 12.1, true, 4);               // "yang menyediakan"
-      checkRow("#s2-k1", "#s2-t1", 12.82, -3);       // "peluang ekonomi"
-      checkRow("#s2-k2", "#s2-t2", 14.06, -2);       // "pendidikan berkualiti"
-      checkRow("#s2-k3", "#s2-t3", 16.22, -2);       // "kemudahan awam"
-      checkRow("#s2-k4", "#s2-t4", 17.84, -2);       // "perkhidmatan"
+      /* ================= SCENE 2 (9.05 - 22.0) ================= */
+      focusIn("#s2 .cam", 9.1);
+      brush("#s2-label", 9.2, 0.55);                 // "kita mahukan sebuah negara"
+      captionIn("#s2-cap", 9.1);
+      stamp("#s2-w1", "#s2 .cam", 10.94);            // "aman"
+      highlight("#s2-hl", 11.18);
+      stamp("#s2-w2", "#s2 .cam", 11.34);            // "dan"
+      stamp("#s2-w3", "#s2 .cam", 11.58, 1.5);       // "selamat"
+      blurBg("#s2-bg", 12.28, 20.6);
+      cardIn("#s2-c1", 12.28, false, -3);            // "sebuah negara"
+      cardIn("#s2-c2", 12.8, true, 4);               // "yang menyediakan"
+      checkRow("#s2-k1", "#s2-t1", 13.94, -3);       // "peluang ekonomi"
+      checkRow("#s2-k2", "#s2-t2", 15.36, -2);       // "pendidikan berkualiti"
+      checkRow("#s2-k3", "#s2-t3", 17.2, -2);        // "kemudahan awam"
+      checkRow("#s2-k4", "#s2-t4", 19.02, -2);       // "perkhidmatan"
 
-      flagWipe(20.5);
+      flagWipe(22.0);
 
-      /* ================= SCENE 3 (20.5 - 30.3) ================= */
-      focusIn("#s3 .cam", 20.55);
-      captionIn("#s3-cap", 20.55);
-      brush("#s3-label", 21.6, 0.5);                 // "bukan sekadar"
-      blurBg("#s3-bg", 23.3, 24.9);
-      cardIn("#s3-c1", 23.3, false, -2);             // "bangunan"
+      /* ================= SCENE 3 (22.0 - 31.85) ================= */
+      focusIn("#s3 .cam", 22.05);
+      captionIn("#s3-cap", 22.05);
+      brush("#s3-label", 23.54, 0.5);                // "bukan sekadar"
+      blurBg("#s3-bg", 25.0, 26.6);
+      cardIn("#s3-c1", 25.0, false, -2);             // "bangunan"
       tl.fromTo("#s3-stamp", { scale: 2.8, opacity: 0, rotation: -14 },
-        { scale: 1, opacity: 1, rotation: -4, duration: 0.22, ease: "power4.in" }, 23.84);   // "tinggi"
-      shake("#s3 .cam", 24.06, 1.6);
-      brush("#s3-label2", 25.86, 0.4);               // "tetapi"
-      cardIn("#s3-c2", 26.5, true, -1.5);            // "juga melalui"
-      stamp("#s3-w1", "#s3 .cam", 27.46, 1.2);       // "kesejahteraan"
-      highlight("#s3-hl", 27.7);
-      stamp("#s3-w2", "#s3 .cam", 28.88, 1.5);       // "rakyatnya"
+        { scale: 1, opacity: 1, rotation: -4, duration: 0.22, ease: "power4.in" }, 25.54);   // "tinggi"
+      shake("#s3 .cam", 25.76, 1.6);
+      brush("#s3-label2", 27.76, 0.4);               // "tetapi"
+      cardIn("#s3-c2", 28.3, true, -1.5);            // "juga melalui"
+      stamp("#s3-w1", "#s3 .cam", 29.22, 1.2);       // "kesejahteraan"
+      highlight("#s3-hl", 29.46);
+      stamp("#s3-w2", "#s3 .cam", 30.76, 1.5);       // "rakyatnya"
 
-      flagWipe(30.3);
+      flagWipe(31.85);
 
-      /* ================= SCENE 4 (30.3 - 41.3) — no narration ================= */
-      focusIn("#s4 .cam", 30.35);
-      brush("#s4-label", 30.55, 0.5);
-      tl.fromTo("#s4-logo", { scale: 0, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(2.2)" }, 31.0);
-      tl.fromTo("#s4-logoshine", { x: -300 }, { x: 1100, duration: 0.9, ease: "power2.inOut" }, 31.45);
-      stamp("#s4-w1", "#s4 .cam", 31.75);
-      stamp("#s4-w2", "#s4 .cam", 32.1, 1.5);
-      highlight("#s4-hl", 32.35);
-      tl.fromTo("#s4-sub", { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power2.inOut" }, 32.5);
-      blurBg("#s4-bg", 32.8, 34.0);
-      cardIn("#s4-c1", 32.8, true, -3);
-      captionIn("#s4-cap", 32.95);
-      tl.fromTo("#s4-logoshine", { x: -300 }, { x: 1100, duration: 0.9, ease: "power2.inOut" }, 38.9);
-      tl.to("#fadeout", { opacity: 1, duration: 0.8, ease: "power2.in" }, 40.4);
+      /* ================= SCENE 4 (31.85 - 47.4) ================= */
+      focusIn("#s4 .cam", 31.9);
+      captionIn("#s4-cap", 31.95);
+      brush("#s4-label", 32.06, 0.5);                // "inilah aspirasi"
+      tl.fromTo("#s4-logo", { scale: 0, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(2.2)" }, 33.15);
+      tl.fromTo("#s4-logoshine", { x: -300 }, { x: 1100, duration: 0.9, ease: "power2.inOut" }, 33.6);
+      stamp("#s4-w1", "#s4 .cam", 34.16);            // "Malaysia"
+      stamp("#s4-w2", "#s4 .cam", 34.64, 1.5);       // "MADANI"
+      highlight("#s4-hl", 34.88);
+      tl.fromTo("#s4-sub", { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power2.inOut" }, 35.3);
+      blurBg("#s4-bg", 36.2, 37.4);
+      cardIn("#s4-c1", 36.2, true, -3);              // "kemajuan dan pembangunan"
+      tl.fromTo("#s4-logoshine", { x: -300 }, { x: 1100, duration: 0.9, ease: "power2.inOut" }, 41.6);
+      tl.to("#fadeout", { opacity: 1, duration: 0.8, ease: "power2.in" }, 46.55);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

@@ -6,15 +6,15 @@ Detects silences with ffmpeg, shortens every pause, and writes:
 """
 import json, re, subprocess, sys
 
-RAW = "video4/raw/voice-raw.m4a"
+RAW = "video4/raw/voice-raw-v2.m4a"   # re-recorded take that includes frame 4
 OUT = "video4/assets/voice.wav"
 MAP = "video4/raw/cut_map.json"
-START, END = 6.85, 53.05          # trim dead air before "Yang keempat" and after the last word
+START, END = 7.20, 58.45          # trim dead air before "Yang keempat" and after the last word
 REMOVE = []                       # retakes are cut exactly with EXACT_REMOVE below
 # exact cuts (no padding): two failed takes of "dan perkhidmatan yang memberi..."
 # and the first, shorter take of "Kemajuan negara bukan sekadar diukur..."
-EXACT_REMOVE = [(25.64, 32.0), (36.9, 43.0)]
-SENTENCE_BREAKS = [16.0, 36.0]          # pauses between storyboard frames
+EXACT_REMOVE = []   # the re-recorded take has no repeated phrases
+SENTENCE_BREAKS = [17.6, 31.2, 41.9]    # pauses between storyboard frames
 SHORT_GAP, LONG_GAP = 0.20, 0.45  # max pause kept inside / between frames
 
 log = subprocess.run(["ffmpeg", "-hide_banner", "-i", RAW, "-af",

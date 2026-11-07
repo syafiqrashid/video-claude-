@@ -87,6 +87,7 @@
       .caption.type.center { text-align: center; }
       .caption.mono { font: 600 35px/1.5 var(--f-mono); text-transform: uppercase; letter-spacing: .01em; padding: 34px 30px 38px; }
       .caption.left { text-align: left; }
+      .cw { display: inline-block; }
       .sketch { display: block; }
 
       /* ---------- scene 2 cards ---------- */
@@ -199,7 +200,7 @@
             </div></div>
           </div>
 
-          <div class="caption left abs" id="s3-cap" style="top:1522px; left:88px; right:80px; padding:34px 30px 38px 66px; font-size:48px; line-height:1.24;">&nbsp;&nbsp;Semangat keberanian,<br />kebijaksanaan dan kepemimpinan<br />mereka harus terus menjadi<br />inspirasi kepada generasi hari ini.</div>
+          <div class="caption left abs" id="s3-cap" style="top:1522px; left:88px; right:80px; padding:34px 30px 38px 66px; font-size:48px; line-height:1.24; text-indent:28px;">Semangat keberanian,<br />kebijaksanaan dan kepemimpinan<br />mereka harus terus menjadi<br />inspirasi kepada generasi hari ini.</div>
         </div>
       </div>
 
@@ -301,6 +302,38 @@
         tl.fromTo(c.querySelector(".bar .shine"), { x: -260 }, { x: 1000, duration: 0.8, ease: "power2.inOut" }, t + 0.6);
       }
 
+      // caption script follows the voice: every word appears when it is spoken
+      // (word times from the transcript of the trimmed voice track, assets/words.json)
+      const CAPTION_WORDS = {
+        "#s1-cap": [2.86, 3.18, 3.66, 3.94, 4.44, 4.82, 5.74, 6.16, 6.3, 6.48, 6.66, 6.72, 6.78, 6.84, 6.9, 6.96],
+        "#s2-cap": [9.28, 9.54, 9.86, 10.3, 10.7, 11.36, 11.94, 12.26, 13.42, 13.7, 14.2, 14.72, 15.22, 15.66, 15.92, 16.66, 17.16, 17.4, 17.7, 18.56, 18.88],
+        "#s3-cap": [20.1, 20.54, 21.1, 21.34, 22.44, 23.0, 23.2, 23.55, 23.96, 24.6, 25.6, 25.9, 26.52, 26.8],
+        "#s4-cap": [27.95, 28.34, 28.52, 28.8, 29.24, 29.44, 30.0, 31.2, 31.46, 31.78, 32.48, 33.16, 33.46, 33.98, 35.08, 35.24, 35.74, 36.36, 36.82, 37.1],
+      };
+      function splitWords(el) {
+        [...el.childNodes].forEach((n) => {
+          if (n.nodeType !== 3) return;
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const sp = document.createElement("span");
+            sp.className = "cw"; sp.textContent = part; frag.appendChild(sp);
+          });
+          n.replaceWith(frag);
+        });
+        return [...el.querySelectorAll(".cw")];
+      }
+      const captionWords = {};
+      Object.keys(CAPTION_WORDS).forEach((sel) => { captionWords[sel] = splitWords(q(sel)); });
+      function scriptFollowsVoice(sel) {
+        captionWords[sel].forEach((w, i) => {
+          const t = CAPTION_WORDS[sel][i] - 0.04;
+          tl.fromTo(w, { opacity: 0, y: 10, filter: "blur(4px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, t);
+        });
+      }
+
       /* --- initial states --- */
       gsap.set(".word", { opacity: 0 });
       gsap.set(["#s1-bar"], { scaleX: 0 });
@@ -312,6 +345,8 @@
       gsap.set(["#s2-c1", "#s2-c3"], { x: -1250 });
       gsap.set(["#s2-c2", "#s2-tag"], { x: 1250 });
       gsap.set(".stripe", { xPercent: -120, skewX: -14 });
+      gsap.set(".cw", { opacity: 0 });
+      Object.keys(CAPTION_WORDS).forEach(scriptFollowsVoice);
 
       /* ================= SCENE 1  (0 - 7.15) ================= */
       focusIn("#s1 .cam", 0);
@@ -336,7 +371,7 @@
       stamp("#s2-w3", "#s2 .cam", 8.14);              // "dengan"
       stamp("#s2-w4", "#s2 .cam", 8.36, 1.5);         // "mudah"
       highlight("#s2-hl", 8.62);
-      captionIn("#s2-cap", 9.6);
+      captionIn("#s2-cap", 9.0);
       // pulse the label when "pengorbanan" is spoken
       tl.to("#s2-label", { scale: 1.08, duration: 0.14, ease: "power2.out" }, 11.32);
       tl.to("#s2-label", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 11.46);
@@ -354,7 +389,7 @@
       iconCard("#s3-v2", 21.25);                      // "kebijaksanaan"
       iconCard("#s3-v3", 22.35);                      // "kepimpinan"
       tl.fromTo("#s3-art", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, 22.9);
-      captionIn("#s3-cap", 23.5);
+      captionIn("#s3-cap", 19.85);
       // one more light sweep across all cards near the end of the frame
       ["#s3-v1", "#s3-v2", "#s3-v3"].forEach((id, i) => {
         tl.fromTo(q(id).querySelector(".bar .shine"), { x: -260 }, { x: 1000, duration: 0.8, ease: "power2.inOut" }, 25.9 + i * 0.15);
@@ -375,7 +410,7 @@
       stamp("#s4-w3b", "#s4 .cam", 33.0, 1.5);        // "kita"
       highlight("#s4-hl2", 33.25);
       tl.fromTo("#s4-art2", { opacity: 0, y: 60, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 33.6);
-      captionIn("#s4-cap", 34.3);
+      captionIn("#s4-cap", 27.75);
       tl.to(["#s4-art1", "#s4-art2"], { scale: 1.03, duration: 5, ease: "none" }, 34.6);
       tl.to("#fadeout", { opacity: 1, duration: 0.9, ease: "power2.in" }, 38.7);
 

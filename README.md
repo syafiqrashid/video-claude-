@@ -28,6 +28,7 @@ Render: `cd video2 && npx hyperframes render -o output/manfaat-merdeka-HD.mp4`
 
 Video menegak 1080x1920 (35.6s) dalam `video3/`, ikut storyboard patriotisme (`video3/raw/storyboard.png`).
 
+- `video3/output/patriotisme-HD.mp4` — video siap HD (1080x1920)
 - `video3/output/patriotisme-lowres.mp4` — preview low res (540x960)
 - `video3/index.html` — komposisi HyperFrames
 - `scripts/cut_voice3.py` — buang pause janggal (52.4s → 34.5s); tiada skrip berulang dalam rakaman ini

@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <style>
+      :root {
+        --paper: #ecd5a4;
+        --ink: #17130f;
+        --red: #c4161c;
+        --label-ink: #fff3dc;
+        --yellow: #fcd92b;
+        --card: #2a2622;
+        --card-ink: #f6eedb;
+        --flag-red: #cc0001;
+        --flag-white: #fbf7ee;
+        --flag-blue: #010066;
+        --f-label: "Fira Sans Condensed", sans-serif;
+        --f-title: "Merriweather", serif;
+        --f-icon: "Fira Sans Extra Condensed", sans-serif;
+        --f-type: "Courier Prime", monospace;
+        --f-mono: "IBM Plex Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+        background:
+          radial-gradient(ellipse at 50% 42%, rgba(255,240,205,.55) 0%, rgba(255,240,205,0) 55%),
+          radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(110,70,20,.38) 100%),
+          repeating-linear-gradient(0deg, rgba(120,85,40,.07) 0 2px, transparent 2px 46px),
+          repeating-linear-gradient(90deg, rgba(120,85,40,.06) 0 2px, transparent 2px 46px),
+          var(--paper);
+      }
+      #grain { position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: .55; mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .32  0 0 0 0 .15  0 0 0 .38 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>");
+      }
+      .scene { position: absolute; inset: 0; z-index: 5; }
+      .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+      .abs { position: absolute; }
+
+      .counter { font: 700 52px/1 var(--f-label); color: var(--red); letter-spacing: .08em; left: 0; right: 0; text-align: center; }
+
+      .label { display: inline-block; position: relative; background: var(--red); color: var(--label-ink);
+        font: 800 82px/1 var(--f-label); letter-spacing: .03em; text-transform: uppercase;
+        padding: 16px 40px 18px; box-shadow: 0 4px 0 rgba(0,0,0,.12);
+        --p: 0%;
+        clip-path: polygon(0 0, calc(var(--p) + 1%) 0, calc(var(--p) - 1.5%) 14%, calc(var(--p) + 2%) 30%,
+          calc(var(--p) - 1%) 46%, calc(var(--p) + 2.5%) 62%, calc(var(--p) - 2%) 80%, calc(var(--p) + 1%) 100%, 0 100%);
+      }
+      .label::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+        background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 3px, rgba(0,0,0,.06) 3px 7px, transparent 7px 12px); }
+
+      .title { font: 900 140px/1.02 var(--f-title); color: var(--ink); letter-spacing: -.01em; white-space: nowrap; }
+      .word { display: inline-block; position: relative; transform-origin: 50% 60%; }
+      .hl { position: relative; display: inline-block; z-index: 0; }
+      .hl > .hlbg { position: absolute; left: -16px; right: -16px; top: 8%; bottom: 0; background: var(--yellow);
+        z-index: -1; transform-origin: 0 50%; transform: scaleX(0); }
+
+      .caption { left: 72px; right: 72px; background: var(--card); color: var(--card-ink); border-radius: 26px;
+        padding: 34px 34px 38px; text-align: center; font: 600 38px/1.42 var(--f-mono); letter-spacing: -.01em;
+        box-shadow: 0 0 0 4px rgba(246,232,200,.75), 0 18px 34px rgba(60,35,10,.35), inset 0 0 40px rgba(0,0,0,.35); }
+      .cw { display: inline-block; }
+
+      .vcard { position: absolute; left: 70px; width: 940px; height: 170px; }
+      .vcard .bar { position: absolute; left: 140px; right: 0; top: 0; bottom: 0; background: var(--card); border-radius: 20px;
+        box-shadow: 0 12px 22px rgba(50,30,8,.36); overflow: hidden; transform-origin: 0 50%; }
+      .vcard .txt { position: absolute; left: 110px; right: 10px; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center;
+        font: italic 900 92px/1 var(--f-icon); color: var(--yellow); }
+      .vcard .icoWrap { position: absolute; left: 0; top: 0; width: 260px; height: 170px; transform-origin: 40% 50%; filter: drop-shadow(0 10px 14px rgba(50,30,8,.35)); }
+      .vcard .ico { position: absolute; inset: 0; background: #f4ead2; border: 4px solid #1d1914; border-radius: 20px 0 0 20px;
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); overflow: hidden; }
+      .vcard .ico svg { position: absolute; left: 40px; top: 24px; width: 122px; height: 122px; }
+      .shine { position: absolute; top: -20%; bottom: -20%; width: 170px; left: 0;
+        background: linear-gradient(90deg, rgba(255,250,220,0) 0%, rgba(255,250,220,.78) 50%, rgba(255,250,220,0) 100%);
+        transform: translateX(-260px) skewX(-20deg); mix-blend-mode: screen; pointer-events: none; }
+
+      .tag { position: absolute; background: #f3ecdc; border: 3px solid #1d1a16; padding: 12px 26px 10px;
+        font: 700 46px/1 var(--f-type); color: var(--ink); letter-spacing: .06em; box-shadow: 0 8px 14px rgba(40,25,8,.3); overflow: hidden; }
+      .stampbadge { position: absolute; border: 9px solid var(--red); color: var(--red); padding: 6px 30px 10px; border-radius: 14px;
+        font: 900 112px/1 var(--f-label); letter-spacing: .04em; background: rgba(255,245,225,.35); }
+
+      #wipes { position: absolute; inset: 0; z-index: 40; pointer-events: none; overflow: hidden; }
+      .stripe { position: absolute; top: -10%; height: 120%; left: -20%; width: 140%; }
+      .stripe.r { background: var(--flag-red); }
+      .stripe.w { background: var(--flag-white); }
+      .stripe.b { background: var(--flag-blue); }
+      #fadeout { position: absolute; inset: 0; z-index: 45; background: #120e0a; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="35.6" data-width="1080" data-height="1920" data-fps="30">
+
+      <!-- ================= SCENE 1 : PATRIOTISME ================= -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="8.45" data-track-index="1">
+        <div class="cam">
+          <img class="abs" id="s1-art" src="assets/art/f1-street.png" style="left:0; top:745px; width:1080px;" />
+          <div class="counter abs" id="s1-count" style="top:120px;">01 / 04</div>
+          <div class="abs" style="left:0; right:0; top:205px; text-align:center;"><div class="label" id="s1-label" style="font-size:96px; padding:14px 50px 16px;">Patriotisme</div></div>
+          <div class="title abs" style="left:96px; top:370px;">
+            <span class="word" id="s1-w1">Semangat</span><br />
+            <span class="word hl" id="s1-w2"><span class="hlbg" id="s1-hl"></span>Patriotisme</span>
+          </div>
+        </div>
+        <div class="caption abs" id="s1-cap" style="top:1555px;">Bagi saya, semangat patriotisme bukan hanya ditunjukkan ketika menyambut hari kebangsaan.</div>
+      </div>
+
+      <!-- ================= SCENE 2 : BUKAN SEKADAR ================= -->
+      <div id="s2" class="scene clip" data-start="8.45" data-duration="4.25" data-track-index="1">
+        <div class="cam">
+          <div class="counter abs" id="s2-count" style="top:120px;">02 / 04</div>
+          <div class="abs" style="left:0; right:0; top:205px; text-align:center;"><div class="label" id="s2-label">Bukan Sekadar</div></div>
+          <div class="title abs" style="left:0; right:0; top:360px; text-align:center; font-size:124px;">
+            <span class="word" id="s2-w1">Jalur</span> <span class="word hl" id="s2-w2"><span class="hlbg" id="s2-hl"></span>Gemilang</span>
+          </div>
+          <div class="abs" id="s2-flag" style="left:205px; top:630px; width:670px; height:446px; transform-origin:30% 80%;">
+            <img src="assets/art/f4-flag.png" style="width:670px; height:446px; display:block;" />
+            <div class="abs" style="inset:0; overflow:hidden; -webkit-mask: url(assets/art/f4-flag.png) center/100% 100%; mask: url(assets/art/f4-flag.png) center/100% 100%;"><div class="shine" id="s2-flagshine" style="width:220px;"></div></div>
+          </div>
+          <div class="stampbadge" id="s2-merdeka" style="left:430px; top:1170px; transform: rotate(-8deg);">MERDEKA!</div>
+        </div>
+        <div class="caption abs" id="s2-cap" style="top:1555px;">Bukan sekadar mengibarkan Jalur Gemilang atau melaungkan perkataan merdeka.</div>
+      </div>
+
+      <!-- ================= SCENE 3 : MELALUI TINDAKAN ================= -->
+      <div id="s3" class="scene clip" data-start="12.7" data-duration="14.8" data-track-index="1">
+        <div class="cam">
+          <div class="counter abs" id="s3-count" style="top:90px;">03 / 04</div>
+          <div class="abs" style="left:0; right:0; top:160px; text-align:center;"><div class="label" id="s3-label" style="font-size:74px;">Patriotisme Sebenar</div></div>
+          <div class="title abs" style="left:0; right:0; top:290px; text-align:center; font-size:104px;">
+            <span class="word" id="s3-w1">Melalui</span> <span class="word hl" id="s3-w2"><span class="hlbg" id="s3-hl"></span>Tindakan</span>
+          </div>
+
+          <div class="vcard" id="s3-v1" style="top:470px;">
+            <div class="bar"><div class="txt"><span>MENGHORMATI</span></div><div class="shine"></div></div>
+            <div class="icoWrap"><div class="ico">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M4 40 L22 30 L40 36 L52 30 L70 30 L96 42" />
+                <path d="M4 40 L4 62 L16 66 M96 42 L96 64 L84 66" />
+                <path d="M40 36 L30 48 C34 54 42 52 48 46 L56 44 L80 64 C84 68 80 74 75 71 L64 62 M75 71 C78 76 73 80 68 76 L58 68 M68 76 C70 81 64 84 60 80 L52 74 M60 80 C60 85 55 86 51 83 L40 76 L16 66" />
+              </svg>
+            </div></div>
+          </div>
+          <div class="vcard" id="s3-v2" style="top:660px;">
+            <div class="bar"><div class="txt"><span style="font-size:88px;">KEHARMONIAN</span></div><div class="shine"></div></div>
+            <div class="icoWrap"><div class="ico">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M50 86 C20 64 8 48 8 32 C8 18 18 10 30 10 C40 10 46 16 50 24 C54 16 60 10 70 10 C82 10 92 18 92 32 C92 48 80 64 50 86 Z" />
+                <path d="M50 30 C50 30 50 62 50 70" stroke-width="3.5" />
+                <path d="M28 30 C24 34 24 40 28 46" stroke-width="3.5" />
+              </svg>
+            </div></div>
+          </div>
+          <div class="vcard" id="s3-v3" style="top:850px;">
+            <div class="bar"><div class="txt"><span>PERPADUAN</span></div><div class="shine"></div></div>
+            <div class="icoWrap"><div class="ico">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+                <circle cx="50" cy="24" r="11" /><circle cx="20" cy="34" r="9" /><circle cx="80" cy="34" r="9" />
+                <path d="M30 88 L30 66 C30 52 40 44 50 44 C60 44 70 52 70 66 L70 88" />
+                <path d="M4 86 L4 66 C4 56 10 50 20 50 C25 50 29 52 32 55" />
+                <path d="M96 86 L96 66 C96 56 90 50 80 50 C75 50 71 52 68 55" />
+              </svg>
+            </div></div>
+          </div>
+          <div class="vcard" id="s3-v4" style="top:1040px;">
+            <div class="bar"><div class="txt"><span style="font-size:80px;">TANGGUNGJAWAB</span></div><div class="shine"></div></div>
+            <div class="icoWrap"><div class="ico">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M50 6 L88 18 C88 52 76 78 50 94 C24 78 12 52 12 18 Z" />
+                <path d="M32 50 L45 63 L70 36" stroke-width="7" />
+              </svg>
+            </div></div>
+          </div>
+        </div>
+        <div class="caption abs" id="s3-cap" style="top:1265px; font-size:36px; line-height:1.4;">Tapi patriotisme perlu diterjemahkan melalui tindakan, dengan menghormati antara satu sama lain, menjaga keharmonian masyarakat, memelihara perpaduan, serta melaksanakan tanggungjawab kita sebagai rakyat Malaysia.</div>
+      </div>
+
+      <!-- ================= SCENE 4 : SATU IDENTITI ================= -->
+      <div id="s4" class="scene clip" data-start="27.5" data-duration="8.1" data-track-index="1">
+        <div class="cam">
+          <div class="counter abs" id="s4-count" style="top:120px;">04 / 04</div>
+          <div class="abs" style="left:0; right:0; top:205px; text-align:center;"><div class="label" id="s4-label" style="font-size:76px;">Berbeza Tapi Satu</div></div>
+          <div class="tag" id="s4-t1" style="left:96px; top:400px;">BANGSA<div class="shine"></div></div>
+          <div class="tag" id="s4-t2" style="left:415px; top:400px;">AGAMA<div class="shine"></div></div>
+          <div class="tag" id="s4-t3" style="left:712px; top:400px;">BUDAYA<div class="shine"></div></div>
+          <div class="title abs" style="left:0; right:0; top:560px; text-align:center; font-size:128px;">
+            <span class="word" id="s4-w1">Satu</span> <span class="word hl" id="s4-w2"><span class="hlbg" id="s4-hl"></span>Identiti</span>
+          </div>
+          <img class="abs" id="s4-art" src="assets/art/f4-people.png" style="left:0; top:880px; width:1080px;" />
+        </div>
+        <div class="caption abs" id="s4-cap" style="top:1555px;">Walaupun kita berbeza bangsa, agama dan budaya, kita tetap mempunyai satu identiti yang sama.</div>
+      </div>
+
+      <div id="wipes">
+        <div class="stripe r" id="wr"></div>
+        <div class="stripe w" id="ww"></div>
+        <div class="stripe b" id="wb"></div>
+      </div>
+      <div id="grain"></div>
+      <div id="fadeout"></div>
+
+      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="34.52" data-track-index="5" data-volume="1"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const q = (s) => document.querySelector(s);
+
+      /* --- helpers (same motion language as the earlier videos) --- */
+      function focusIn(cam, t) {
+        tl.fromTo(cam, { filter: "blur(26px)", scale: 1.07, opacity: 0.85 },
+          { filter: "blur(5px)", scale: 1.015, opacity: 1, duration: 0.38, ease: "power2.out" }, t);
+        tl.to(cam, { filter: "blur(11px)", duration: 0.16, ease: "sine.inOut" }, t + 0.38);
+        tl.to(cam, { filter: "blur(0px)", scale: 1, duration: 0.36, ease: "power3.out" }, t + 0.54);
+      }
+      function brush(el, t, d = 0.5) {
+        tl.fromTo(el, { "--p": "-4%" }, { "--p": "104%", duration: d, ease: "power2.inOut" }, t);
+        tl.fromTo(el, { x: -10 }, { x: 0, duration: d, ease: "power2.out" }, t);
+      }
+      function stamp(word, cam, t, strength = 1) {
+        tl.fromTo(word, { scale: 2.6, opacity: 0, filter: "blur(6px)" },
+          { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.in" }, t);
+        shake(cam, t + 0.2, strength);
+      }
+      function shake(cam, t, s = 1) {
+        const pts = [[-9, 5], [7, -6], [-5, 3], [3, -2], [0, 0]];
+        pts.forEach(([x, y], i) => tl.to(cam, { x: x * s, y: y * s, duration: 0.045, ease: "none" }, t + i * 0.045));
+      }
+      function highlight(el, t) { tl.to(el, { scaleX: 1, duration: 0.32, ease: "power3.out" }, t); }
+      function captionIn(el, t) {
+        tl.fromTo(el, { y: 70, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, t);
+      }
+      function fadeUp(el, t, d = 0.4) { tl.fromTo(el, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: d, ease: "power2.out" }, t); }
+      function flagWipe(cut) {
+        ["#wr", "#ww", "#wb"].forEach((id, i) => {
+          tl.fromTo(id, { xPercent: -120 }, { xPercent: 0, duration: 0.32, ease: "power3.in" }, cut - 0.42 + i * 0.09);
+        });
+        ["#wb", "#ww", "#wr"].forEach((id, i) => {
+          tl.to(id, { xPercent: 120, duration: 0.36, ease: "power3.out" }, cut + 0.04 + i * 0.08);
+        });
+      }
+      // icon pops in, bar extends, then a light sweeps over it
+      function iconCard(id, t) {
+        const c = q(id);
+        tl.fromTo(c.querySelector(".icoWrap"), { scale: 0, rotation: -14, opacity: 0 },
+          { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.6)" }, t);
+        tl.fromTo(c.querySelector(".bar"), { scaleX: 0 }, { scaleX: 1, duration: 0.42, ease: "power3.out" }, t + 0.12);
+        tl.fromTo(c.querySelector(".txt span"), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.2)" }, t + 0.26);
+        tl.fromTo(c.querySelector(".bar .shine"), { x: -260 }, { x: 1000, duration: 0.8, ease: "power2.inOut" }, t + 0.6);
+      }
+      function popShine(el, shine, t, sweep) {
+        tl.fromTo(el, { scale: 0, rotation: -12, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.4)" }, t);
+        tl.fromTo(shine, { x: -260 }, { x: sweep, duration: 0.65, ease: "power2.inOut" }, t + 0.35);
+      }
+
+      // caption script follows the voice: each word appears when it is spoken
+      // (times from video3/raw/words.json, checked against the cut map)
+      const CAPTION_WORDS = {
+        "#s1-cap": [2.72, 3.0, 3.84, 4.34, 5.06, 5.56, 5.96, 6.5, 6.92, 7.3, 7.52],
+        "#s2-cap": [8.74, 8.98, 9.38, 9.92, 10.34, 10.78, 11.06, 11.66, 12.12],
+        "#s3-cap": [13.0, 13.34, 14.34, 14.9, 15.8, 16.52, 16.96, 17.46, 18.14, 18.88, 19.08, 19.32, 20.18, 20.54, 21.42, 22.6, 23.08, 24.1, 24.62, 25.34, 25.84, 26.12, 26.56, 26.9],
+        "#s4-cap": [27.84, 28.32, 28.62, 29.16, 29.76, 30.28, 30.54, 31.38, 31.58, 31.98, 32.6, 33.0, 33.46, 33.74],
+      };
+      function splitWords(el) {
+        [...el.childNodes].forEach((n) => {
+          if (n.nodeType !== 3) return;
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const sp = document.createElement("span");
+            sp.className = "cw"; sp.textContent = part; frag.appendChild(sp);
+          });
+          n.replaceWith(frag);
+        });
+        return [...el.querySelectorAll(".cw")];
+      }
+      Object.keys(CAPTION_WORDS).forEach((sel) => {
+        splitWords(q(sel)).forEach((w, i) => {
+          tl.fromTo(w, { opacity: 0, y: 10, filter: "blur(4px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, CAPTION_WORDS[sel][i] - 0.04);
+        });
+      });
+
+      /* --- initial states --- */
+      gsap.set(".word", { opacity: 0 });
+      gsap.set([".caption", ".counter", "#s1-art", "#s4-art", "#s2-flag", "#s2-merdeka", ".tag"], { opacity: 0 });
+      gsap.set(".icoWrap", { scale: 0, opacity: 0 });
+      gsap.set(".vcard .bar", { scaleX: 0 });
+      gsap.set(".vcard .txt span", { opacity: 0 });
+      gsap.set(".stripe", { xPercent: -120, skewX: -14 });
+
+      /* ================= SCENE 1 (0 - 8.45) ================= */
+      focusIn("#s1 .cam", 0);
+      fadeUp("#s1-count", 0.3);
+      tl.fromTo("#s1-art", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" }, 0.15);
+      tl.to("#s1-art", { scale: 1.05, duration: 7.2, ease: "none", transformOrigin: "60% 60%" }, 1.15);
+      brush("#s1-label", 1.35, 0.5);                 // "patriotisme"
+      captionIn("#s1-cap", 2.45);                    // "Bagi saya..."
+      stamp("#s1-w1", "#s1 .cam", 3.76);             // "semangat"
+      stamp("#s1-w2", "#s1 .cam", 4.26, 1.5);        // "patriotisme"
+      highlight("#s1-hl", 4.52);
+
+      flagWipe(8.45);
+
+      /* ================= SCENE 2 (8.45 - 12.7) ================= */
+      focusIn("#s2 .cam", 8.5);
+      fadeUp("#s2-count", 8.6);
+      brush("#s2-label", 8.7, 0.42);                 // "bukan sekadar"
+      captionIn("#s2-cap", 8.55);
+      popShine("#s2-flag", "#s2-flagshine", 9.35, 820);   // "mengibarkan"
+      tl.to("#s2-flag", { rotation: 2.5, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 3 }, 9.9);
+      stamp("#s2-w1", "#s2 .cam", 9.84);             // "jalur"
+      stamp("#s2-w2", "#s2 .cam", 10.26, 1.3);       // "gemilang"
+      highlight("#s2-hl", 10.5);
+      tl.fromTo("#s2-merdeka", { scale: 2.8, opacity: 0, rotation: -18 },
+        { scale: 1, opacity: 1, rotation: -8, duration: 0.22, ease: "power4.in" }, 12.0);   // "merdeka"
+      shake("#s2 .cam", 12.22, 1.8);
+
+      flagWipe(12.7);
+
+      /* ================= SCENE 3 (12.7 - 27.5) ================= */
+      focusIn("#s3 .cam", 12.75);
+      fadeUp("#s3-count", 12.85);
+      captionIn("#s3-cap", 12.8);
+      brush("#s3-label", 13.0, 0.5);                 // "tapi patriotisme"
+      stamp("#s3-w1", "#s3 .cam", 15.72);            // "melalui"
+      stamp("#s3-w2", "#s3 .cam", 16.44, 1.5);       // "tindakan"
+      highlight("#s3-hl", 16.7);
+      iconCard("#s3-v1", 17.38);                     // "menghormati"
+      iconCard("#s3-v2", 20.46);                     // "keharmonian"
+      iconCard("#s3-v3", 23.0);                      // "perpaduan"
+      iconCard("#s3-v4", 25.26);                     // "tanggungjawab"
+
+      flagWipe(27.5);
+
+      /* ================= SCENE 4 (27.5 - 35.6) ================= */
+      focusIn("#s4 .cam", 27.55);
+      fadeUp("#s4-count", 27.65);
+      captionIn("#s4-cap", 27.6);
+      brush("#s4-label", 27.8, 0.5);                 // "walaupun kita berbeza"
+      popShine("#s4-t1", "#s4-t1 .shine", 29.1, 420);     // "bangsa"
+      popShine("#s4-t2", "#s4-t2 .shine", 29.7, 420);     // "agama"
+      popShine("#s4-t3", "#s4-t3 .shine", 30.5, 420);     // "budaya"
+      tl.fromTo("#s4-art", { opacity: 0, y: 60, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 31.2);
+      stamp("#s4-w1", "#s4 .cam", 32.52);            // "satu"
+      stamp("#s4-w2", "#s4 .cam", 32.92, 1.5);       // "identiti"
+      highlight("#s4-hl", 33.18);
+      tl.to("#s4-art", { scale: 1.03, duration: 3.4, ease: "none" }, 32.2);
+      tl.to("#fadeout", { opacity: 1, duration: 0.8, ease: "power2.in" }, 34.8);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

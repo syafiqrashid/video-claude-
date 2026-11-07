@@ -23,3 +23,11 @@ Video menegak 1080x1920 (28.6s) dalam `video2/`, gaya animasi sama dengan video 
 - `scripts/extract_art2.py` — potong foto dan ilustrasi dari storyboard
 
 Render: `cd video2 && npx hyperframes render -o output/manfaat-merdeka-HD.mp4`
+
+## Video 3 — Patriotisme
+
+Video menegak 1080x1920 (35.6s) dalam `video3/`. Storyboard direka sendiri (tiada storyboard patriotisme dihantar) dalam gaya sama, guna ilustrasi dari video 1 & 2.
+
+- `video3/output/patriotisme-lowres.mp4` — preview low res (540x960)
+- `video3/index.html` — komposisi HyperFrames
+- `scripts/cut_voice3.py` — buang pause janggal (52.4s → 34.5s); tiada skrip berulang dalam rakaman ini

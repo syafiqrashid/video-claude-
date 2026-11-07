@@ -11,3 +11,15 @@ Video menegak 1080x1920 (39.6s) dibina dengan [HyperFrames](https://hyperframes.
 
 Render semula: `cd merdeka && npx hyperframes render -o ../output/merdeka-warisan-perjuangan.mp4`
 (jalankan skrip dari root repo: `python3 scripts/cut_voice.py`; `cd merdeka && python3 ../scripts/extract_art.py`)
+
+## Video 2 — Manfaat Merdeka
+
+Video menegak 1080x1920 (28.6s) dalam `video2/`, gaya animasi sama dengan video pertama.
+
+- `video2/output/manfaat-merdeka-lowres.mp4` — preview low res (540x960)
+- `video2/index.html` — komposisi HyperFrames
+- `video2/raw/` — rakaman asal, storyboard, transkrip (`words.json`) dan peta potongan
+- `scripts/cut_voice2.py` — buang pause janggal + take berulang "daripada kemudahan pendidikan" (49.2s → 27.4s)
+- `scripts/extract_art2.py` — potong foto dan ilustrasi dari storyboard
+
+Render: `cd video2 && npx hyperframes render -o output/manfaat-merdeka-HD.mp4`

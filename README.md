@@ -16,6 +16,7 @@ Render semula: `cd merdeka && npx hyperframes render -o ../output/merdeka-warisa
 
 Video menegak 1080x1920 (28.6s) dalam `video2/`, gaya animasi sama dengan video pertama.
 
+- `video2/output/manfaat-merdeka-HD.mp4` — video siap HD (1080x1920)
 - `video2/output/manfaat-merdeka-lowres.mp4` — preview low res (540x960)
 - `video2/index.html` — komposisi HyperFrames
 - `video2/raw/` — rakaman asal, storyboard, transkrip (`words.json`) dan peta potongan

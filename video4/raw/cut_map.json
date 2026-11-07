@@ -1,0 +1,65 @@
+{
+ "segments": [
+  {
+   "raw_start": 6.85,
+   "raw_end": 7.745,
+   "out_start": 0.0
+  },
+  {
+   "raw_start": 7.859,
+   "raw_end": 9.332,
+   "out_start": 0.895
+  },
+  {
+   "raw_start": 9.606,
+   "raw_end": 12.934,
+   "out_start": 2.368
+  },
+  {
+   "raw_start": 13.04,
+   "raw_end": 15.852,
+   "out_start": 5.695
+  },
+  {
+   "raw_start": 16.193,
+   "raw_end": 19.14,
+   "out_start": 8.507
+  },
+  {
+   "raw_start": 19.306,
+   "raw_end": 23.991,
+   "out_start": 11.455
+  },
+  {
+   "raw_start": 24.221,
+   "raw_end": 25.64,
+   "out_start": 16.141
+  },
+  {
+   "raw_start": 32.0,
+   "raw_end": 34.977,
+   "out_start": 17.56
+  },
+  {
+   "raw_start": 43.025,
+   "raw_end": 44.365,
+   "out_start": 20.537
+  },
+  {
+   "raw_start": 44.477,
+   "raw_end": 48.423,
+   "out_start": 21.877
+  },
+  {
+   "raw_start": 48.75,
+   "raw_end": 51.466,
+   "out_start": 25.822
+  },
+  {
+   "raw_start": 51.656,
+   "raw_end": 53.05,
+   "out_start": 28.539
+  }
+ ],
+ "duration": 29.932
+}

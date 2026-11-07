@@ -4,7 +4,7 @@ Video menegak 1080x1920 (39.6s) dibina dengan [HyperFrames](https://hyperframes.
 
 - `output/merdeka-warisan-perjuangan-lowres.mp4` — preview low res (540x960)
 - `merdeka/index.html` — komposisi HyperFrames (semua animasi GSAP)
-- `assets/voice-raw.m4a` — rakaman suara asal; `assets/storyboard-v2.png` — storyboard terkini (v1: `assets/storyboard.png`, untuk foto kad)
+- `assets/voice-raw.m4a` — rakaman suara asal; `assets/storyboard-v3.png` — storyboard terkini (gambar pemimpin); v2 untuk ilustrasi sketsa
 - `scripts/cut_voice.py` — buang pause janggal (56.5s → 38.5s), normalize suara → `merdeka/assets/voice.wav`
 - `scripts/extract_art.py` — potong ilustrasi dari storyboard → `merdeka/assets/art/`
 

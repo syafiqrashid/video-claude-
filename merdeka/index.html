@@ -85,7 +85,8 @@
 
       .caption.type { font: 700 40px/1.36 var(--f-type); text-align: left; padding: 36px 46px 40px; letter-spacing: -.005em; }
       .caption.type.center { text-align: center; }
-      .caption.mono { font: 600 35px/1.5 var(--f-mono); text-transform: uppercase; letter-spacing: .01em; padding: 34px 30px 38px; }
+      .caption.mono { font: 600 38px/1.42 var(--f-mono); letter-spacing: -.01em; padding: 32px 28px 36px; text-align: center; }
+      .caption.mono.left { text-align: left; }
       .caption.left { text-align: left; }
       .cw { display: inline-block; }
       .sketch { display: block; }
@@ -93,6 +94,13 @@
       /* ---------- scene 2 cards ---------- */
       .photo { position: absolute; background: #f7f2e6; padding: 18px; box-shadow: 0 22px 40px rgba(40,25,8,.45), 0 2px 4px rgba(0,0,0,.25); }
       .photo img { display: block; filter: grayscale(1) contrast(1.08); }
+      .leader { position: absolute; width: 334px; background: #f5efe0; padding: 14px 14px 0; box-shadow: 0 18px 32px rgba(40,25,8,.45), 0 2px 4px rgba(0,0,0,.25); }
+      .leader img { display: block; width: 306px; height: 296px; object-fit: cover; filter: sepia(.25) contrast(1.05); }
+      .leader .name { position: relative; margin: -34px -6px 0; background: #efe3c4; padding: 12px 8px 14px; text-align: center;
+        font: 700 33px/1.08 var(--f-label); color: var(--ink); box-shadow: 0 6px 12px rgba(40,25,8,.3); }
+      #s2-backdrop { position: absolute; left: -10px; right: -10px; top: 588px; height: 925px; background: rgba(150,100,40,.20);
+        clip-path: polygon(2% 6%, 9% 2%, 18% 4%, 30% 1%, 44% 3%, 57% 0%, 70% 3%, 83% 1%, 94% 4%, 100% 2%, 99% 22%, 100% 45%, 98% 70%, 100% 96%,
+          88% 99%, 73% 97%, 58% 100%, 42% 97%, 27% 100%, 12% 97%, 1% 99%, 2% 75%, 0% 50%, 1% 25%); }
       .tag { position: absolute; background: #efe2c2; padding: 22px 34px; font: 700 46px/1 var(--f-label); color: var(--ink); letter-spacing: .02em;
         box-shadow: 0 12px 22px rgba(40,25,8,.35); }
 
@@ -127,7 +135,7 @@
       <div id="s1" class="scene clip" data-start="0" data-duration="7.15" data-track-index="1">
         <div class="cam">
           <img class="sketch abs" id="s1-art" src="assets/art/f1-street.png" style="left:0; top:722px; width:1080px;" />
-          <div class="counter center abs" id="s1-count" style="top:70px; font-size:54px;">02 / 04</div>
+          <div class="counter center abs" id="s1-count" style="top:70px; font-size:54px;">01 / 04</div>
           <div class="abs" style="left:108px; top:268px;"><div class="label" id="s1-label" style="font-size:84px; padding:16px 36px 18px;">Warisan Perjuangan</div></div>
           <div class="title abs" style="left:122px; top:400px; font-size:160px; line-height:0.98;">
             <span class="word" id="s1-w1">Jangan</span><br />
@@ -135,7 +143,7 @@
             <span class="word hl" id="s1-w3"><span class="hlbg" id="s1-hl"></span>Lupa</span>
           </div>
           <div class="abs" id="s1-bar" style="left:120px; top:958px; width:196px; height:22px; background:var(--ink); transform-origin:0 50%;"></div>
-          <div class="caption type abs" id="s1-cap" style="top:1531px; left:77px; right:78px; font-size:43px; padding:38px 34px 42px 40px;">Tetapi kita jangan sesekali lupa.<br />Segala nikmat yang kita kecapai<br />hari ini bukan datang dengan<br />mudah.</div>
+          <div class="caption mono left abs" id="s1-cap" style="top:1531px; left:77px; right:78px; font-size:41px; line-height:1.38; padding:36px 30px 40px 40px;">Tetapi kita jangan sesekali lupa.<br />Segala nikmat yang kita kecapai<br />hari ini bukan datang dengan<br />mudah.</div>
         </div>
       </div>
 
@@ -143,18 +151,24 @@
       <div id="s2" class="scene clip" data-start="7.15" data-duration="12.55" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s2-bg">
+            <div id="s2-backdrop"></div>
+            <div class="counter center abs" id="s2-count" style="top:76px; font-size:54px;">02 / 04</div>
             <div class="abs" style="left:0; right:0; top:189px; text-align:center;"><div class="label" id="s2-label" style="font-size:82px; padding:16px 58px 18px;">Pengorbanan</div></div>
             <div class="title abs" style="left:104px; top:340px; font-size:120px;">
               <span class="word" id="s2-w1">Bukan</span> <span class="word" id="s2-w2">Datang</span><br />
               <span class="word" id="s2-w3">Dengan</span> <span class="word hl" id="s2-w4"><span class="hlbg" id="s2-hl"></span>Mudah</span>
             </div>
-            <div class="caption mono abs" id="s2-cap" style="top:1507px; left:68px; right:68px;">Di sebalik kemerdekaan negara,<br />terdapat pengorbanan besar tokoh-tokoh<br />dan pejuang terdahulu yang berjuang<br />demi memastikan tanah air kita bebas<br />daripada penjajahan.</div>
           </div>
           <div class="layer" id="s2-cards">
-            <div class="photo" id="s2-c1" style="left:77px; top:620px;"><img src="assets/art/f2-crowd.jpg" style="width:812px; height:282px;" /></div>
-            <div class="photo" id="s2-c2" style="left:165px; top:888px;"><img src="assets/art/f2-flag.jpg" style="width:784px; height:276px;" /></div>
-            <div class="photo" id="s2-c3" style="left:83px; top:1165px;"><img src="assets/art/f2-street.jpg" style="width:604px; height:226px;" /></div>
-            <div class="tag" id="s2-tag" style="left:752px; top:1178px;">31.08.1957</div>
+            <div class="leader" id="s2-c1" style="left:40px; top:652px;"><img src="assets/art/leader-tunku.jpg" /><div class="name">Tunku Abdul Rahman<br />Putra Al-Haj</div></div>
+            <div class="leader" id="s2-c2" style="left:378px; top:662px;"><img src="assets/art/leader-onn.jpg" /><div class="name">Datuk<br />Onn Jaafar</div></div>
+            <div class="leader" id="s2-c3" style="left:712px; top:676px;"><img src="assets/art/leader-razak.jpg" /><div class="name">Dato' Abdul Razak<br />Hussein</div></div>
+            <div class="leader" id="s2-c4" style="left:30px; top:1090px;"><img src="assets/art/leader-tancl.jpg" /><div class="name" style="padding:24px 8px 26px;">Tan Cheng Lock</div></div>
+            <div class="leader" id="s2-c5" style="left:374px; top:1094px;"><img src="assets/art/leader-sambanthan.jpg" /><div class="name">Tun V. T.<br />Sambanthan</div></div>
+            <div class="leader" id="s2-c6" style="left:716px; top:1100px;"><img src="assets/art/leader-ismail.jpg" /><div class="name" style="padding:24px 8px 26px;">Tun Dr. Ismail</div></div>
+          </div>
+          <div class="layer">
+            <div class="caption mono abs" id="s2-cap" style="top:1525px; left:61px; right:61px; font-size:37px;">Di sebalik kemerdekaan negara,<br />terdapat pengorbanan besar tokoh-tokoh<br />dan pejuang terdahulu yang berjuang<br />demi memastikan tanah air kita bebas<br />daripada penjajahan.</div>
           </div>
         </div>
       </div>
@@ -200,7 +214,7 @@
             </div></div>
           </div>
 
-          <div class="caption left abs" id="s3-cap" style="top:1522px; left:88px; right:80px; padding:34px 30px 38px 66px; font-size:48px; line-height:1.24; text-indent:28px;">Semangat keberanian,<br />kebijaksanaan dan kepemimpinan<br />mereka harus terus menjadi<br />inspirasi kepada generasi hari ini.</div>
+          <div class="caption mono abs" id="s3-cap" style="top:1522px; left:88px; right:80px; font-size:40px; line-height:1.4;">Semangat keberanian,<br />kebijaksanaan dan kepemimpinan<br />mereka harus terus menjadi<br />inspirasi kepada generasi hari ini.</div>
         </div>
       </div>
 
@@ -217,7 +231,7 @@
           <div class="title abs" style="left:92px; top:990px; font-size:90px; white-space:nowrap;">
             <span class="word hl" id="s4-w3"><span class="hlbg" id="s4-hl2"></span><span id="s4-w3a" class="word">Tanggungjawab</span> <span id="s4-w3b" class="word">Kita</span></span>
           </div>
-          <div class="caption type center abs" id="s4-cap" style="top:1514px; left:68px; right:63px; font-size:42px; line-height:1.24; padding:34px 30px 38px;">Jika dahulu mereka berjuang untuk<br />mendapatkan kemerdekaan, hari ini<br />menjadi tanggungjawab kita untuk<br />mempertahankan dan mengisi<br />kemerdekaan itu dengan kejayaan.</div>
+          <div class="caption mono abs" id="s4-cap" style="top:1514px; left:68px; right:63px; font-size:39px; line-height:1.3; padding:34px 26px 38px;">Jika dahulu mereka berjuang untuk<br />mendapatkan kemerdekaan, hari ini<br />menjadi tanggungjawab kita untuk<br />mempertahankan dan mengisi<br />kemerdekaan itu dengan kejayaan.</div>
         </div>
       </div>
 
@@ -284,9 +298,10 @@
       }
 
       // photo card flies in from a side and lands with a bounce; background blurs meanwhile
-      function cardIn(el, t, fromLeft, rot) {
+      function cardIn(el, t, fromLeft, rot, blurBg = true) {
         tl.fromTo(el, { x: fromLeft ? -1250 : 1250, rotation: fromLeft ? -28 : 28, scale: 1.12 },
           { x: 0, rotation: rot, scale: 1, duration: 0.85, ease: "back.out(1.9)" }, t);
+        if (!blurBg) return;
         tl.to("#s2-bg", { filter: "blur(7px)", opacity: 0.8, duration: 0.25, ease: "power2.out" }, t);
         tl.to("#s2-bg", { filter: "blur(0px)", opacity: 1, duration: 0.5, ease: "power2.inOut" }, t + 0.9);
       }
@@ -342,8 +357,8 @@
       gsap.set(".icoWrap", { scale: 0, opacity: 0 });
       gsap.set(".vcard .bar", { scaleX: 0 });
       gsap.set(".vcard .txt span", { opacity: 0 });
-      gsap.set(["#s2-c1", "#s2-c3"], { x: -1250 });
-      gsap.set(["#s2-c2", "#s2-tag"], { x: 1250 });
+      gsap.set(["#s2-c1", "#s2-c3", "#s2-c5"], { x: -1250 });
+      gsap.set(["#s2-c2", "#s2-c4", "#s2-c6"], { x: 1250 });
       gsap.set(".stripe", { xPercent: -120, skewX: -14 });
       gsap.set(".cw", { opacity: 0 });
       Object.keys(CAPTION_WORDS).forEach(scriptFollowsVoice);
@@ -365,6 +380,7 @@
 
       /* ================= SCENE 2  (7.15 - 19.7) ================= */
       focusIn("#s2 .cam", 7.2);
+      fadeUp("#s2-count", 7.4);
       brush("#s2-label", 7.3, 0.42);
       stamp("#s2-w1", "#s2 .cam", 7.55);              // "bukanlah"
       stamp("#s2-w2", "#s2 .cam", 7.82);              // "datang"
@@ -375,10 +391,14 @@
       // pulse the label when "pengorbanan" is spoken
       tl.to("#s2-label", { scale: 1.08, duration: 0.14, ease: "power2.out" }, 11.32);
       tl.to("#s2-label", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 11.46);
-      cardIn("#s2-c1", 12.1, true, -2);              // "tokoh-tokoh"
-      cardIn("#s2-c2", 13.6, false, 2);              // "pejuang terdahulu"
-      cardIn("#s2-c3", 15.8, true, -1.5);            // "memastikan tanah air"
-      cardIn("#s2-tag", 17.55, false, -5);           // "bebas"
+      tl.to("#s2-bg", { filter: "blur(7px)", opacity: 0.8, duration: 0.3, ease: "power2.out" }, 12.1);
+      cardIn("#s2-c1", 12.15, true, -3, false);      // "tokoh-tokoh"
+      cardIn("#s2-c2", 13.0, false, 1.5, false);
+      cardIn("#s2-c3", 13.7, true, 2.5, false);      // "pejuang terdahulu"
+      cardIn("#s2-c4", 14.6, false, -4, false);      // "yang berjuang"
+      cardIn("#s2-c5", 15.55, true, 1, false);       // "demi memastikan"
+      cardIn("#s2-c6", 16.55, false, 3, false);      // "tanah air"
+      tl.to("#s2-bg", { filter: "blur(0px)", opacity: 1, duration: 0.6, ease: "power2.inOut" }, 17.5);
 
       flagWipe(19.7);
 

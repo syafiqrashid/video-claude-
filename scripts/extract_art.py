@@ -70,3 +70,21 @@ sketch("f3-skyline", 2, (0, 988, 916, 1268), feather=0.07)
 sketch("f4-soldiers", 3, (30, 392, 900, 726), feather=0.08)
 sketch("f4-people", 3, (40, 946, 880, 1274), feather=0.07)
 print("done")
+
+# ---- storyboard v3: leader portraits (frame 2). Crop the photo inside each card;
+# the page draws the card frame and the name label.
+V3 = Image.open("../assets/storyboard-v3.png").convert("RGB")
+X0, Y0 = 476, 4                          # panel 2 origin in storyboard v3
+LEADERS = {
+    "tunku": (72, 592, 306, 818),
+    "onn": (356, 590, 592, 822),
+    "razak": (648, 610, 866, 836),
+    "tancl": (68, 962, 290, 1188),
+    "sambanthan": (352, 962, 592, 1172),
+    "ismail": (648, 970, 880, 1196),
+}
+for name, (l, t, r, b) in LEADERS.items():
+    c = V3.crop((X0 + l / 2, Y0 + t / 2, X0 + r / 2, Y0 + b / 2))
+    c = c.resize((round(c.width * 2.6), round(c.height * 2.6)), Image.LANCZOS)
+    c.filter(ImageFilter.UnsharpMask(radius=2, percent=60, threshold=2)).save(OUT + f"leader-{name}.jpg", quality=92)
+print("leaders done")

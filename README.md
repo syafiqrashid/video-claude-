@@ -2,6 +2,7 @@
 
 Video menegak 1080x1920 (39.6s) dibina dengan [HyperFrames](https://hyperframes.heygen.com) mengikut storyboard 4 frame.
 
+- `output/merdeka-warisan-perjuangan-HD.mp4` — video siap HD (1080x1920)
 - `output/merdeka-warisan-perjuangan-lowres.mp4` — preview low res (540x960)
 - `merdeka/index.html` — komposisi HyperFrames (semua animasi GSAP)
 - `assets/voice-raw.m4a` — rakaman suara asal; `assets/storyboard-v3.png` — storyboard terkini (gambar pemimpin); v2 untuk ilustrasi sketsa

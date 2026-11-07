@@ -22,6 +22,8 @@
         --f-title: "Merriweather", serif;
         --f-body: "Source Serif 4", serif;
         --f-icon: "Fira Sans Extra Condensed", sans-serif;
+        --f-type: "Courier Prime", monospace;
+        --f-mono: "IBM Plex Mono", monospace;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
@@ -81,6 +83,10 @@
         box-shadow: 0 0 0 4px rgba(246,232,200,.75), 0 18px 34px rgba(60,35,10,.35), inset 0 0 40px rgba(0,0,0,.35);
       }
 
+      .caption.type { font: 700 40px/1.36 var(--f-type); text-align: left; padding: 36px 46px 40px; letter-spacing: -.005em; }
+      .caption.type.center { text-align: center; }
+      .caption.mono { font: 600 35px/1.5 var(--f-mono); text-transform: uppercase; letter-spacing: .01em; padding: 34px 30px 38px; }
+      .caption.left { text-align: left; }
       .sketch { display: block; }
 
       /* ---------- scene 2 cards ---------- */
@@ -90,15 +96,15 @@
         box-shadow: 0 12px 22px rgba(40,25,8,.35); }
 
       /* ---------- scene 3 icon cards ---------- */
-      .vcard { position: absolute; left: 80px; width: 920px; height: 208px; }
+      .vcard { position: absolute; left: 72px; width: 940px; height: 214px; }
       .vcard .bar { position: absolute; left: 150px; right: 0; top: 0; bottom: 0; background: var(--card); border-radius: 22px;
         box-shadow: 0 14px 26px rgba(50,30,8,.38); overflow: hidden; transform-origin: 0 50%; }
       .vcard .txt { position: absolute; left: 120px; right: 10px; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center;
         font: italic 900 106px/1 var(--f-icon); color: var(--yellow); letter-spacing: .01em; }
-      .vcard .ico { position: absolute; left: 0; top: 0; width: 300px; height: 208px; background: #f4ead2; border: 4px solid #1d1914;
+      .vcard .ico { position: absolute; left: 0; top: 0; width: 300px; height: 214px; background: #f4ead2; border: 4px solid #1d1914;
         border-radius: 22px 0 0 22px; clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); }
-      .vcard .ico svg { position: absolute; left: 44px; top: 30px; width: 150px; height: 148px; }
-      .vcard .icoWrap { position: absolute; left: 0; top: 0; width: 300px; height: 208px; transform-origin: 40% 50%; filter: drop-shadow(0 10px 14px rgba(50,30,8,.35)); }
+      .vcard .ico svg { position: absolute; left: 44px; top: 33px; width: 150px; height: 148px; }
+      .vcard .icoWrap { position: absolute; left: 0; top: 0; width: 300px; height: 214px; transform-origin: 40% 50%; filter: drop-shadow(0 10px 14px rgba(50,30,8,.35)); }
       .shine { position: absolute; top: -20%; bottom: -20%; width: 180px; left: 0;
         background: linear-gradient(90deg, rgba(255,250,220,0) 0%, rgba(255,250,220,.75) 50%, rgba(255,250,220,0) 100%);
         transform: translateX(-260px) skewX(-20deg); mix-blend-mode: screen; pointer-events: none; }
@@ -119,16 +125,16 @@
       <!-- ================= SCENE 1 : WARISAN PERJUANGAN ================= -->
       <div id="s1" class="scene clip" data-start="0" data-duration="7.15" data-track-index="1">
         <div class="cam">
-          <img class="sketch abs" id="s1-art" src="assets/art/f1-street.png" style="left:0; top:735px; width:1080px;" />
-          <div class="counter abs" id="s1-count" style="left:130px; top:228px;">01 / 04</div>
-          <div class="abs" style="left:98px; top:290px;"><div class="label" id="s1-label">Warisan Perjuangan</div></div>
-          <div class="title abs" style="left:100px; top:440px;">
+          <img class="sketch abs" id="s1-art" src="assets/art/f1-street.png" style="left:0; top:722px; width:1080px;" />
+          <div class="counter center abs" id="s1-count" style="top:70px; font-size:54px;">02 / 04</div>
+          <div class="abs" style="left:108px; top:268px;"><div class="label" id="s1-label" style="font-size:84px; padding:16px 36px 18px;">Warisan Perjuangan</div></div>
+          <div class="title abs" style="left:122px; top:400px; font-size:160px; line-height:0.98;">
             <span class="word" id="s1-w1">Jangan</span><br />
             <span class="word" id="s1-w2">Sesekali</span><br />
             <span class="word hl" id="s1-w3"><span class="hlbg" id="s1-hl"></span>Lupa</span>
           </div>
-          <div class="abs" id="s1-bar" style="left:104px; top:1000px; width:180px; height:22px; background:var(--ink); transform-origin:0 50%;"></div>
-          <div class="caption abs" id="s1-cap" style="top:1560px;">Tetapi kita jangan sesekali lupa segala nikmat yang kita kecapi hari ini bukan datang dengan mudah.</div>
+          <div class="abs" id="s1-bar" style="left:120px; top:958px; width:196px; height:22px; background:var(--ink); transform-origin:0 50%;"></div>
+          <div class="caption type abs" id="s1-cap" style="top:1531px; left:77px; right:78px; font-size:43px; padding:38px 34px 42px 40px;">Tetapi kita jangan sesekali lupa.<br />Segala nikmat yang kita kecapai<br />hari ini bukan datang dengan<br />mudah.</div>
         </div>
       </div>
 
@@ -136,19 +142,18 @@
       <div id="s2" class="scene clip" data-start="7.15" data-duration="12.55" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s2-bg">
-            <div class="counter center abs" id="s2-count" style="top:190px;">02 / 04</div>
-            <div class="abs" style="left:0; right:0; top:250px; text-align:center;"><div class="label" id="s2-label">Pengorbanan</div></div>
-            <div class="title abs" style="left:96px; top:420px; font-size:118px;">
+            <div class="abs" style="left:0; right:0; top:189px; text-align:center;"><div class="label" id="s2-label" style="font-size:82px; padding:16px 58px 18px;">Pengorbanan</div></div>
+            <div class="title abs" style="left:104px; top:340px; font-size:120px;">
               <span class="word" id="s2-w1">Bukan</span> <span class="word" id="s2-w2">Datang</span><br />
               <span class="word" id="s2-w3">Dengan</span> <span class="word hl" id="s2-w4"><span class="hlbg" id="s2-hl"></span>Mudah</span>
             </div>
-            <div class="caption abs" id="s2-cap" style="top:1572px; font-size:40px;">Ia hasil daripada perjuangan, pengorbanan dan kesatuan seluruh rakyat yang sanggup berkorban demi kebebasan, kemerdekaan dan masa depan negara.</div>
+            <div class="caption mono abs" id="s2-cap" style="top:1507px; left:68px; right:68px;">Di sebalik kemerdekaan negara,<br />terdapat pengorbanan besar tokoh-tokoh<br />dan pejuang terdahulu yang berjuang<br />demi memastikan tanah air kita bebas<br />daripada penjajahan.</div>
           </div>
           <div class="layer" id="s2-cards">
-            <div class="photo" id="s2-c1" style="left:70px; top:715px;"><img src="assets/art/f2-crowd.jpg" style="width:800px; height:277px;" /></div>
-            <div class="photo" id="s2-c2" style="left:170px; top:1000px;"><img src="assets/art/f2-flag.jpg" style="width:790px; height:278px;" /></div>
-            <div class="photo" id="s2-c3" style="left:110px; top:1268px;"><img src="assets/art/f2-street.jpg" style="width:560px; height:209px;" /></div>
-            <div class="tag" id="s2-tag" style="left:735px; top:1300px;">31.08.1957</div>
+            <div class="photo" id="s2-c1" style="left:77px; top:620px;"><img src="assets/art/f2-crowd.jpg" style="width:812px; height:282px;" /></div>
+            <div class="photo" id="s2-c2" style="left:165px; top:888px;"><img src="assets/art/f2-flag.jpg" style="width:784px; height:276px;" /></div>
+            <div class="photo" id="s2-c3" style="left:83px; top:1165px;"><img src="assets/art/f2-street.jpg" style="width:604px; height:226px;" /></div>
+            <div class="tag" id="s2-tag" style="left:752px; top:1178px;">31.08.1957</div>
           </div>
         </div>
       </div>
@@ -156,11 +161,10 @@
       <!-- ================= SCENE 3 : SEMANGAT MEREKA ================= -->
       <div id="s3" class="scene clip" data-start="19.7" data-duration="7.95" data-track-index="1">
         <div class="cam">
-          <img class="sketch abs" id="s3-art" src="assets/art/f3-skyline.png" style="left:0; top:1185px; width:1080px;" />
-          <div class="counter center abs" id="s3-count" style="top:190px;">03 / 04</div>
-          <div class="abs" style="left:0; right:0; top:250px; text-align:center;"><div class="label" id="s3-label">Semangat Mereka</div></div>
+          <img class="sketch abs" id="s3-art" src="assets/art/f3-skyline.png" style="left:0; top:1165px; width:1080px;" />
+          <div class="abs" style="left:0; right:0; top:198px; text-align:center;"><div class="label" id="s3-label" style="font-size:88px; padding:16px 48px 18px;">Semangat Mereka</div></div>
 
-          <div class="vcard" id="s3-v1" style="top:478px;">
+          <div class="vcard" id="s3-v1" style="top:392px;">
             <div class="bar"><div class="txt"><span>KEBERANIAN</span></div><div class="shine"></div></div>
             <div class="icoWrap"><div class="ico">
               <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="6" stroke-linejoin="round">
@@ -172,7 +176,7 @@
               <div class="shine"></div>
             </div></div>
           </div>
-          <div class="vcard" id="s3-v2" style="top:730px;">
+          <div class="vcard" id="s3-v2" style="top:654px;">
             <div class="bar"><div class="txt"><span style="font-size:96px;">KEBIJAKSANAAN</span></div><div class="shine"></div></div>
             <div class="icoWrap"><div class="ico">
               <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round">
@@ -183,7 +187,7 @@
               <div class="shine"></div>
             </div></div>
           </div>
-          <div class="vcard" id="s3-v3" style="top:982px;">
+          <div class="vcard" id="s3-v3" style="top:916px;">
             <div class="bar"><div class="txt"><span>KEPIMPINAN</span></div><div class="shine"></div></div>
             <div class="icoWrap"><div class="ico">
               <svg viewBox="0 0 100 100" fill="none" stroke="#17130f" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round">
@@ -195,25 +199,24 @@
             </div></div>
           </div>
 
-          <div class="caption abs" id="s3-cap" style="top:1560px;">Semangat kebersamaan, kebijaksanaan dan kepemimpinan mereka harus terus menjadi inspirasi kepada generasi hari ini.</div>
+          <div class="caption left abs" id="s3-cap" style="top:1522px; left:88px; right:80px; padding:34px 30px 38px 66px; font-size:48px; line-height:1.24;">&nbsp;&nbsp;Semangat keberanian,<br />kebijaksanaan dan kepemimpinan<br />mereka harus terus menjadi<br />inspirasi kepada generasi hari ini.</div>
         </div>
       </div>
 
       <!-- ================= SCENE 4 : DAHULU / HARI INI ================= -->
       <div id="s4" class="scene clip" data-start="27.65" data-duration="11.95" data-track-index="1">
         <div class="cam">
-          <img class="sketch abs" id="s4-art1" src="assets/art/f4-soldiers.png" style="left:40px; top:505px; width:1000px;" />
-          <img class="sketch abs" id="s4-art2" src="assets/art/f4-people.png" style="left:50px; top:1110px; width:980px;" />
-          <div class="counter center abs" id="s4-count" style="top:180px;">04 / 04</div>
-          <div class="abs" style="left:96px; top:240px;"><div class="label sm" id="s4-label1">Dahulu</div></div>
-          <div class="title abs" style="left:100px; top:356px; font-size:100px; white-space:nowrap;">
+          <img class="sketch abs" id="s4-art1" src="assets/art/f4-soldiers.png" style="left:35px; top:462px; width:1026px;" />
+          <img class="sketch abs" id="s4-art2" src="assets/art/f4-people.png" style="left:47px; top:1115px; width:990px;" />
+          <div class="abs" style="left:97px; top:192px;"><div class="label sm" id="s4-label1" style="font-size:72px; padding:14px 30px 16px;">Dahulu</div></div>
+          <div class="title abs" style="left:98px; top:316px; font-size:104px; white-space:nowrap;">
             <span class="word" id="s4-w1">Mereka</span> <span class="word hl" id="s4-w2"><span class="hlbg" id="s4-hl1"></span>Berjuang</span>
           </div>
-          <div class="abs" style="left:96px; top:880px;"><div class="label sm" id="s4-label2">Hari Ini</div></div>
-          <div class="title abs" style="left:104px; top:1000px; font-size:84px; white-space:nowrap;">
+          <div class="abs" style="left:100px; top:867px;"><div class="label sm" id="s4-label2" style="font-size:72px; padding:14px 30px 16px;">Hari Ini</div></div>
+          <div class="title abs" style="left:92px; top:990px; font-size:90px; white-space:nowrap;">
             <span class="word hl" id="s4-w3"><span class="hlbg" id="s4-hl2"></span><span id="s4-w3a" class="word">Tanggungjawab</span> <span id="s4-w3b" class="word">Kita</span></span>
           </div>
-          <div class="caption abs" id="s4-cap" style="top:1548px; font-size:40px;">Kita dituntut mereka berjuang untuk mempertahankan kemerdekaan, hari ini menjadi tanggungjawab kita untuk mempertahankannya dan menjaga keharmonian di negara Malaysia.</div>
+          <div class="caption type center abs" id="s4-cap" style="top:1514px; left:68px; right:63px; font-size:42px; line-height:1.24; padding:34px 30px 38px;">Jika dahulu mereka berjuang untuk<br />mendapatkan kemerdekaan, hari ini<br />menjadi tanggungjawab kita untuk<br />mempertahankan dan mengisi<br />kemerdekaan itu dengan kejayaan.</div>
         </div>
       </div>
 
@@ -327,7 +330,6 @@
 
       /* ================= SCENE 2  (7.15 - 19.7) ================= */
       focusIn("#s2 .cam", 7.2);
-      fadeUp("#s2-count", 7.4);
       brush("#s2-label", 7.3, 0.42);
       stamp("#s2-w1", "#s2 .cam", 7.55);              // "bukanlah"
       stamp("#s2-w2", "#s2 .cam", 7.82);              // "datang"
@@ -347,7 +349,6 @@
 
       /* ================= SCENE 3  (19.7 - 27.65) ================= */
       focusIn("#s3 .cam", 19.75);
-      fadeUp("#s3-count", 19.9);
       brush("#s3-label", 19.95, 0.5);                 // "semangat"
       iconCard("#s3-v1", 20.45);                      // "keberanian"
       iconCard("#s3-v2", 21.25);                      // "kebijaksanaan"
@@ -363,7 +364,6 @@
 
       /* ================= SCENE 4  (27.65 - 39.6) ================= */
       focusIn("#s4 .cam", 27.7);
-      fadeUp("#s4-count", 27.85);
       brush("#s4-label1", 27.95, 0.4);                // "jika dulu"
       stamp("#s4-w1", "#s4 .cam", 28.35);             // "mereka"
       stamp("#s4-w2", "#s4 .cam", 28.65, 1.4);        // "berjuang"

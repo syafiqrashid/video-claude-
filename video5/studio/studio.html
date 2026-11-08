@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<style>
+  /* Studio backdrop for video 5. Rendered once to studio.png (1080x1920). */
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #14161b; }
+  #set { position: absolute; inset: 0; filter: blur(7px); transform: scale(1.03); }
+  .abs { position: absolute; }
+  /* back wall: deep charcoal with warm wash */
+  #wall { inset: 0; background:
+      radial-gradient(ellipse 60% 38% at 50% 34%, rgba(255,178,102,.22), rgba(255,178,102,0) 70%),
+      linear-gradient(180deg, #1d2129 0%, #20242c 45%, #191b21 100%); }
+  /* acoustic wood slats on the left and right */
+  .slats { top: 0; height: 1920px; width: 300px;
+    background: repeating-linear-gradient(90deg, #4a3322 0 26px, #2a1d14 26px 34px); opacity: .95; }
+  #slL { left: 0; } #slR { right: 0; }
+  .slats::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.1) 30%, rgba(0,0,0,.15) 70%, rgba(0,0,0,.6)); }
+  #slL::before, #slR::before { content: ""; position: absolute; top: 0; bottom: 0; width: 120px;
+    background: linear-gradient(90deg, rgba(255,170,90,0), rgba(255,170,90,.18), rgba(255,170,90,0)); }
+  #slL::before { right: -10px; } #slR::before { left: -10px; }
+  /* vertical warm LED strips framing the centre panel */
+  .led { top: 140px; width: 12px; height: 1400px; border-radius: 6px; background: #ffc98a;
+    box-shadow: 0 0 30px 10px rgba(255,170,90,.55), 0 0 120px 40px rgba(255,150,70,.25); }
+  #ledL { left: 312px; } #ledR { right: 312px; }
+  /* centre panel */
+  #panel { left: 330px; right: 330px; top: 120px; height: 1440px; border-radius: 8px;
+    background: linear-gradient(180deg, #262b35, #1f232b); box-shadow: inset 0 0 120px rgba(0,0,0,.6); }
+  /* soft Malaysia accent: neon crescent+star outline high on the panel */
+  #neon { left: 445px; top: 230px; width: 190px; height: 190px; opacity: .75;
+    filter: drop-shadow(0 0 10px rgba(255,214,90,.9)) drop-shadow(0 0 30px rgba(255,190,60,.6)); }
+  /* shelves with plants and objects on the slats */
+  .shelf { height: 14px; background: #120d09; box-shadow: 0 10px 30px rgba(0,0,0,.6); }
+  .plant { border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 40% 35%, #3d6a3f, #1a3320 70%); }
+  .pot { background: linear-gradient(180deg, #d9cfc0, #9e9385); border-radius: 6px 6px 14px 14px; }
+  .book { background: #7a2a26; }
+  /* bokeh lamps */
+  .bok { border-radius: 50%; background: radial-gradient(circle, rgba(255,214,150,.95), rgba(255,180,100,.35) 45%, rgba(255,180,100,0) 70%); }
+  #floor { left: 0; right: 0; top: 1560px; bottom: 0; background: linear-gradient(180deg, #2b2420, #15110e); }
+  #vig { inset: 0; background: radial-gradient(ellipse 75% 60% at 50% 42%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+</style></head>
+<body>
+<div id="set">
+  <div class="abs" id="wall"></div>
+  <div class="abs slats" id="slL"></div>
+  <div class="abs slats" id="slR"></div>
+  <div class="abs" id="panel"></div>
+  <div class="abs led" id="ledL"></div>
+  <div class="abs led" id="ledR"></div>
+  <svg class="abs" id="neon" viewBox="0 0 100 100" fill="none" stroke="#ffd65a" stroke-width="3.2" stroke-linejoin="round">
+    <path d="M58 14 A36 36 0 1 0 58 86 A29 29 0 1 1 58 14 Z" />
+    <path d="M76 50 L69 53 L72 60 L66 55 L62 62 L61 54 L54 55 L59 50 L54 45 L61 46 L62 38 L66 45 L72 40 L69 47 Z" />
+  </svg>
+  <!-- left shelves -->
+  <div class="abs shelf" style="left:20px; top:560px; width:250px;"></div>
+  <div class="abs pot" style="left:60px; top:500px; width:60px; height:60px;"></div>
+  <div class="abs plant" style="left:30px; top:410px; width:120px; height:110px;"></div>
+  <div class="abs book" style="left:170px; top:470px; width:22px; height:90px;"></div>
+  <div class="abs book" style="left:196px; top:480px; width:18px; height:80px; background:#c9a24a;"></div>
+  <div class="abs book" style="left:218px; top:465px; width:24px; height:95px; background:#25406b;"></div>
+  <div class="abs shelf" style="left:20px; top:940px; width:250px;"></div>
+  <div class="abs pot" style="left:150px; top:860px; width:80px; height:80px;"></div>
+  <div class="abs plant" style="left:120px; top:740px; width:140px; height:140px;"></div>
+  <!-- right shelves -->
+  <div class="abs shelf" style="right:20px; top:680px; width:250px;"></div>
+  <div class="abs pot" style="right:70px; top:610px; width:70px; height:70px;"></div>
+  <div class="abs plant" style="right:40px; top:500px; width:130px; height:130px;"></div>
+  <div class="abs book" style="right:190px; top:595px; width:24px; height:85px; background:#b8342f;"></div>
+  <div class="abs book" style="right:216px; top:610px; width:20px; height:70px; background:#e6dccb;"></div>
+  <div class="abs shelf" style="right:20px; top:1060px; width:250px;"></div>
+  <div class="abs" style="right:90px; top:990px; width:90px; height:70px; border-radius:8px; background:#2d2a26; box-shadow: inset 0 0 0 6px #4b453d;"></div>
+  <!-- bokeh lamps -->
+  <div class="abs bok" style="left:-40px; top:160px; width:220px; height:220px;"></div>
+  <div class="abs bok" style="right:-30px; top:280px; width:200px; height:200px; opacity:.8;"></div>
+  <div class="abs bok" style="left:230px; top:1180px; width:120px; height:120px; opacity:.5;"></div>
+  <div class="abs bok" style="right:200px; top:1260px; width:150px; height:150px; opacity:.45;"></div>
+  <div class="abs" id="floor"></div>
+  <div class="abs" id="vig"></div>
+</div>
+</body></html>

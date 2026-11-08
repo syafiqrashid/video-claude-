@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <style>
+      :root {
+        --accent: #f2683a;          /* reference-style orange */
+        --ink: #ffffff;
+        --dark: #16181d;
+        --red: #d8262c;
+        --f-sans: "Fira Sans", sans-serif;
+        --f-cond: "Fira Sans Condensed", sans-serif;
+        --f-mono: "IBM Plex Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+      .abs { position: absolute; }
+
+      #camera { position: absolute; inset: 0; transform-origin: 50% 32%; }
+      #base { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      #vig { position: absolute; inset: 0; pointer-events: none; z-index: 3;
+        background: radial-gradient(ellipse 80% 62% at 50% 42%, rgba(0,0,0,0) 60%, rgba(0,0,0,.35) 100%); }
+
+      .ov { position: absolute; z-index: 10; opacity: 0; }
+      .center { left: 0; right: 0; text-align: center; }
+
+      /* word-by-word caption, reference style */
+      #cap { position: absolute; z-index: 12; left: 60px; right: 60px; top: 1585px; text-align: center;
+        font: 800 50px/1.15 var(--f-sans); color: #fff; letter-spacing: -.01em;
+        text-shadow: 0 3px 0 rgba(0,0,0,.55), 0 0 18px rgba(0,0,0,.55), 0 0 4px rgba(0,0,0,.8); }
+      #cap .cw { display: inline-block; opacity: 0; }
+      #cap .cw.k { color: var(--accent); }
+
+      .big { font: 900 118px/0.98 var(--f-sans); color: #fff; letter-spacing: -.03em;
+        text-shadow: 0 6px 22px rgba(0,0,0,.45), 0 2px 0 rgba(0,0,0,.25); white-space: nowrap; }
+      .big .dot { color: var(--accent); }
+      .small { font: 800 44px/1 var(--f-sans); color: #fff; text-shadow: 0 3px 12px rgba(0,0,0,.6); white-space: nowrap; }
+
+      .pill { display: inline-flex; align-items: center; gap: 16px; background: #fff; color: var(--dark); border-radius: 999px;
+        padding: 14px 30px 14px 16px; font: 800 40px/1 var(--f-sans); box-shadow: 0 10px 26px rgba(0,0,0,.35); white-space: nowrap; }
+      .pill .ic { width: 50px; height: 50px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; }
+      .pill img { width: 64px; height: 43px; border-radius: 4px; display: block; }
+
+      .chip { display: inline-flex; align-items: center; gap: 16px; background: rgba(255,255,255,.96); color: var(--dark); border-radius: 18px;
+        padding: 16px 30px 16px 18px; font: 800 46px/1 var(--f-sans); box-shadow: 0 12px 28px rgba(0,0,0,.35); white-space: nowrap; }
+      .chip .tick { width: 50px; height: 50px; border-radius: 12px; background: var(--accent); position: relative; flex: none; }
+      .chip .tick svg { position: absolute; inset: 9px; }
+
+      .strike { position: absolute; left: -16px; right: -16px; top: 52%; height: 14px; background: var(--red); border-radius: 7px;
+        transform-origin: 0 50%; transform: scaleX(0) rotate(-3deg); box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+
+      #endcard { position: absolute; inset: 0; z-index: 20; background: radial-gradient(ellipse at 50% 45%, #232733, #0f1115 75%); opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="51.6" data-width="1080" data-height="1920" data-fps="30">
+      <div id="camera">
+        <video id="base" class="clip" src="assets/comp.mp4" data-start="0" data-duration="49.11" data-track-index="0" muted playsinline></video>
+      </div>
+      <div id="vig"></div>
+
+      <!-- K1 greeting -->
+      <div class="ov center" id="k1" style="top:190px;"><div class="pill"><img src="assets/flag.png" />Salam Sejahtera</div></div>
+      <!-- K2 question -->
+      <div class="ov center big" id="k2" style="top:150px; font-size:96px;">Apa erti<br /><span style="color:var(--accent);">kemerdekaan?</span></div>
+      <!-- K3 bukan sekadar bebas dari penjajah -->
+      <div class="ov center small" id="k3a" style="top:1060px;">bukan sekadar</div>
+      <div class="ov center" id="k3b" style="top:1125px;"><span class="big" style="position:relative; display:inline-block; font-size:104px;">bebas dari penjajah<span class="strike" id="k3s"></span></span></div>
+      <!-- K4 three wins -->
+      <div class="ov center" id="k4a" style="top:1040px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Aman damai</div></div>
+      <div class="ov center" id="k4b" style="top:1162px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Bersatu padu</div></div>
+      <div class="ov center" id="k4c" style="top:1284px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Masa depan lebih baik</div></div>
+      <!-- K5 rakyat Malaysia -->
+      <div class="ov center" id="k5f" style="top:1010px;"><img src="assets/flag.png" style="width:220px; height:147px; display:inline-block; filter: drop-shadow(0 10px 18px rgba(0,0,0,.4));" /></div>
+      <div class="ov center big" id="k5" style="top:1180px; font-size:112px;">Rakyat Malaysia<span class="dot">.</span></div>
+      <!-- K6 berdaulat -->
+      <div class="ov center big" id="k6" style="top:1030px; font-size:128px;">Berdaulat<span class="dot">.</span></div>
+      <div class="ov center" id="k6b" style="top:1196px;"><div class="chip" style="font-size:42px;">aman &amp; damai</div></div>
+      <div class="ov center small" id="k6c" style="top:1320px; font-size:46px;">terus melangkah ke depan <span style="color:var(--accent);">&#10140;</span></div>
+      <!-- K7 akhir kata -->
+      <div class="ov center" id="k7" style="top:250px;"><div class="pill"><div class="ic"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M4 5h16v10H9l-5 4z" fill="#fff"/></svg></div>Akhir kata</div></div>
+      <!-- K8 sejarah -> amanah -->
+      <div class="ov center" id="k8a" style="top:200px;"><span class="big" style="position:relative; display:inline-block; font-size:100px;">sejarah<span class="strike" id="k8s"></span></span></div>
+      <div class="ov center big" id="k8b" style="top:330px; font-size:132px;">amanah<span class="dot">.</span></div>
+      <!-- K9 perpaduan / keharmonian / gemilang -->
+      <div class="ov center" id="k9a" style="top:180px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Perpaduan</div></div>
+      <div class="ov center" id="k9b" style="top:302px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Keharmonian</div></div>
+      <div class="ov center" id="k9c" style="top:424px;"><div class="chip"><div class="tick"><svg viewBox="0 0 32 32"><path d="M6 17 L13 24 L26 8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Masa depan gemilang</div></div>
+      <!-- K10 jiwa merdeka -->
+      <div class="ov center small" id="k10a" style="top:190px; font-size:42px;">kemerdekaan kita <span style="color:var(--accent);">hargai</span></div>
+      <div class="ov center small" id="k10b" style="top:250px; font-size:42px;">perpaduan kita <span style="color:var(--accent);">pelihara</span></div>
+      <div class="ov center big" id="k10" style="top:330px; font-size:130px;">Jiwa Merdeka<span class="dot">.</span></div>
+
+      <div id="cap"></div>
+
+      <!-- end card -->
+      <div id="endcard">
+        <img class="abs" id="endflag" src="assets/flag.png" style="left:390px; top:640px; width:300px; height:200px; filter: drop-shadow(0 12px 22px rgba(0,0,0,.5));" />
+        <div class="abs center big" id="endt" style="top:900px; font-size:120px;">Terima kasih<span class="dot">.</span></div>
+        <div class="abs center small" id="ends" style="top:1050px; font-size:46px; color:#d9dbe2;">Salam Merdeka</div>
+      </div>
+
+      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="49.11" data-track-index="5" data-volume="1"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const q = (s) => document.querySelector(s);
+
+      /* ---- camera: punch in / out on every jump cut, slow push within a shot ---- */
+      const CUTS = [0, 2.192, 4.359, 13.305, 14.969, 20.567, 23.969, 29.076, 36.878, 39.77, 42.718, 49.11];
+      CUTS.slice(0, -1).forEach((t, i) => {
+        const z = i % 2 ? 1.12 : 1.0;
+        const origin = t < 23.9 ? "50% 30%" : "50% 46%";
+        tl.set("#camera", { scale: z, transformOrigin: origin }, t);
+        tl.to("#camera", { scale: z + 0.025, duration: CUTS[i + 1] - t, ease: "none" }, t);
+      });
+
+      /* ---- simple overlay moves (reference style) ---- */
+      function popIn(el, t, from = 0.6) {
+        tl.fromTo(el, { opacity: 0, scale: from, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.42, ease: "back.out(2.2)" }, t);
+      }
+      function riseIn(el, t) {
+        tl.fromTo(el, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t);
+      }
+      function out(el, t) { tl.to(el, { opacity: 0, y: -16, duration: 0.25, ease: "power2.in" }, t); }
+      function strike(el, t) { tl.to(el, { scaleX: 1, duration: 0.3, ease: "power2.out" }, t); }
+
+      // K1 greeting
+      popIn("#k1", 0.15); out("#k1", 2.1);
+      // K2 question
+      popIn("#k2", 2.35, 0.8); out("#k2", 4.4);
+      // K3 bukan sekadar bebas dari penjajah (strike)
+      riseIn("#k3a", 4.95); popIn("#k3b", 5.95, 0.8); strike("#k3s", 7.0);
+      out("#k3a", 7.6); out("#k3b", 7.6);
+      // K4 three wins
+      popIn("#k4a", 10.9); popIn("#k4b", 11.95); popIn("#k4c", 13.85);
+      ["#k4a", "#k4b", "#k4c"].forEach((s) => out(s, 15.2));
+      // K5 rakyat Malaysia
+      popIn("#k5f", 15.6); tl.to("#k5f", { rotation: 3, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 16.1);
+      popIn("#k5", 18.1, 0.7); out("#k5f", 19.4); out("#k5", 19.4);
+      // K6 berdaulat
+      popIn("#k6", 20.3, 1.6); popIn("#k6b", 21.7); riseIn("#k6c", 22.7);
+      ["#k6", "#k6b", "#k6c"].forEach((s) => out(s, 23.85));
+      // K7 akhir kata
+      popIn("#k7", 24.0); out("#k7", 26.3);
+      // K8 sejarah -> amanah
+      popIn("#k8a", 27.8, 0.8); strike("#k8s", 29.25); popIn("#k8b", 29.9, 1.5);
+      out("#k8a", 32.1); out("#k8b", 32.1);
+      // K9 perpaduan / keharmonian / gemilang
+      popIn("#k9a", 35.6); popIn("#k9b", 37.45); popIn("#k9c", 40.6);
+      ["#k9a", "#k9b", "#k9c"].forEach((s) => out(s, 42.5));
+      // K10 jiwa merdeka
+      riseIn("#k10a", 42.8); riseIn("#k10b", 44.2); popIn("#k10", 45.95, 1.5);
+      ["#k10a", "#k10b", "#k10"].forEach((s) => out(s, 47.5));
+
+      /* ---- word-by-word captions that follow the voice ---- */
+      // [start, end, text, accent?] — times from video5/work/words.json, wording corrected
+      const W = [
+        [0.0, "Assalamualaikum"], [0.9, "dan"], [1.1, "salam"], [1.46, "sejahtera.", 1],
+        [2.34, "Apakah"], [2.6, "erti"], [2.96, "kemerdekaan", 1], [3.46, "kepada"], [3.76, "kita?"],
+        [4.56, "Kemerdekaan", 1], [4.98, "bukanlah"], [5.5, "sekadar"], [6.0, "bebas"], [6.68, "dari"], [6.9, "penjajah."],
+        [7.5, "Tetapi"], [7.88, "kemerdekaan"], [8.56, "membolehkan"], [9.7, "kita"], [10.0, "hidup"], [10.64, "dengan"],
+        [10.88, "aman", 1], [11.14, "damai,", 1], [11.96, "bersatu", 1], [12.28, "padu", 1], [12.82, "dan"], [13.14, "membina"],
+        [13.86, "masa"], [14.06, "depan"], [14.3, "yang"], [14.42, "lebih"], [14.66, "baik."],
+        [15.5, "Hari"], [16.16, "ini"], [16.66, "kita"], [17.08, "berdiri"], [17.44, "megah"], [17.86, "sebagai"],
+        [18.14, "rakyat", 1], [18.46, "Malaysia,", 1], [19.52, "sebuah"], [19.68, "negara"], [20.02, "yang"], [20.34, "berdaulat,", 1],
+        [21.72, "aman"], [21.86, "dan"], [22.04, "damai"], [22.48, "dan"], [22.74, "terus"], [23.04, "melangkah"], [23.3, "ke"], [23.58, "depan."],
+        [24.1, "Akhir"], [24.92, "kata"], [25.3, "daripada"], [25.64, "saya,"],
+        [26.6, "kemerdekaan"], [27.06, "bukan"], [27.36, "sekadar"], [27.86, "sejarah"], [28.2, "untuk"], [28.36, "kita"], [28.62, "kenang,"],
+        [29.3, "tetapi"], [29.94, "amanah", 1], [30.82, "yang"], [31.0, "untuk"], [31.3, "kita"], [31.52, "pelihara."],
+        [32.34, "Marilah"], [32.76, "kita"], [33.06, "sama-sama"], [33.56, "memainkan"], [34.14, "peranan"], [34.52, "untuk"],
+        [34.98, "mengekalkan"], [35.66, "perpaduan,", 1], [37.06, "menjaga"], [37.5, "keharmonian,", 1], [39.32, "dalam"],
+        [40.12, "membina"], [40.66, "masa"], [40.96, "depan"], [41.38, "yang"], [41.5, "lebih"], [41.78, "gemilang.", 1],
+        [42.78, "Kemerdekaan"], [43.5, "kita"], [43.74, "hargai,"], [44.18, "perpaduan"], [44.94, "kita"], [45.18, "pelihara,"],
+        [45.94, "inilah"], [46.36, "jiwa", 1], [46.74, "merdeka.", 1],
+        [47.64, "Sekian,"], [47.96, "terima"], [48.18, "kasih"], [48.44, "daripada"], [48.76, "saya."],
+      ];
+      // group into short lines: break on punctuation, a gap > 0.45 s, or 4 words
+      const lines = []; let cur = [];
+      W.forEach((w, i) => {
+        cur.push(w);
+        const nxt = W[i + 1];
+        const endP = /[.,?]$/.test(w[1]);
+        if (!nxt || endP || cur.length >= 4 || nxt[0] - w[0] > 1.1) { lines.push(cur); cur = []; }
+      });
+      const cap = q("#cap");
+      lines.forEach((ln, li) => {
+        const box = document.createElement("div");
+        box.className = "abs"; box.style.cssText = "left:0; right:0; top:0; opacity:0;";
+        ln.forEach((w, wi) => {
+          const sp = document.createElement("span");
+          sp.className = "cw" + (w[2] ? " k" : ""); sp.textContent = w[1];
+          box.appendChild(sp);
+          if (wi < ln.length - 1) box.appendChild(document.createTextNode(" "));
+        });
+        cap.appendChild(box);
+        const t0 = ln[0][0];
+        const nextLine = lines[li + 1];
+        const t1 = nextLine ? Math.min(nextLine[0][0], ln[ln.length - 1][0] + 1.6) : 49.3;
+        tl.set(box, { opacity: 1 }, t0 - 0.05);
+        [...box.querySelectorAll(".cw")].forEach((sp, wi) => {
+          tl.fromTo(sp, { opacity: 0, y: 14, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.16, ease: "back.out(2)" }, ln[wi][0] - 0.03);
+        });
+        tl.set(box, { opacity: 0 }, t1 - 0.02);
+      });
+
+      /* ---- end card ---- */
+      tl.to("#endcard", { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 49.2);
+      popIn("#endflag", 49.5); tl.to("#endflag", { rotation: 3, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 2 }, 50.0);
+      popIn("#endt", 49.75, 0.7); riseIn("#ends", 50.15);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -128,11 +128,11 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="39.6" data-width="1080" data-height="1920" data-fps="30">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="31.6" data-width="1080" data-height="1920" data-fps="30">
       <div id="stains"></div>
 
       <!-- ================= SCENE 1 : WARISAN PERJUANGAN ================= -->
-      <div id="s1" class="scene clip" data-start="0" data-duration="7.15" data-track-index="1">
+      <div id="s1" class="scene clip" data-start="0" data-duration="5.25" data-track-index="1">
         <div class="cam">
           <img class="sketch abs" id="s1-art" src="assets/art/f1-street.png" style="left:0; top:722px; width:1080px;" />
           <div class="counter center abs" id="s1-count" style="top:70px; font-size:54px;">01 / 04</div>
@@ -143,12 +143,12 @@
             <span class="word hl" id="s1-w3"><span class="hlbg" id="s1-hl"></span>Lupa</span>
           </div>
           <div class="abs" id="s1-bar" style="left:120px; top:958px; width:196px; height:22px; background:var(--ink); transform-origin:0 50%;"></div>
-          <div class="caption mono left abs" id="s1-cap" style="top:1531px; left:77px; right:78px; font-size:41px; line-height:1.38; padding:36px 30px 40px 40px;">Tetapi kita jangan sesekali lupa.<br />Segala nikmat yang kita kecapai<br />hari ini bukan datang dengan<br />mudah.</div>
+          <div class="caption mono left abs" id="s1-cap" style="top:1531px; left:77px; right:78px; font-size:41px; line-height:1.38; padding:36px 30px 40px 40px;">Tapi kita jangan sesekali lupa.<br />Segala nikmat yang kita kecapai<br />hari ini bukan datang dengan<br />mudah.</div>
         </div>
       </div>
 
       <!-- ================= SCENE 2 : PENGORBANAN ================= -->
-      <div id="s2" class="scene clip" data-start="7.15" data-duration="12.55" data-track-index="1">
+      <div id="s2" class="scene clip" data-start="5.25" data-duration="9.6" data-track-index="1">
         <div class="cam">
           <div class="layer" id="s2-bg">
             <div id="s2-backdrop"></div>
@@ -174,7 +174,7 @@
       </div>
 
       <!-- ================= SCENE 3 : SEMANGAT MEREKA ================= -->
-      <div id="s3" class="scene clip" data-start="19.7" data-duration="7.95" data-track-index="1">
+      <div id="s3" class="scene clip" data-start="14.85" data-duration="6.7" data-track-index="1">
         <div class="cam">
           <img class="sketch abs" id="s3-art" src="assets/art/f3-skyline.png" style="left:0; top:1165px; width:1080px;" />
           <div class="abs" style="left:0; right:0; top:198px; text-align:center;"><div class="label" id="s3-label" style="font-size:88px; padding:16px 48px 18px;">Semangat Mereka</div></div>
@@ -219,7 +219,7 @@
       </div>
 
       <!-- ================= SCENE 4 : DAHULU / HARI INI ================= -->
-      <div id="s4" class="scene clip" data-start="27.65" data-duration="11.95" data-track-index="1">
+      <div id="s4" class="scene clip" data-start="21.55" data-duration="10.05" data-track-index="1">
         <div class="cam">
           <img class="sketch abs" id="s4-art1" src="assets/art/f4-soldiers.png" style="left:35px; top:462px; width:1026px;" />
           <img class="sketch abs" id="s4-art2" src="assets/art/f4-people.png" style="left:47px; top:1115px; width:990px;" />
@@ -244,7 +244,7 @@
       <div id="grain"></div>
       <div id="fadeout"></div>
 
-      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="38.52" data-track-index="5" data-volume="1"></audio>
+      <audio id="vo" src="assets/voice.wav" data-start="0" data-duration="30.66" data-track-index="5" data-volume="1"></audio>
     </div>
 
     <script>
@@ -319,11 +319,11 @@
 
       // caption script follows the voice: every word appears when it is spoken
       // (word times from the transcript of the trimmed voice track, assets/words.json)
-      const CAPTION_WORDS = {
-        "#s1-cap": [2.86, 3.18, 3.66, 3.94, 4.44, 4.82, 5.74, 6.16, 6.3, 6.48, 6.66, 6.72, 6.78, 6.84, 6.9, 6.96],
-        "#s2-cap": [9.28, 9.54, 9.86, 10.3, 10.7, 11.36, 11.94, 12.26, 13.42, 13.7, 14.2, 14.72, 15.22, 15.66, 15.92, 16.66, 17.16, 17.4, 17.7, 18.56, 18.88],
-        "#s3-cap": [20.1, 20.54, 21.1, 21.34, 22.44, 23.0, 23.2, 23.55, 23.96, 24.6, 25.6, 25.9, 26.52, 26.8],
-        "#s4-cap": [27.95, 28.34, 28.52, 28.8, 29.24, 29.44, 30.0, 31.2, 31.46, 31.78, 32.48, 33.16, 33.46, 33.98, 35.08, 35.24, 35.74, 36.36, 36.82, 37.1],
+      const CAPTION_WORDS = {   // re-recorded voice-over (assets/words_v2.json, onsets checked on the waveform)
+        "#s1-cap": [0.05, 0.42, 0.76, 0.98, 1.18, 1.85, 2.1, 2.44, 2.56, 2.78, 3.2, 3.4, 3.62, 4.14, 4.56, 4.72],
+        "#s2-cap": [5.45, 5.62, 5.9, 6.28, 6.9, 7.36, 7.9, 8.36, 9.22, 9.44, 10.18, 11.3, 11.44, 11.82, 12.04, 12.56, 12.96, 13.1, 13.3, 13.72, 14.1],
+        "#s3-cap": [15.1, 15.45, 16.2, 16.68, 17.2, 17.74, 17.9, 18.44, 18.82, 19.1, 19.9, 20.18, 20.64, 21.0],
+        "#s4-cap": [21.8, 22.04, 22.28, 22.5, 22.92, 23.16, 23.64, 24.45, 24.8, 25.08, 25.52, 26.12, 26.36, 27.15, 27.94, 28.04, 28.4, 28.9, 29.24, 29.58],
       };
       function splitWords(el) {
         [...el.childNodes].forEach((n) => {
@@ -363,76 +363,76 @@
       gsap.set(".cw", { opacity: 0 });
       Object.keys(CAPTION_WORDS).forEach(scriptFollowsVoice);
 
-      /* ================= SCENE 1  (0 - 7.15) ================= */
+      /* ================= SCENE 1  (0 - 5.25) ================= */
       focusIn("#s1 .cam", 0);
       fadeUp("#s1-count", 0.3);
       tl.fromTo("#s1-art", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" }, 0.1);
-      brush("#s1-label", 0.85, 0.55);                // "warisan perjuangan"
-      captionIn("#s1-cap", 2.6);                     // "Tapi kita..."
-      stamp("#s1-w1", "#s1 .cam", 3.45);             // "jangan"
-      stamp("#s1-w2", "#s1 .cam", 3.75);             // "sesekali"
-      stamp("#s1-w3", "#s1 .cam", 4.24, 1.5);        // "lupa"
-      highlight("#s1-hl", 4.5);
-      tl.to("#s1-bar", { scaleX: 1, duration: 0.4, ease: "power3.out" }, 4.65);
-      tl.to("#s1-art", { scale: 1.05, duration: 6, ease: "none", transformOrigin: "60% 60%" }, 1.1);
+      brush("#s1-label", 0.15, 0.5);                 // topic label (the new take starts at "Tapi")
+      captionIn("#s1-cap", 0.0);                     // "Tapi kita..."
+      stamp("#s1-w1", "#s1 .cam", 0.72);             // "jangan"
+      stamp("#s1-w2", "#s1 .cam", 0.94);             // "sesekali"
+      stamp("#s1-w3", "#s1 .cam", 1.14, 1.5);        // "lupa"
+      highlight("#s1-hl", 1.4);
+      tl.to("#s1-bar", { scaleX: 1, duration: 0.4, ease: "power3.out" }, 1.55);
+      tl.to("#s1-art", { scale: 1.05, duration: 4.1, ease: "none", transformOrigin: "60% 60%" }, 1.1);
 
-      flagWipe(7.15);
+      flagWipe(5.25);
 
-      /* ================= SCENE 2  (7.15 - 19.7) ================= */
-      focusIn("#s2 .cam", 7.2);
-      fadeUp("#s2-count", 7.4);
-      brush("#s2-label", 7.3, 0.42);
-      stamp("#s2-w1", "#s2 .cam", 7.55);              // "bukanlah"
-      stamp("#s2-w2", "#s2 .cam", 7.82);              // "datang"
-      stamp("#s2-w3", "#s2 .cam", 8.14);              // "dengan"
-      stamp("#s2-w4", "#s2 .cam", 8.36, 1.5);         // "mudah"
-      highlight("#s2-hl", 8.62);
-      captionIn("#s2-cap", 9.0);
+      /* ================= SCENE 2  (5.25 - 14.85) ================= */
+      focusIn("#s2 .cam", 5.3);
+      fadeUp("#s2-count", 5.4);
+      brush("#s2-label", 5.35, 0.42);
+      stamp("#s2-w1", "#s2 .cam", 5.45);              // recap: "bukan datang dengan mudah"
+      stamp("#s2-w2", "#s2 .cam", 5.65);
+      stamp("#s2-w3", "#s2 .cam", 5.85);
+      stamp("#s2-w4", "#s2 .cam", 6.05, 1.5);
+      highlight("#s2-hl", 6.3);
+      captionIn("#s2-cap", 5.3);
       // pulse the label when "pengorbanan" is spoken
-      tl.to("#s2-label", { scale: 1.08, duration: 0.14, ease: "power2.out" }, 11.32);
-      tl.to("#s2-label", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 11.46);
-      tl.to("#s2-bg", { filter: "blur(7px)", opacity: 0.8, duration: 0.3, ease: "power2.out" }, 12.1);
-      cardIn("#s2-c1", 12.15, true, -3, false);      // "tokoh-tokoh"
-      cardIn("#s2-c2", 13.0, false, 1.5, false);
-      cardIn("#s2-c3", 13.7, true, 2.5, false);      // "pejuang terdahulu"
-      cardIn("#s2-c4", 14.6, false, -4, false);      // "yang berjuang"
-      cardIn("#s2-c5", 15.55, true, 1, false);       // "demi memastikan"
-      cardIn("#s2-c6", 16.55, false, 3, false);      // "tanah air"
-      tl.to("#s2-bg", { filter: "blur(0px)", opacity: 1, duration: 0.6, ease: "power2.inOut" }, 17.5);
+      tl.to("#s2-label", { scale: 1.08, duration: 0.14, ease: "power2.out" }, 7.36);
+      tl.to("#s2-label", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 7.5);
+      tl.to("#s2-bg", { filter: "blur(7px)", opacity: 0.8, duration: 0.3, ease: "power2.out" }, 8.3);
+      cardIn("#s2-c1", 8.36, true, -3, false);       // "tokoh-tokoh"
+      cardIn("#s2-c2", 8.9, false, 1.5, false);
+      cardIn("#s2-c3", 9.44, true, 2.5, false);      // "pejuang"
+      cardIn("#s2-c4", 10.18, false, -4, false);     // "terdahulu"
+      cardIn("#s2-c5", 11.4, true, 1, false);        // "berjuang"
+      cardIn("#s2-c6", 12.5, false, 3, false);       // "tanah air"
+      tl.to("#s2-bg", { filter: "blur(0px)", opacity: 1, duration: 0.6, ease: "power2.inOut" }, 13.45);
 
-      flagWipe(19.7);
+      flagWipe(14.85);
 
-      /* ================= SCENE 3  (19.7 - 27.65) ================= */
-      focusIn("#s3 .cam", 19.75);
-      brush("#s3-label", 19.95, 0.5);                 // "semangat"
-      iconCard("#s3-v1", 20.45);                      // "keberanian"
-      iconCard("#s3-v2", 21.25);                      // "kebijaksanaan"
-      iconCard("#s3-v3", 22.35);                      // "kepimpinan"
-      tl.fromTo("#s3-art", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, 22.9);
-      captionIn("#s3-cap", 19.85);
+      /* ================= SCENE 3  (14.85 - 21.55) ================= */
+      focusIn("#s3 .cam", 14.9);
+      brush("#s3-label", 15.0, 0.45);                 // "semangat"
+      iconCard("#s3-v1", 15.4);                       // "keberanian"
+      iconCard("#s3-v2", 16.15);                      // "kebijaksanaan"
+      iconCard("#s3-v3", 17.15);                      // "kepimpinan"
+      tl.fromTo("#s3-art", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, 17.7);
+      captionIn("#s3-cap", 14.9);
       // one more light sweep across all cards near the end of the frame
       ["#s3-v1", "#s3-v2", "#s3-v3"].forEach((id, i) => {
-        tl.fromTo(q(id).querySelector(".bar .shine"), { x: -260 }, { x: 1000, duration: 0.8, ease: "power2.inOut" }, 25.9 + i * 0.15);
+        tl.fromTo(q(id).querySelector(".bar .shine"), { x: -260 }, { x: 1000, duration: 0.8, ease: "power2.inOut" }, 20.1 + i * 0.15);
       });
 
-      flagWipe(27.65);
+      flagWipe(21.55);
 
-      /* ================= SCENE 4  (27.65 - 39.6) ================= */
-      focusIn("#s4 .cam", 27.7);
-      brush("#s4-label1", 27.95, 0.4);                // "jika dulu"
-      stamp("#s4-w1", "#s4 .cam", 28.35);             // "mereka"
-      stamp("#s4-w2", "#s4 .cam", 28.65, 1.4);        // "berjuang"
-      highlight("#s4-hl1", 28.9);
-      tl.fromTo("#s4-art1", { opacity: 0, y: 50, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 29.2);
-      brush("#s4-label2", 31.1, 0.42);                // "hari ini"
-      stamp("#s4-w3a", "#s4 .cam", 32.3);             // "tanggungjawab"
-      tl.set("#s4-w3", { opacity: 1 }, 32.3);
-      stamp("#s4-w3b", "#s4 .cam", 33.0, 1.5);        // "kita"
-      highlight("#s4-hl2", 33.25);
-      tl.fromTo("#s4-art2", { opacity: 0, y: 60, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 33.6);
-      captionIn("#s4-cap", 27.75);
-      tl.to(["#s4-art1", "#s4-art2"], { scale: 1.03, duration: 5, ease: "none" }, 34.6);
-      tl.to("#fadeout", { opacity: 1, duration: 0.9, ease: "power2.in" }, 38.7);
+      /* ================= SCENE 4  (21.55 - 31.6) ================= */
+      focusIn("#s4 .cam", 21.6);
+      brush("#s4-label1", 21.8, 0.4);                 // "jika dahulu"
+      stamp("#s4-w1", "#s4 .cam", 22.24);             // "mereka"
+      stamp("#s4-w2", "#s4 .cam", 22.46, 1.4);        // "berjuang"
+      highlight("#s4-hl1", 22.7);
+      tl.fromTo("#s4-art1", { opacity: 0, y: 50, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 22.9);
+      brush("#s4-label2", 24.4, 0.42);                // "hari ini"
+      stamp("#s4-w3a", "#s4 .cam", 25.48);            // "tanggungjawab"
+      tl.set("#s4-w3", { opacity: 1 }, 25.48);
+      stamp("#s4-w3b", "#s4 .cam", 26.08, 1.5);       // "kita"
+      highlight("#s4-hl2", 26.32);
+      tl.fromTo("#s4-art2", { opacity: 0, y: 60, scale: 1.04 }, { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 26.6);
+      captionIn("#s4-cap", 21.6);
+      tl.to(["#s4-art1", "#s4-art2"], { scale: 1.03, duration: 4, ease: "none" }, 27.6);
+      tl.to("#fadeout", { opacity: 1, duration: 0.8, ease: "power2.in" }, 30.8);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

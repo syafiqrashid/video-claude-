@@ -6,7 +6,7 @@ Video menegak 1080x1920 (39.6s) dibina dengan [HyperFrames](https://hyperframes.
 - `output/merdeka-warisan-perjuangan-lowres.mp4` — preview low res (540x960)
 - `merdeka/index.html` — komposisi HyperFrames (semua animasi GSAP)
 - `assets/voice-raw.m4a` — rakaman suara asal; `assets/storyboard-v3.png` — storyboard terkini (gambar pemimpin); v2 untuk ilustrasi sketsa
-- `scripts/cut_voice.py` — buang pause janggal (56.5s → 38.5s), normalize suara → `merdeka/assets/voice.wav`
+- `scripts/cut_voice_warisan_v2.py` — suara baru (`assets/voice-raw-v2.m4a`, 37.9s → 30.7s) → `merdeka/assets/voice.wav`; `scripts/cut_voice.py` untuk rakaman lama
 - `scripts/extract_art.py` — potong ilustrasi dari storyboard → `merdeka/assets/art/`
 
 Render semula: `cd merdeka && npx hyperframes render -o ../output/merdeka-warisan-perjuangan.mp4`
@@ -64,6 +64,6 @@ Dua klip (IMG_2863 + IMG_2864) digabung, take berulang dan pause janggal dibuang
 
 ## Video penuh — Opening + 4 point + Closing
 
-- `final/merdeka-penuh-HD.mp4` — 1080x1920, 3:23 (opening Jiwa Merdeka → Manfaat Merdeka → Warisan Perjuangan → Patriotisme → Kesejahteraan → closing + end card)
+- `final/merdeka-penuh-HD.mp4` — 1080x1920, 3:15 (opening Jiwa Merdeka → Manfaat Merdeka → Warisan Perjuangan → Patriotisme → Kesejahteraan → closing + end card)
 - `final/merdeka-penuh-lowres.mp4` — preview low res
 - `scripts/enhance_and_join_full.py` — bersihkan suara 4 point, potong opening/closing dari video 5, gabung

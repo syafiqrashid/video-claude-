@@ -50,3 +50,13 @@ Video menegak 1080x1920 (47.4s) dalam `video4/`, ikut storyboard `video4/raw/sto
 - `final/merdeka-4-bahagian-HD.mp4` — keempat-empat video digabung (1080x1920, 2:31)
 - `final/merdeka-4-bahagian-lowres.mp4` — preview low res
 - `scripts/enhance_and_join.py` — susun ikut skrip (Manfaat Merdeka → Warisan Perjuangan → Patriotisme → Kesejahteraan), bersihkan suara (noise reduction, EQ, de-esser, compressor, -14 LUFS) dan gabung
+
+## Video 5 — Jiwa Merdeka (talking head)
+
+Dua klip (IMG_2863 + IMG_2864) digabung, take berulang dan pause janggal dibuang, latar bilik diganti studio, suara dibersihkan, animasi ringkas ikut video reference.
+
+- `video5/output/jiwa-merdeka-lowres.mp4` — preview low res (540x960, 51.6s)
+- `video5/index.html` — komposisi HyperFrames (overlay, caption ikut suara, end card)
+- `video5/studio/studio.html` — latar studio
+- `scripts/v5_cut.py` → `v5_matte.py` (RVM) → `v5_composite.py` → `v5_audio.py`
+- Rakaman asal & fail perantaraan tak masuk repo (`video5/raw`, `video5/work`)

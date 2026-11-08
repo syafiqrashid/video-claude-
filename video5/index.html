@@ -51,7 +51,7 @@
       .chip .tick svg { position: absolute; inset: 9px; }
 
       .strike { position: absolute; left: -16px; right: -16px; top: 52%; height: 14px; background: var(--red); border-radius: 7px;
-        transform-origin: 0 50%; transform: scaleX(0) rotate(-3deg); box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+        transform-origin: 0 50%; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
 
       #endcard { position: absolute; inset: 0; z-index: 20; background: radial-gradient(ellipse at 50% 45%, #232733, #0f1115 75%); opacity: 0; }
     </style>
@@ -66,7 +66,7 @@
       <!-- K1 greeting -->
       <div class="ov center" id="k1" style="top:190px;"><div class="pill"><img src="assets/flag.png" />Salam Sejahtera</div></div>
       <!-- K2 question -->
-      <div class="ov center big" id="k2" style="top:150px; font-size:96px;">Apa erti<br /><span style="color:var(--accent);">kemerdekaan?</span></div>
+      <div class="ov center big" id="k2" style="top:84px; font-size:84px;">Apa erti<br /><span style="color:var(--accent);">kemerdekaan?</span></div>
       <!-- K3 bukan sekadar bebas dari penjajah -->
       <div class="ov center small" id="k3a" style="top:1060px;">bukan sekadar</div>
       <div class="ov center" id="k3b" style="top:1125px;"><span class="big" style="position:relative; display:inline-block; font-size:104px;">bebas dari penjajah<span class="strike" id="k3s"></span></span></div>
@@ -114,11 +114,13 @@
       /* ---- camera: punch in / out on every jump cut, slow push within a shot ---- */
       const CUTS = [0, 2.192, 4.359, 13.305, 14.969, 20.567, 23.969, 29.076, 36.878, 39.77, 42.718, 49.11];
       CUTS.slice(0, -1).forEach((t, i) => {
-        const z = i % 2 ? 1.12 : 1.0;
+        const z = i % 2 ? 1.15 : 1.05;   // never 1.0, so the studio floor edge stays out of frame
         const origin = t < 23.9 ? "50% 30%" : "50% 46%";
         tl.set("#camera", { scale: z, transformOrigin: origin }, t);
         tl.to("#camera", { scale: z + 0.025, duration: CUTS[i + 1] - t, ease: "none" }, t);
       });
+
+      gsap.set(".strike", { scaleX: 0, rotation: -3 });
 
       /* ---- simple overlay moves (reference style) ---- */
       function popIn(el, t, from = 0.6) {

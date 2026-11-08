@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Enam Ikhtiar Untuk Rakyat</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --navy:#0a2563; --navy2:#071a47; --blue:#1d6fe8; --sky:#8cc8ff; --yellow:#ffcb1f; --red:#e3252f; --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#071a47}
+body{font-family:'Montserrat',Inter,sans-serif;color:#fff}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;
+  background:radial-gradient(1200px 700px at 80% 10%, #2a7cf0 0%, transparent 60%),
+             radial-gradient(900px 600px at 0% 100%, #0f3a9a 0%, transparent 60%),
+             linear-gradient(135deg,#0a2563 0%,#0b2f86 55%,#0a2563 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
+.el{position:absolute;will-change:transform,opacity;opacity:0}
+.photo{overflow:hidden;border-radius:28px;border:6px solid #fff;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.photo img{width:100%;height:100%;object-fit:cover;transform-origin:center}
+.full{left:0;top:0;width:1920px;height:1080px}
+.full img{width:100%;height:100%;object-fit:cover;filter:blur(3px) saturate(1.1)}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,26,71,.95) 0%,rgba(7,26,71,.75) 45%,rgba(7,26,71,.25) 100%)}
+.card{background:rgba(255,255,255,.96);color:var(--navy);border-radius:26px;box-shadow:0 24px 50px rgba(0,0,0,.28);padding:28px 34px}
+.glass{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:26px;padding:28px 34px;backdrop-filter:blur(8px)}
+.pill{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:900;font-style:italic;border-radius:14px;padding:10px 26px;font-size:44px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.box{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;color:#fff;font-weight:900;box-shadow:0 18px 36px rgba(0,0,0,.3);text-align:center;line-height:1}
+.box.navy{background:linear-gradient(180deg,#1a3f9e,#0a2563);border:3px solid rgba(255,255,255,.5)}
+.box.red{background:linear-gradient(180deg,#f0333d,#b8141d);border:3px solid rgba(255,255,255,.7)}
+.box small{font-size:.36em;font-weight:800;margin-top:10px;letter-spacing:1px}
+.chev{font-size:110px;font-weight:900;color:var(--yellow);line-height:1;letter-spacing:-18px}
+.h{font-weight:900;text-transform:uppercase;line-height:1.05}
+.sub{font-weight:700;line-height:1.3}
+.yel{color:var(--yellow)} .redt{color:var(--red)} .navyt{color:var(--navy)}
+.check{display:flex;align-items:center;gap:18px;font-weight:800;font-size:40px;color:var(--navy)}
+.check i{flex:none;width:52px;height:52px;border-radius:50%;background:#22b14c;display:grid;place-items:center}
+.check.w{color:#fff}
+.burst{width:190px;height:190px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:62px;box-shadow:0 0 0 12px rgba(255,203,31,.3),0 20px 40px rgba(0,0,0,.3)}
+.secnum{width:260px;height:260px;border-radius:40px;background:#fff;display:grid;place-items:center;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.secnum b{font-size:220px;font-weight:900;font-style:italic;color:var(--red);line-height:1;margin-top:-10px}
+.ico{display:grid;place-items:center}
+.ico svg{width:100%;height:100%}
+/* header */
+#hdr-logo{left:40px;top:28px;height:92px;border-radius:12px}
+#hdr-title{right:48px;top:40px;text-align:right}
+#dots{right:48px;top:96px;display:flex;gap:12px}
+#dots span{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-weight:900;font-size:24px;color:rgba(255,255,255,.6);font-style:italic}
+#dots span.on{background:var(--red);color:#fff;box-shadow:0 6px 16px rgba(227,37,47,.5)}
+#dots span.done{background:rgba(255,255,255,.35);color:#fff}
+/* captions */
+#cap{left:50%;bottom:44px;transform:translateX(-50%);max-width:1500px;text-align:center;opacity:1}
+#cap span{display:inline;background:rgba(5,16,46,.82);color:#fff;font-weight:700;font-size:44px;line-height:1.55;padding:6px 18px;border-radius:10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#cap span em{font-style:normal;color:var(--yellow)}
+#wipe{left:-60%;top:-20%;width:60%;height:140%;transform:skewX(-18deg);background:linear-gradient(90deg,var(--yellow) 0 14%,var(--blue) 14% 100%);opacity:1}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="b1" style="width:700px;height:700px;background:#3d8bff;left:1200px;top:-200px"></div>
+  <div class="blob" id="b2" style="width:600px;height:600px;background:#1240b8;left:-150px;top:600px"></div>
+  <div class="grid"></div>
+  <div id="layer"></div>
+</div>
+<script src="script_data.js"></script>
+<script src="captions.js"></script>
+<script>
+const OFF = 4.0;                 // intro length before VO starts (s)
+const OUTRO = 4.5;               // end card after VO
+window.DURATION = OFF + AUDIO_END + OUTRO;
+const SHOW_CAPTIONS = !location.hash.includes('nocap');
+const L = document.getElementById('layer');
+const E = [];                    // animated elements
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOut=x=>1-Math.pow(1-x,3);
+const easeBack=x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const easeInOut=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+
+// ---------- icons (simple line icons) ----------
+const ICO = {
+ fuel:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="8" width="26" height="48" rx="4"/><rect x="15" y="14" width="16" height="12" rx="2"/><path d="M36 22h6l6 6v20a4 4 0 0 1-8 0V36h-4"/><path d="M6 56h34"/></svg>`,
+ school:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><path d="M6 26 32 10l26 16"/><rect x="12" y="26" width="40" height="28"/><rect x="27" y="38" width="10" height="16"/><path d="M18 34h5M41 34h5M18 44h5M41 44h5"/><path d="M4 54h56"/></svg>`,
+ laptop:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="12" y="12" width="40" height="28" rx="3"/><path d="M4 50h56l-4-10H8z"/><path d="M22 32l14-14"/></svg>`,
+ hospital:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="18" width="44" height="38" rx="2"/><path d="M32 24v14M25 31h14"/><rect x="26" y="44" width="12" height="12"/><path d="M22 18V8h20v10"/></svg>`,
+ receipt:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M14 6h36v52l-6-4-6 4-6-4-6 4-6-4-6 4z"/><path d="M22 18h20M22 28h20M22 38h12"/></svg>`,
+ store:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M8 24 12 8h40l4 16"/><path d="M8 24a6 6 0 0 0 12 0 6 6 0 0 0 12 0 6 6 0 0 0 12 0 6 6 0 0 0 12 0"/><path d="M12 30v26h40V30"/><rect x="26" y="40" width="12" height="16"/></svg>`,
+ users:`<svg viewBox="0 0 64 64" fill="currentColor"><circle cx="32" cy="18" r="9"/><path d="M16 50c0-10 7-17 16-17s16 7 16 17z"/><circle cx="13" cy="24" r="6.5"/><path d="M2 50c0-7 4-12 10-13 3 0 4 1 4 1-3 4-4 8-4 12z"/><circle cx="51" cy="24" r="6.5"/><path d="M62 50c0-7-4-12-10-13-3 0-4 1-4 1 3 4 4 8 4 12z"/></svg>`,
+ truck:`<svg viewBox="0 0 64 64" fill="currentColor"><path d="M4 14h34v30H4z"/><path d="M40 24h12l8 10v10H40z"/><circle cx="16" cy="48" r="6" fill="#fff" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="48" r="6" fill="#fff" stroke="currentColor" stroke-width="4"/></svg>`,
+ cal:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="8" y="12" width="48" height="44" rx="5"/><path d="M8 24h48M20 6v12M44 6v12"/><path d="M18 34h6M30 34h6M42 34h6M18 44h6M30 44h6" stroke-linecap="round"/></svg>`,
+ check:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 33l11 11 22-24"/></svg>`,
+ wifi:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"><path d="M6 24a38 38 0 0 1 52 0"/><path d="M14 33a26 26 0 0 1 36 0"/><path d="M22 42a14 14 0 0 1 20 0"/><circle cx="32" cy="51" r="3" fill="currentColor"/></svg>`,
+ timer:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"><circle cx="32" cy="36" r="22"/><path d="M32 36V22M26 6h12M32 6v8M50 16l4-4"/></svg>`,
+ emr:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="10" width="52" height="36" rx="4"/><path d="M22 56h20M32 46v10"/><circle cx="22" cy="24" r="5"/><path d="M14 38c1-5 4-8 8-8s7 3 8 8"/><path d="M36 22h14M36 30h14M36 38h8"/></svg>`,
+ coins:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><ellipse cx="24" cy="18" rx="16" ry="6"/><path d="M8 18v8c0 3 7 6 16 6s16-3 16-6v-8"/><path d="M8 26v8c0 3 7 6 16 6"/><ellipse cx="42" cy="38" rx="16" ry="6"/><path d="M26 38v8c0 3 7 6 16 6s16-3 16-6v-8"/></svg>`,
+ up:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 52 24 32l10 10 22-26"/><path d="M42 16h14v14"/></svg>`,
+ ai:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"><rect x="14" y="14" width="36" height="36" rx="6"/><path d="M24 4v10M40 4v10M24 50v10M40 50v10M4 24h10M4 40h10M50 24h10M50 40h10" stroke-linecap="round"/><text x="32" y="40" text-anchor="middle" font-size="18" font-weight="900" fill="currentColor" stroke="none" font-family="Montserrat">AI</text></svg>`,
+ grant:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M4 44h10l12 6h14l18-10-4-4-16 6"/><path d="M14 44V36h10l8 4h8"/><path d="M40 8c-6 0-9 4-9 8 0 6 9 12 9 12s9-6 9-12c0-4-3-8-9-8z" fill="currentColor"/></svg>`
+};
+const icon=(n,size,color)=>`<div class="ico" style="width:${size}px;height:${size}px;color:${color||'currentColor'}">${ICO[n]}</div>`;
+
+// ---------- element factory ----------
+// add(html, {t0,t1 (audio time; null=video absolute via v0/v1), x,y,w,h, a: anim, cls, kb: kenburns})
+function add(html,o){
+  const d=document.createElement('div'); d.className='el '+(o.cls||''); d.innerHTML=html;
+  const st=d.style; if(o.x!=null)st.left=o.x+'px'; if(o.y!=null)st.top=o.y+'px';
+  if(o.w)st.width=o.w+'px'; if(o.h)st.height=o.h+'px'; if(o.css)d.style.cssText+=o.css;
+  L.appendChild(d);
+  const v0 = o.v0!=null?o.v0:(o.t0+OFF), v1 = o.v1!=null?o.v1:(o.t1+OFF);
+  const r={d,v0,v1,a:o.a||'up',kb:o.kb,din:o.din||.55,dout:o.dout||.4,count:o.count};
+  E.push(r); return r;
+}
+function upd(r,t){
+  if(t<r.v0-0.01||t>r.v1+0.01){ if(r.vis!==false){r.d.style.opacity=0;r.d.style.visibility='hidden';r.vis=false;} return; }
+  r.vis=true; r.d.style.visibility='visible';
+  const pi=clamp((t-r.v0)/r.din), po=clamp((t-(r.v1-r.dout))/r.dout);
+  let op=easeOut(pi)*(1-easeOut(po)), tf='';
+  const e=easeOut(pi), b=easeBack(pi), out=easeInOut(po);
+  switch(r.a){
+    case 'up':   tf=`translateY(${(1-e)*60 - out*30}px)`; break;
+    case 'left': tf=`translateX(${(1-e)*-120 + out*-60}px)`; break;
+    case 'right':tf=`translateX(${(1-e)*120 + out*60}px)`; break;
+    case 'pop':  tf=`scale(${(pi<1?0.4+0.6*b:1)*(1-out*.15)})`; break;
+    case 'zoom': tf=`scale(${1.25-0.25*e})`; break;
+    case 'fade': break;
+    case 'slam': tf=`scale(${pi<1?2.2-1.2*easeOut(pi):1}) rotate(${(1-e)*-6}deg)`; op=clamp(pi*3)*(1-easeOut(po)); break;
+    case 'wipeR':r.d.style.clipPath=`inset(0 ${(1-e)*100}% 0 0 round 22px)`; op=1-easeOut(po); break;
+  }
+  r.d.style.opacity=op; r.d.style.transform=tf;
+  if(r.kb){ const img=r.d.querySelector('img'); const p=clamp((t-r.v0)/(r.v1-r.v0));
+    const [s0,s1,x0,x1]=r.kb; img.style.transform=`scale(${s0+(s1-s0)*p}) translateX(${x0+(x1-x0)*p}%)`; }
+  if(r.count){ const c=r.count; const p=easeOut(clamp((t-OFF-c.t)/(c.dur||1.2)));
+    const v=c.from+(c.to-c.from)*p; r.d.querySelector('.n').textContent=(c.pre||'')+fmt(v,c.dec)+(c.suf||''); }
+}
+const fmt=(v,dec)=>dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');
+
+// ---------- persistent header ----------
+const SECS=[{n:1,t:0,end:27.4,title:'BUDI MADANI',sub:'Kelayakan Dipertingkat',img:'petrol',ico:'fuel'},
+ {n:2,t:27.4,end:56.6,title:'Tiada Sekolah Tercicir',sub:'Peruntukan penyelenggaraan sekolah ditingkatkan',img:'school',ico:'school'},
+ {n:3,t:56.6,end:87.5,title:'AI Percuma Untuk Anak Muda',sub:'Langganan aplikasi AI percuma 3 bulan',img:'youth',ico:'laptop'},
+ {n:4,t:87.5,end:114.8,title:'Perkhidmatan Kesihatan Awam Lebih Cekap',sub:'RM1 bilion untuk pendigitalan',img:'hospital',ico:'hospital'},
+ {n:5,t:114.8,end:138.5,title:'e-Invois',sub:'Kurangkan beban perniagaan kecil',img:'shopman',ico:'receipt'},
+ {n:6,t:138.5,end:163.8,title:'Bantuan Penjaja & Peniaga Kecil',sub:'Geran & pembiayaan mikro diperluas',img:'hawker',ico:'store'}];
+const HV0=OFF-0.3, HV1=OFF+AUDIO_END+0.2;
+add(`<img src="img/logo.png" style="height:92px;border-radius:12px;display:block">`,{v0:HV0,v1:HV1,x:40,y:28,a:'left'});
+add(`<div class="h" style="font-size:22px;letter-spacing:3px;color:var(--sky)">Video Komuniti MADANI</div><div class="h" style="font-size:30px;font-style:italic">Enam Ikhtiar Untuk Rakyat</div>`,{v0:HV0,v1:HV1,cls:'',css:'right:48px;top:24px;text-align:right',a:'right'});
+const dots=add(`<div id="dots">${SECS.map(s=>`<span>${s.n}</span>`).join('')}</div>`,{v0:HV0,v1:HV1,css:'right:48px;top:100px',a:'right'});
+
+// ---------- INTRO (video 0..OFF) ----------
+add(`<img src="img/sky.png">`,{v0:0,v1:OFF+0.4,cls:'full',a:'fade',kb:[1.15,1.3,0,-3],din:.3,css:'overflow:hidden'});
+add(`<div class="shade" style="background:linear-gradient(180deg,rgba(7,26,71,.45),rgba(7,26,71,.92))"></div>`,{v0:0,v1:OFF+0.4,cls:'full',a:'fade',din:.3});
+add(`<img src="img/logo.png" style="height:150px;border-radius:18px">`,{v0:0.2,v1:OFF+0.1,x:860-100,y:150,a:'pop',css:'left:50%;margin-left:-102px'});
+add(`<div class="h" style="font-size:40px;letter-spacing:8px;color:var(--sky);text-align:center;width:1920px">Video Komuniti MADANI</div>`,{v0:0.6,v1:OFF+0.1,x:0,y:360,a:'up'});
+add(`<div style="text-align:center;width:1920px"><span class="pill" style="font-size:96px;padding:18px 50px;border-radius:24px">ENAM IKHTIAR UNTUK RAKYAT</span></div>`,{v0:1.0,v1:OFF+0.1,x:0,y:430,a:'slam'});
+SECS.forEach((s,i)=>add(`<div style="width:170px;text-align:center">${`<div style="width:120px;height:120px;margin:0 auto;border-radius:30px;background:#fff;color:var(--navy);display:grid;place-items:center;box-shadow:0 14px 30px rgba(0,0,0,.3)">${icon(s.ico,72)}</div>`}<div class="h" style="font-size:40px;font-style:italic;color:var(--yellow);margin-top:10px">${s.n}</div></div>`,
+  {v0:1.7+i*.15,v1:OFF+0.1,x:960-6*200/2+i*200+15,y:640,a:'pop'}));
+
+// ---------- section title cards ----------
+function titleCard(s,dur){
+  const t0=s.t, t1=s.t+dur;
+  add(`<img src="img/${s.img}.png">`,{t0,t1:t1+.3,cls:'full',a:'fade',kb:[1.1,1.22,-2,2],din:.35,css:'overflow:hidden'});
+  add(`<div class="shade"></div>`,{t0,t1:t1+.3,cls:'full',a:'fade',din:.35});
+  add(`<div class="secnum"><b>${s.n}</b></div>`,{t0:t0+.1,t1,x:150,y:330,a:'slam'});
+  add(`<div class="h" style="font-size:30px;letter-spacing:6px;color:var(--yellow)">Ikhtiar ${['','Pertama','Kedua','Ketiga','Keempat','Kelima','Keenam'][s.n]}</div>`,{t0:t0+.3,t1,x:470,y:350,a:'left'});
+  add(`<div class="h" style="font-size:${s.title.length>24?78:96}px;width:1250px;font-style:italic">${s.title}</div>`,{t0:t0+.45,t1,x:470,y:395,a:'left'});
+  add(`<div style="width:1000px;height:8px;background:linear-gradient(90deg,var(--yellow),transparent);border-radius:4px"></div>`,{t0:t0+.7,t1,x:470,y:(s.title.length>24?600:520),a:'wipeR',din:.7});
+  add(`<div class="sub" style="font-size:40px;color:#dbe9ff">${s.sub}</div>`,{t0:t0+.9,t1,x:470,y:(s.title.length>24?625:545),a:'up'});
+}
+// wipe transition at each section start (except first: intro handles it)
+SECS.slice(1).forEach(s=>{ const w=add('',{t0:s.t-0.35,t1:s.t+0.45,a:'fade',din:.01,dout:.01,css:'left:0;top:0;width:1920px;height:1080px'});
+  w.d.innerHTML='<div class="el" style="opacity:1;left:-70%;top:-20%;width:65%;height:140%;transform:skewX(-18deg);background:linear-gradient(90deg,#ffcb1f 0 12%,#1d6fe8 12% 100%)"></div>';
+  w.wipe=true; });
+
+// photo card helper (left panel)
+const PH={x:80,y:185,w:760,h:620};
+function photo(img,t0,t1,kb){ return add(`<img src="img/${img}.png">`,{t0,t1,x:PH.x,y:PH.y,w:PH.w,h:PH.h,cls:'photo',a:'left',kb:kb||[1.05,1.18,-2,2]}); }
+const RX=900;   // right column x
+function chev(t0,t1,x,y){return add(`<div class="chev">&rsaquo;&rsaquo;</div>`,{t0,t1,x,y,a:'left'});}
+function chk(txt,t0,t1,x,y,white,size){return add(`<div class="check ${white?'w':''}" style="font-size:${size||40}px"><i>${icon('check',34)}</i><span>${txt}</span></div>`,{t0,t1,x,y,a:'left'});}
+
+// ========== SECTION 1: BUDI MADANI (0 - 27.4) ==========
+titleCard(SECS[0],3.9);
+photo('petrol',4.0,27.2);
+add(`<span class="pill">BUDI95</span>`,{t0:4.3,t1:10.9,x:RX,y:200,a:'pop'});
+add(`<div class="sub" style="font-size:36px">Kelayakan asas sebulan</div>`,{t0:5.6,t1:10.9,x:RX+250,y:212,a:'left'});
+add(`<div class="box navy" style="width:300px;height:190px;font-size:96px">200&nbsp;L</div>`,{t0:8.3,t1:10.9,x:RX,y:340,a:'pop'});
+chev(8.9,10.9,RX+325,370);
+add(`<div class="box red" style="width:360px;height:230px;font-size:110px">300&nbsp;L<small>SEBULAN</small></div>`,{t0:9.3,t1:10.9,x:RX+470,y:320,a:'pop'});
+add(`<div class="sub" style="font-size:44px;width:900px">Kelayakan <span class="yel">dipertingkat 50%</span></div>`,{t0:9.6,t1:10.9,x:RX,y:600,a:'up'});
+// diesel
+add(`<span class="pill">BUDI Diesel</span>`,{t0:11.1,t1:18.2,x:RX,y:200,a:'pop'});
+add(`<div class="card" style="padding:16px;width:420px"><img src="img/pickup.png" style="width:100%;border-radius:14px;display:block"><div class="h" style="font-size:30px;text-align:center;margin-top:10px">Pick-up &amp; jip yang layak</div></div>`,{t0:12.3,t1:18.2,x:RX,y:320,a:'left'});
+add(`<div class="sub" style="font-size:36px">Diperluas sehingga</div>`,{t0:15.2,t1:18.2,x:RX+480,y:330,a:'right'});
+add(`<div class="box red" style="width:400px;height:250px;font-size:120px">400&nbsp;L<small>SEBULAN</small></div>`,{t0:16.2,t1:18.2,x:RX+480,y:390,a:'pop'});
+// stats
+const stat=(ic,t0,cnt,label,y)=>{add(`<div style="width:130px;height:130px;border-radius:30px;background:#fff;color:var(--blue);display:grid;place-items:center">${icon(ic,90)}</div>`,{t0,t1:27.2,x:RX,y,a:'pop'});
+  add(`<div class="h" style="font-size:100px;color:var(--yellow)"><span class="n">0</span></div><div class="h" style="font-size:34px;letter-spacing:2px">${label}</div>`,{t0,t1:27.2,x:RX+165,y:y-12,a:'left',count:cnt});};
+stat('users',20.4,{t:20.6,from:0,to:16,pre:'> ',suf:' JUTA',dur:1.1},'Pengguna BUDI95',230);
+stat('truck',24.6,{t:24.8,from:0,to:500000,pre:'> ',dur:1.1},'Pengguna Diesel',420);
+add(`<div style="display:flex;align-items:center;gap:20px;background:var(--yellow);color:var(--navy);border-radius:20px;padding:18px 30px">${icon('cal',64)}<div><div class="h" style="font-size:26px">Berkuat kuasa</div><div class="h" style="font-size:44px">1 September 2026</div></div></div>`,{t0:25.6,t1:27.2,x:RX,y:620,a:'pop'});
+
+// ========== SECTION 2: SEKOLAH (27.4 - 56.6) ==========
+let S=SECS[1]; titleCard(S,3.9);
+photo('school',31.4,50.4);
+photo('worker',50.2,56.5,[1.0,1.12,0,-3]);
+add(`<div class="h" style="font-size:66px;width:900px;line-height:1.1">Pendidikan berkualiti bermula dengan persekitaran <span class="yel">selesa &amp; selamat</span></div>`,{t0:31.6,t1:36.6,x:RX,y:280,a:'up'});
+add(`<div class="h" style="font-size:46px;width:700px">Peruntukan penyelenggaraan sekolah</div>`,{t0:36.8,t1:47.0,x:RX,y:200,a:'up'});
+add(`<div class="burst">+50%</div>`,{t0:40.1,t1:47.0,x:1660,y:150,a:'pop'});
+add(`<div class="box navy" style="width:340px;height:200px;font-size:84px">RM1<small>BILION</small></div>`,{t0:41.8,t1:47.0,x:RX,y:370,a:'pop'});
+chev(42.6,47.0,RX+365,410);
+add(`<div class="box red" style="width:400px;height:240px;font-size:96px">RM1.5<small>BILION</small></div>`,{t0:43.0,t1:47.0,x:RX+510,y:350,a:'pop'});
+add(`<span class="pill" style="font-size:36px">Tahun 2027</span>`,{t0:45.4,t1:47.0,x:RX,y:640,a:'up'});
+add(`<div class="card" style="width:900px;height:400px"><div class="h" style="font-size:34px;background:var(--navy);color:#fff;display:inline-block;padding:8px 24px;border-radius:12px">Melibatkan pelbagai aliran</div></div>`,{t0:47.2,t1:53.4,x:RX,y:190,a:'up'});
+['SK','SJKC','SJKT'].forEach((s,i)=>chk(s,47.7+i*.3,53.4,RX+40,300+i*90));
+['Sekolah Agama','Tahfiz','Pondok','Pendidikan Khas'].forEach((s,i)=>chk(s,48.6+i*.3,53.4,RX+340,300+i*80,false,38));
+add(`<div class="h" style="font-size:44px;width:940px;line-height:1.15;font-style:italic;color:var(--sky)">Tiada sekolah tercicir<br><span style="color:#fff;font-size:72px">daripada arus pembangunan</span></div>`,{t0:53.6,t1:56.4,x:RX,y:300,a:'up'});
+
+// ========== SECTION 3: AI (56.6 - 87.5) ==========
+S=SECS[2]; titleCard(S,3.9);
+photo('youth',60.7,81.7);
+photo('youngman',81.5,87.3,[1.0,1.12,0,2]);
+add(`<div class="h" style="font-size:72px;width:900px">Anak muda,<br><span class="yel">peneraju masa hadapan</span> negara</div>`,{t0:60.9,t1:64.1,x:RX,y:300,a:'up'});
+add(`<div style="display:flex;gap:16px;align-items:center;color:var(--sky)">${icon('users',60)}<span class="h" style="font-size:38px">Menyasarkan</span></div>`,{t0:64.3,t1:73.0,x:RX,y:190,a:'left'});
+add(`<div class="h" style="font-size:170px;color:var(--yellow);line-height:1"><span class="n">0</span></div>`,{t0:64.5,t1:73.0,x:RX,y:250,a:'pop',count:{t:64.6,from:0,to:100000,dur:1.2}});
+add(`<div class="h" style="font-size:66px">Belia Malaysia</div>`,{t0:65.5,t1:73.0,x:RX,y:430,a:'up'});
+add(`<span class="pill" style="font-size:38px">Berusia 18 – 30 tahun</span>`,{t0:66.8,t1:73.0,x:RX,y:520,a:'pop'});
+add(`<div class="sub" style="font-size:38px;width:900px">Peluang mempelajari teknologi <b class="yel">kecerdasan buatan (AI)</b></div>`,{t0:69.8,t1:73.0,x:RX,y:620,a:'up'});
+add(`<div class="card" style="width:400px;height:330px;text-align:center"><div style="color:var(--blue);margin:10px auto">${icon('laptop',120)}</div><div class="h" style="font-size:36px">Lengkapkan modul ditetapkan</div></div>`,{t0:73.4,t1:81.7,x:RX,y:260,a:'up'});
+add(`<div style="position:absolute;left:-20px;top:-20px;width:70px;height:70px;border-radius:50%;background:#22b14c;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.3)">${icon('check',48)}</div>`,{t0:75.0,t1:81.7,x:RX,y:260,a:'pop'});
+chev(76.6,81.7,RX+420,370);
+add(`<div class="card" style="width:430px;height:330px;text-align:center;border:5px solid #8a5cff"><div style="color:#7a4dff;margin:6px auto">${icon('ai',110)}</div><div class="h" style="font-size:32px">Langganan aplikasi AI</div><div class="h redt" style="font-size:56px">PERCUMA</div></div>`,{t0:77.6,t1:81.7,x:RX+560,y:260,a:'pop'});
+add(`<div class="box red" style="width:300px;height:110px;font-size:62px">3 BULAN</div>`,{t0:80.3,t1:81.7,x:RX+625,y:610,a:'pop'});
+add(`<div style="color:var(--yellow)">${icon('up',170)}</div>`,{t0:81.8,t1:87.3,x:RX,y:220,a:'pop'});
+add(`<div class="h" style="font-size:64px;width:950px">Generasi muda <span class="yel">berdaya saing</span> dalam dunia digital</div>`,{t0:82.2,t1:87.3,x:RX,y:420,a:'up'});
+
+// ========== SECTION 4: KESIHATAN (87.5 - 114.8) ==========
+S=SECS[3]; titleCard(S,4.0);
+photo('hospital',91.7,114.6,[1.04,1.2,2,-2]);
+add(`<div class="h" style="font-size:76px;width:900px">Kesihatan rakyat<br><span class="yel">terus menjadi keutamaan</span></div>`,{t0:91.9,t1:94.4,x:RX,y:320,a:'up'});
+add(`<div class="box red" style="width:640px;height:150px;font-size:100px;transform:skewX(-8deg)">RM1 BILION</div>`,{t0:94.8,t1:105.0,x:RX,y:190,a:'pop'});
+add(`<div class="sub" style="font-size:38px;width:900px">Memperkukuh <b class="yel">pendigitalan</b> sektor kesihatan awam</div>`,{t0:96.8,t1:105.0,x:RX,y:370,a:'up'});
+const tile=(ic,t0,cnt,label,x)=>add(`<div class="card" style="width:400px;height:250px;text-align:center"><div style="color:var(--blue);margin:0 auto">${icon(ic,70)}</div><div class="h" style="font-size:80px;color:var(--navy)"><span class="n">0</span></div><div class="h" style="font-size:30px;color:var(--navy)">${label}</div></div>`,{t0,t1:105.0,x,y:480,a:'pop',count:cnt});
+tile('hospital',101.4,{t:101.5,from:0,to:150,dur:1.0},'Hospital',RX);
+tile('hospital',103.4,{t:103.5,from:0,to:2000,pre:'> ',dur:1.0},'Klinik Kesihatan',RX+440);
+add(`<div class="card" style="width:520px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="color:var(--blue)">${icon('emr',140)}</div><div class="h" style="font-size:34px">Rekod Perubatan Elektronik</div></div>`,{t0:105.4,t1:114.6,x:RX,y:190,a:'up'});
+add(`<div style="text-align:center;color:var(--sky)">${icon('wifi',140)}<div class="h" style="font-size:30px;color:#fff;margin-top:6px">Capaian internet</div></div>`,{t0:107.8,t1:114.6,x:RX+580,y:220,a:'pop'});
+add(`<div style="color:#fff">${icon('timer',150)}</div>`,{t0:109.6,t1:114.6,x:RX,y:540,a:'pop'});
+chk('Rawatan lebih cepat',110.2,114.6,RX+190,550,true,44);
+chk('Masa menunggu dikurangkan',112.6,114.6,RX+190,640,true,44);
+
+// ========== SECTION 5: e-INVOIS (114.8 - 138.5) ==========
+S=SECS[4]; titleCard(S,4.0);
+photo('shopman',118.9,131.5);
+photo('shopwoman',131.3,138.3,[1.0,1.12,0,-2]);
+add(`<div style="display:flex;align-items:center;gap:20px"><div class="card" style="padding:14px;color:var(--blue)">${icon('receipt',80)}</div><div class="h" style="font-size:48px;width:760px">Ambang pengecualian e-Invois</div></div>`,{t0:119.1,t1:127.6,x:RX,y:200,a:'up'});
+add(`<div class="box navy" style="width:340px;height:200px;font-size:84px">RM1<small>JUTA</small></div>`,{t0:124.2,t1:127.6,x:RX,y:380,a:'pop'});
+chev(124.8,127.6,RX+365,420);
+add(`<div class="box red" style="width:400px;height:240px;font-size:96px">RM3<small>JUTA</small></div>`,{t0:125.3,t1:127.6,x:RX+510,y:360,a:'pop'});
+add(`<div class="sub" style="font-size:36px;color:#dbe9ff">(jualan tahunan)</div>`,{t0:126.6,t1:127.6,x:RX+580,y:615,a:'up',dout:.3});
+add(`<div class="card" style="width:940px;display:flex;gap:28px;align-items:center"><div style="color:var(--red)">${icon('store',120)}</div><div class="sub" style="font-size:36px">Perniagaan dengan jualan tahunan <b class="redt" style="font-size:44px">≤ RM3 JUTA</b> tidak diwajibkan melaksanakan e-Invois</div></div>`,{t0:127.9,t1:138.3,x:RX,y:190,a:'up'});
+add(`<div style="width:940px;background:var(--yellow);color:var(--navy);border-radius:24px;padding:26px 32px;display:flex;gap:22px;align-items:center"><i style="flex:none;width:70px;height:70px;border-radius:50%;background:var(--navy);display:grid;place-items:center">${icon('check',46)}</i><div class="h" style="font-size:36px;line-height:1.2">Meringankan beban pematuhan PMKS &amp; perniagaan kecil</div></div>`,{t0:129.6,t1:138.3,x:RX,y:430,a:'left'});
+add(`<div style="display:flex;gap:20px;align-items:center"><div style="color:var(--yellow)">${icon('up',90)}</div><div class="h" style="font-size:38px;width:820px">Lebih tumpuan kepada pertumbuhan perniagaan</div></div>`,{t0:134.2,t1:138.3,x:RX,y:640,a:'left'});
+
+// ========== SECTION 6: PENJAJA (138.5 - 163.8) ==========
+S=SECS[5]; titleCard(S,3.7);
+photo('hawker',142.3,163.6,[1.04,1.2,-2,2]);
+add(`<div class="card" style="width:940px;height:520px"><div style="display:flex;gap:22px;align-items:center"><div style="color:var(--red)">${icon('grant',100)}</div><div class="h" style="font-size:48px">Geran Sejahtera<br>MADANI</div></div></div>`,{t0:144.8,t1:155.0,x:RX,y:190,a:'up'});
+add(`<div class="box red" style="width:360px;height:130px;font-size:74px">RM200<small>JUTA</small></div>`,{t0:146.7,t1:155.0,x:RX+40,y:330,a:'pop'});
+[['Penjaja',149.7],['Peniaga kecil',150.5],['Peniaga pasar malam',151.4],['Ibu bekerja dari rumah',152.6]].forEach(([s,t],i)=>chk(s,t,155.0,RX+50+(i%2)*420,500+Math.floor(i/2)*90,false,36));
+add(`<div style="display:flex;gap:22px;align-items:center"><div style="color:var(--yellow)">${icon('coins',110)}</div><div class="h" style="font-size:60px">Pembiayaan Mikro</div></div>`,{t0:155.3,t1:163.6,x:RX,y:190,a:'up'});
+add(`<div class="sub" style="font-size:36px">Ditambah</div>`,{t0:158.2,t1:163.6,x:RX,y:340,a:'left'});
+add(`<div class="box red" style="width:520px;height:120px;font-size:72px">+ RM1 BILION</div>`,{t0:158.4,t1:163.6,x:RX,y:390,a:'pop'});
+add(`<div style="display:flex;align-items:center;gap:30px"><div class="box navy" style="width:300px;height:150px;font-size:64px">RM5<small>BILION</small></div><div class="chev" style="font-size:90px">&rsaquo;&rsaquo;</div></div>`,{t0:160.6,t1:163.6,x:RX,y:560,a:'left'});
+add(`<div class="box" style="width:360px;height:180px;font-size:80px;background:var(--yellow);color:var(--navy)">RM6<small>BILION</small></div>`,{t0:161.4,t1:163.6,x:RX+450,y:545,a:'pop'});
+add(`<span class="pill" style="font-size:30px;background:#fff">pada 2026</span>`,{t0:162.8,t1:163.6,x:RX+520,y:745,a:'up',dout:.25});
+
+// ========== PENUTUP (163.8 - 172.15) ==========
+add(`<img src="img/sky.png">`,{t0:163.8,t1:AUDIO_END+0.4,cls:'full',a:'fade',kb:[1.1,1.25,2,-2],css:'overflow:hidden'});
+add(`<div class="shade" style="background:linear-gradient(180deg,rgba(7,26,71,.55),rgba(7,26,71,.92))"></div>`,{t0:163.8,t1:AUDIO_END+0.4,cls:'full',a:'fade'});
+[0.35,0.5,0.7,0.95].forEach((h,i)=>add(`<div style="width:110px;height:${h*380}px;border-radius:16px 16px 0 0;background:linear-gradient(180deg,var(--yellow),#ff9f1a)"></div>`,{t0:164.2+i*.35,t1:AUDIO_END+0.2,x:220+i*140,y:760-h*380,a:'up'}));
+add(`<div style="color:#fff">${icon('up',300)}</div>`,{t0:165.2,t1:AUDIO_END+0.2,x:330,y:250,a:'pop'});
+add(`<div class="h" style="font-size:72px;width:1000px;font-style:italic">Lebih banyak <span class="yel">peluang</span> diwujudkan</div>`,{t0:164.2,t1:AUDIO_END+0.2,x:850,y:260,a:'left'});
+chk('Perniagaan kecil terus berkembang',166.5,AUDIO_END+0.2,850,500,true,46);
+chk('Pendapatan rakyat terus meningkat',168.3,AUDIO_END+0.2,850,600,true,46);
+
+// ========== OUTRO end card ==========
+const O0=OFF+AUDIO_END;
+add(`<div style="width:1920px;height:1080px;background:linear-gradient(135deg,#0a2563,#1d6fe8)"></div>`,{v0:O0-0.2,v1:DURATION+1,x:0,y:0,a:'fade'});
+add(`<img src="img/logo.png" style="height:130px;border-radius:16px">`,{v0:O0,v1:DURATION+1,css:'left:50%;margin-left:-89px;top:120px',a:'pop'});
+add(`<div style="text-align:center;width:1920px"><span class="pill" style="font-size:80px;padding:16px 46px">ENAM IKHTIAR UNTUK RAKYAT</span></div>`,{v0:O0+0.3,v1:DURATION+1,x:0,y:300,a:'slam'});
+SECS.forEach((s,i)=>add(`<div class="card" style="width:270px;height:260px;text-align:center;padding:22px 16px"><div style="color:var(--blue);margin:0 auto">${icon(s.ico,80)}</div><div class="h redt" style="font-size:44px;font-style:italic">${s.n}</div><div class="h" style="font-size:25px;line-height:1.15">${s.title}</div></div>`,
+  {v0:O0+0.8+i*.12,v1:DURATION+1,x:960-(6*300)/2+i*300+15,y:520,a:'pop'}));
+
+// ---------- captions (top-most) ----------
+const capEl=document.createElement('div'); capEl.id='cap'; capEl.className='el'; document.getElementById('stage').appendChild(capEl);
+
+// ---------- render(t) ----------
+let lastCap=null, lastSec=-1;
+window.render=function(t){
+  document.getElementById('b1').style.transform=`translate(${Math.sin(t*.25)*120}px,${Math.cos(t*.2)*80}px)`;
+  document.getElementById('b2').style.transform=`translate(${Math.cos(t*.18)*140}px,${Math.sin(t*.22)*90}px)`;
+  for(const r of E){
+    if(r.wipe){ const p=clamp((t-r.v0)/(r.v1-r.v0)); const inner=r.d.firstChild;
+      r.d.style.visibility=(p>0&&p<1)?'visible':'hidden'; r.d.style.opacity=1; r.d.style.zIndex=50;
+      inner.style.left=(-70+easeInOut(p)*210)+'%'; continue; }
+    upd(r,t);
+  }
+  // progress dots
+  const at=t-OFF; let cur=-1; SECS.forEach((s,i)=>{ if(at>=s.t-0.1) cur=i; });
+  if(at>163.8) cur=6;
+  if(cur!==lastSec){ dots.d.querySelectorAll('span').forEach((sp,i)=>{sp.className=i===cur?'on':(i<cur?'done':'');}); lastSec=cur; }
+  // captions
+  let c=null; if(SHOW_CAPTIONS) for(const k of CAPS){ if(at>=k.t && at<k.e){c=k;break;} }
+  if(c!==lastCap){ capEl.innerHTML=c?`<span>${c.html}</span>`:''; lastCap=c; }
+  capEl.style.opacity=c?1:0; capEl.style.visibility=c?'visible':'hidden'; capEl.style.zIndex=60;
+};
+window.ready = document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r;}))));
+</script>
+</body>
+</html>

@@ -1,0 +1,1911 @@
+[
+ {
+  "start": 0.0,
+  "end": 3.88,
+  "text": " Yang pertama ialah Budi Banani, kelayakan dipertengkat.",
+  "words": [
+   {
+    "s": 0.0,
+    "e": 0.6,
+    "w": " Yang"
+   },
+   {
+    "s": 0.6,
+    "e": 1.06,
+    "w": " pertama"
+   },
+   {
+    "s": 1.06,
+    "e": 1.64,
+    "w": " ialah"
+   },
+   {
+    "s": 1.64,
+    "e": 2.04,
+    "w": " Budi"
+   },
+   {
+    "s": 2.04,
+    "e": 2.4,
+    "w": " Banani,"
+   },
+   {
+    "s": 2.56,
+    "e": 2.98,
+    "w": " kelayakan"
+   },
+   {
+    "s": 2.98,
+    "e": 3.88,
+    "w": " dipertengkat."
+   }
+  ]
+ },
+ {
+  "start": 4.0,
+  "end": 10.98,
+  "text": " Melalui Budi Banani, kelayakan asas Budi 95 dipertengkat daripada 200 kepada 300 liter sebulan.",
+  "words": [
+   {
+    "s": 4.0,
+    "e": 4.48,
+    "w": " Melalui"
+   },
+   {
+    "s": 4.48,
+    "e": 4.78,
+    "w": " Budi"
+   },
+   {
+    "s": 4.78,
+    "e": 5.36,
+    "w": " Banani,"
+   },
+   {
+    "s": 5.58,
+    "e": 5.98,
+    "w": " kelayakan"
+   },
+   {
+    "s": 5.98,
+    "e": 6.34,
+    "w": " asas"
+   },
+   {
+    "s": 6.34,
+    "e": 6.72,
+    "w": " Budi"
+   },
+   {
+    "s": 6.72,
+    "e": 7.14,
+    "w": " 95"
+   },
+   {
+    "s": 7.14,
+    "e": 7.9,
+    "w": " dipertengkat"
+   },
+   {
+    "s": 7.9,
+    "e": 8.36,
+    "w": " daripada"
+   },
+   {
+    "s": 8.36,
+    "e": 8.94,
+    "w": " 200"
+   },
+   {
+    "s": 8.94,
+    "e": 9.32,
+    "w": " kepada"
+   },
+   {
+    "s": 9.32,
+    "e": 9.88,
+    "w": " 300"
+   },
+   {
+    "s": 9.88,
+    "e": 10.14,
+    "w": " liter"
+   },
+   {
+    "s": 10.14,
+    "e": 10.98,
+    "w": " sebulan."
+   }
+  ]
+ },
+ {
+  "start": 11.08,
+  "end": 18.18,
+  "text": " Bagi keneraan pick-up dan jeep yang layak, kemudahan Budi diesel pula diperluas sehingga 400 liter sebulan.",
+  "words": [
+   {
+    "s": 11.08,
+    "e": 11.32,
+    "w": " Bagi"
+   },
+   {
+    "s": 11.32,
+    "e": 11.8,
+    "w": " keneraan"
+   },
+   {
+    "s": 11.8,
+    "e": 12.08,
+    "w": " pick"
+   },
+   {
+    "s": 12.08,
+    "e": 12.18,
+    "w": "-up"
+   },
+   {
+    "s": 12.18,
+    "e": 12.48,
+    "w": " dan"
+   },
+   {
+    "s": 12.48,
+    "e": 12.82,
+    "w": " jeep"
+   },
+   {
+    "s": 12.82,
+    "e": 13.12,
+    "w": " yang"
+   },
+   {
+    "s": 13.12,
+    "e": 13.56,
+    "w": " layak,"
+   },
+   {
+    "s": 13.74,
+    "e": 14.2,
+    "w": " kemudahan"
+   },
+   {
+    "s": 14.2,
+    "e": 14.62,
+    "w": " Budi"
+   },
+   {
+    "s": 14.62,
+    "e": 14.86,
+    "w": " diesel"
+   },
+   {
+    "s": 14.86,
+    "e": 15.24,
+    "w": " pula"
+   },
+   {
+    "s": 15.24,
+    "e": 15.92,
+    "w": " diperluas"
+   },
+   {
+    "s": 15.92,
+    "e": 16.28,
+    "w": " sehingga"
+   },
+   {
+    "s": 16.28,
+    "e": 16.82,
+    "w": " 400"
+   },
+   {
+    "s": 16.82,
+    "e": 17.18,
+    "w": " liter"
+   },
+   {
+    "s": 17.18,
+    "e": 18.18,
+    "w": " sebulan."
+   }
+  ]
+ },
+ {
+  "start": 18.38,
+  "end": 26.88,
+  "text": " Inisiatif ini memberi manfaat kepada lebih 16 juta pengguna Budi 95 dan juga lebih 500 ribu pengguna diesel.",
+  "words": [
+   {
+    "s": 18.38,
+    "e": 18.82,
+    "w": " Inisiatif"
+   },
+   {
+    "s": 18.82,
+    "e": 19.1,
+    "w": " ini"
+   },
+   {
+    "s": 19.1,
+    "e": 19.62,
+    "w": " memberi"
+   },
+   {
+    "s": 19.62,
+    "e": 20.0,
+    "w": " manfaat"
+   },
+   {
+    "s": 20.0,
+    "e": 20.34,
+    "w": " kepada"
+   },
+   {
+    "s": 20.34,
+    "e": 20.72,
+    "w": " lebih"
+   },
+   {
+    "s": 20.72,
+    "e": 21.38,
+    "w": " 16"
+   },
+   {
+    "s": 21.38,
+    "e": 21.86,
+    "w": " juta"
+   },
+   {
+    "s": 21.86,
+    "e": 22.24,
+    "w": " pengguna"
+   },
+   {
+    "s": 22.24,
+    "e": 22.64,
+    "w": " Budi"
+   },
+   {
+    "s": 22.64,
+    "e": 23.16,
+    "w": " 95"
+   },
+   {
+    "s": 23.16,
+    "e": 23.66,
+    "w": " dan"
+   },
+   {
+    "s": 23.66,
+    "e": 24.34,
+    "w": " juga"
+   },
+   {
+    "s": 24.34,
+    "e": 24.9,
+    "w": " lebih"
+   },
+   {
+    "s": 24.9,
+    "e": 25.46,
+    "w": " 500"
+   },
+   {
+    "s": 25.46,
+    "e": 25.84,
+    "w": " ribu"
+   },
+   {
+    "s": 25.84,
+    "e": 26.26,
+    "w": " pengguna"
+   },
+   {
+    "s": 26.26,
+    "e": 26.88,
+    "w": " diesel."
+   }
+  ]
+ },
+ {
+  "start": 27.599999999999998,
+  "end": 31.2,
+  "text": " Yang kedua ialah tiada sekolah yang tercicir.",
+  "words": [
+   {
+    "s": 27.599999999999998,
+    "e": 28.04,
+    "w": " Yang"
+   },
+   {
+    "s": 28.04,
+    "e": 28.5,
+    "w": " kedua"
+   },
+   {
+    "s": 28.5,
+    "e": 28.98,
+    "w": " ialah"
+   },
+   {
+    "s": 28.98,
+    "e": 29.4,
+    "w": " tiada"
+   },
+   {
+    "s": 29.4,
+    "e": 29.88,
+    "w": " sekolah"
+   },
+   {
+    "s": 29.88,
+    "e": 30.12,
+    "w": " yang"
+   },
+   {
+    "s": 30.12,
+    "e": 31.2,
+    "w": " tercicir."
+   }
+  ]
+ },
+ {
+  "start": 31.44,
+  "end": 36.54,
+  "text": " Pendidikan berkualiti bermula dengan persekitaran pembelajaran yang selesa dan selamat.",
+  "words": [
+   {
+    "s": 31.44,
+    "e": 31.92,
+    "w": " Pendidikan"
+   },
+   {
+    "s": 31.92,
+    "e": 32.62,
+    "w": " berkualiti"
+   },
+   {
+    "s": 32.62,
+    "e": 33.22,
+    "w": " bermula"
+   },
+   {
+    "s": 33.22,
+    "e": 33.62,
+    "w": " dengan"
+   },
+   {
+    "s": 33.62,
+    "e": 34.56,
+    "w": " persekitaran"
+   },
+   {
+    "s": 34.56,
+    "e": 35.2,
+    "w": " pembelajaran"
+   },
+   {
+    "s": 35.2,
+    "e": 35.46,
+    "w": " yang"
+   },
+   {
+    "s": 35.46,
+    "e": 35.78,
+    "w": " selesa"
+   },
+   {
+    "s": 35.78,
+    "e": 35.98,
+    "w": " dan"
+   },
+   {
+    "s": 35.98,
+    "e": 36.54,
+    "w": " selamat."
+   }
+  ]
+ },
+ {
+  "start": 36.76,
+  "end": 46.92,
+  "text": " Perentukan penyelenggaraan sekolah ditingkatkan sebanyak 50% daripada 1 bilion kepada 1.5 bilion ringgit pada tahun 2027.",
+  "words": [
+   {
+    "s": 36.76,
+    "e": 37.54,
+    "w": " Perentukan"
+   },
+   {
+    "s": 37.54,
+    "e": 38.64,
+    "w": " penyelenggaraan"
+   },
+   {
+    "s": 38.64,
+    "e": 39.06,
+    "w": " sekolah"
+   },
+   {
+    "s": 39.06,
+    "e": 39.84,
+    "w": " ditingkatkan"
+   },
+   {
+    "s": 39.84,
+    "e": 40.2,
+    "w": " sebanyak"
+   },
+   {
+    "s": 40.2,
+    "e": 40.66,
+    "w": " 50"
+   },
+   {
+    "s": 40.66,
+    "e": 41.28,
+    "w": "%"
+   },
+   {
+    "s": 41.28,
+    "e": 41.94,
+    "w": " daripada"
+   },
+   {
+    "s": 41.94,
+    "e": 42.32,
+    "w": " 1"
+   },
+   {
+    "s": 42.32,
+    "e": 42.64,
+    "w": " bilion"
+   },
+   {
+    "s": 42.64,
+    "e": 43.0,
+    "w": " kepada"
+   },
+   {
+    "s": 43.0,
+    "e": 43.5,
+    "w": " 1"
+   },
+   {
+    "s": 43.5,
+    "e": 44.3,
+    "w": ".5"
+   },
+   {
+    "s": 44.3,
+    "e": 44.66,
+    "w": " bilion"
+   },
+   {
+    "s": 44.66,
+    "e": 44.98,
+    "w": " ringgit"
+   },
+   {
+    "s": 44.98,
+    "e": 45.28,
+    "w": " pada"
+   },
+   {
+    "s": 45.28,
+    "e": 45.66,
+    "w": " tahun"
+   },
+   {
+    "s": 45.66,
+    "e": 46.92,
+    "w": " 2027."
+   }
+  ]
+ },
+ {
+  "start": 47.2,
+  "end": 53.48,
+  "text": " Menibuti pelbagai aliran pendidikan, usaha ini memastikan keperluan prasarana sekolah terus diberi perhatian.",
+  "words": [
+   {
+    "s": 47.2,
+    "e": 47.56,
+    "w": " Menibuti"
+   },
+   {
+    "s": 47.56,
+    "e": 48.22,
+    "w": " pelbagai"
+   },
+   {
+    "s": 48.22,
+    "e": 48.64,
+    "w": " aliran"
+   },
+   {
+    "s": 48.64,
+    "e": 49.28,
+    "w": " pendidikan,"
+   },
+   {
+    "s": 49.38,
+    "e": 49.56,
+    "w": " usaha"
+   },
+   {
+    "s": 49.56,
+    "e": 50.26,
+    "w": " ini"
+   },
+   {
+    "s": 50.26,
+    "e": 50.92,
+    "w": " memastikan"
+   },
+   {
+    "s": 50.92,
+    "e": 51.46,
+    "w": " keperluan"
+   },
+   {
+    "s": 51.46,
+    "e": 52.12,
+    "w": " prasarana"
+   },
+   {
+    "s": 52.12,
+    "e": 52.5,
+    "w": " sekolah"
+   },
+   {
+    "s": 52.5,
+    "e": 52.76,
+    "w": " terus"
+   },
+   {
+    "s": 52.76,
+    "e": 53.2,
+    "w": " diberi"
+   },
+   {
+    "s": 53.2,
+    "e": 53.48,
+    "w": " perhatian."
+   }
+  ]
+ },
+ {
+  "start": 53.62,
+  "end": 56.24,
+  "text": " Tiada sekolah tercicir daripada arus pembangunan.",
+  "words": [
+   {
+    "s": 53.62,
+    "e": 53.84,
+    "w": " Tiada"
+   },
+   {
+    "s": 53.84,
+    "e": 54.14,
+    "w": " sekolah"
+   },
+   {
+    "s": 54.14,
+    "e": 54.78,
+    "w": " tercicir"
+   },
+   {
+    "s": 54.78,
+    "e": 55.4,
+    "w": " daripada"
+   },
+   {
+    "s": 55.4,
+    "e": 55.66,
+    "w": " arus"
+   },
+   {
+    "s": 55.66,
+    "e": 56.24,
+    "w": " pembangunan."
+   }
+  ]
+ },
+ {
+  "start": 56.88,
+  "end": 60.46,
+  "text": " Yang ketiga ialah AI percuma untuk anak muda.",
+  "words": [
+   {
+    "s": 56.78,
+    "e": 57.24,
+    "w": " Yang"
+   },
+   {
+    "s": 57.24,
+    "e": 57.64,
+    "w": " ketiga"
+   },
+   {
+    "s": 57.64,
+    "e": 58.06,
+    "w": " ialah"
+   },
+   {
+    "s": 58.06,
+    "e": 58.46,
+    "w": " AI"
+   },
+   {
+    "s": 58.46,
+    "e": 59.14,
+    "w": " percuma"
+   },
+   {
+    "s": 59.14,
+    "e": 59.62,
+    "w": " untuk"
+   },
+   {
+    "s": 59.62,
+    "e": 59.84,
+    "w": " anak"
+   },
+   {
+    "s": 59.84,
+    "e": 60.46,
+    "w": " muda."
+   }
+  ]
+ },
+ {
+  "start": 60.7,
+  "end": 64.14,
+  "text": " Anak muda merupakan peneraju masa hadapan negara.",
+  "words": [
+   {
+    "s": 60.7,
+    "e": 60.86,
+    "w": " Anak"
+   },
+   {
+    "s": 60.86,
+    "e": 61.28,
+    "w": " muda"
+   },
+   {
+    "s": 61.28,
+    "e": 62.28,
+    "w": " merupakan"
+   },
+   {
+    "s": 62.28,
+    "e": 62.82,
+    "w": " peneraju"
+   },
+   {
+    "s": 62.82,
+    "e": 63.14,
+    "w": " masa"
+   },
+   {
+    "s": 63.14,
+    "e": 63.44,
+    "w": " hadapan"
+   },
+   {
+    "s": 63.44,
+    "e": 64.14,
+    "w": " negara."
+   }
+  ]
+ },
+ {
+  "start": 64.28,
+  "end": 74.48,
+  "text": " Seramai 100 ribu belia Malaysia berusia 18 hingga 30 tahun disasarkan menerima peluang mempelajari teknologi kecerdasan buatan melalui penyembunan.",
+  "words": [
+   {
+    "s": 64.28,
+    "e": 64.66,
+    "w": " Seramai"
+   },
+   {
+    "s": 64.66,
+    "e": 65.16,
+    "w": " 100"
+   },
+   {
+    "s": 65.16,
+    "e": 65.52,
+    "w": " ribu"
+   },
+   {
+    "s": 65.52,
+    "e": 65.82,
+    "w": " belia"
+   },
+   {
+    "s": 65.82,
+    "e": 66.44,
+    "w": " Malaysia"
+   },
+   {
+    "s": 66.44,
+    "e": 66.88,
+    "w": " berusia"
+   },
+   {
+    "s": 66.88,
+    "e": 67.38,
+    "w": " 18"
+   },
+   {
+    "s": 67.38,
+    "e": 67.86,
+    "w": " hingga"
+   },
+   {
+    "s": 67.86,
+    "e": 68.18,
+    "w": " 30"
+   },
+   {
+    "s": 68.18,
+    "e": 68.48,
+    "w": " tahun"
+   },
+   {
+    "s": 68.48,
+    "e": 69.14,
+    "w": " disasarkan"
+   },
+   {
+    "s": 69.14,
+    "e": 69.86,
+    "w": " menerima"
+   },
+   {
+    "s": 69.86,
+    "e": 70.36,
+    "w": " peluang"
+   },
+   {
+    "s": 70.36,
+    "e": 71.1,
+    "w": " mempelajari"
+   },
+   {
+    "s": 71.1,
+    "e": 71.72,
+    "w": " teknologi"
+   },
+   {
+    "s": 71.72,
+    "e": 72.54,
+    "w": " kecerdasan"
+   },
+   {
+    "s": 72.54,
+    "e": 73.18,
+    "w": " buatan"
+   },
+   {
+    "s": 73.18,
+    "e": 73.74,
+    "w": " melalui"
+   },
+   {
+    "s": 73.74,
+    "e": 74.48,
+    "w": " penyembunan."
+   }
+  ]
+ },
+ {
+  "start": 74.54,
+  "end": 81.2,
+  "text": " Modul yang ditetapkan mereka juga berperluang menibati langganan aplikasi AI secara percuma sehingga 3 bulan.",
+  "words": [
+   {
+    "s": 74.54,
+    "e": 74.88,
+    "w": " Modul"
+   },
+   {
+    "s": 74.88,
+    "e": 75.0,
+    "w": " yang"
+   },
+   {
+    "s": 75.0,
+    "e": 75.94,
+    "w": " ditetapkan"
+   },
+   {
+    "s": 75.94,
+    "e": 76.32,
+    "w": " mereka"
+   },
+   {
+    "s": 76.32,
+    "e": 76.56,
+    "w": " juga"
+   },
+   {
+    "s": 76.56,
+    "e": 77.16,
+    "w": " berperluang"
+   },
+   {
+    "s": 77.16,
+    "e": 77.74,
+    "w": " menibati"
+   },
+   {
+    "s": 77.74,
+    "e": 78.32,
+    "w": " langganan"
+   },
+   {
+    "s": 78.32,
+    "e": 78.78,
+    "w": " aplikasi"
+   },
+   {
+    "s": 78.78,
+    "e": 79.12,
+    "w": " AI"
+   },
+   {
+    "s": 79.12,
+    "e": 79.56,
+    "w": " secara"
+   },
+   {
+    "s": 79.56,
+    "e": 79.98,
+    "w": " percuma"
+   },
+   {
+    "s": 79.98,
+    "e": 80.38,
+    "w": " sehingga"
+   },
+   {
+    "s": 80.38,
+    "e": 80.58,
+    "w": " 3"
+   },
+   {
+    "s": 80.58,
+    "e": 81.2,
+    "w": " bulan."
+   }
+  ]
+ },
+ {
+  "start": 81.2,
+  "end": 86.92,
+  "text": " Langkah ini juga membuka ruang kepada generasi muda untuk terus berdaya saing dalam dunia digital.",
+  "words": [
+   {
+    "s": 81.2,
+    "e": 81.78,
+    "w": " Langkah"
+   },
+   {
+    "s": 81.78,
+    "e": 82.04,
+    "w": " ini"
+   },
+   {
+    "s": 82.04,
+    "e": 82.44,
+    "w": " juga"
+   },
+   {
+    "s": 82.44,
+    "e": 82.9,
+    "w": " membuka"
+   },
+   {
+    "s": 82.9,
+    "e": 83.2,
+    "w": " ruang"
+   },
+   {
+    "s": 83.2,
+    "e": 83.56,
+    "w": " kepada"
+   },
+   {
+    "s": 83.56,
+    "e": 84.08,
+    "w": " generasi"
+   },
+   {
+    "s": 84.08,
+    "e": 84.36,
+    "w": " muda"
+   },
+   {
+    "s": 84.36,
+    "e": 84.62,
+    "w": " untuk"
+   },
+   {
+    "s": 84.62,
+    "e": 84.88,
+    "w": " terus"
+   },
+   {
+    "s": 84.88,
+    "e": 85.4,
+    "w": " berdaya"
+   },
+   {
+    "s": 85.4,
+    "e": 85.7,
+    "w": " saing"
+   },
+   {
+    "s": 85.7,
+    "e": 85.98,
+    "w": " dalam"
+   },
+   {
+    "s": 85.98,
+    "e": 86.24,
+    "w": " dunia"
+   },
+   {
+    "s": 86.24,
+    "e": 86.92,
+    "w": " digital."
+   }
+  ]
+ },
+ {
+  "start": 87.74,
+  "end": 91.5,
+  "text": " Yang keempat ialah perkhidmatan kesehatan awam lebih cekap.",
+  "words": [
+   {
+    "s": 87.74,
+    "e": 87.84,
+    "w": " Yang"
+   },
+   {
+    "s": 87.84,
+    "e": 88.22,
+    "w": " keempat"
+   },
+   {
+    "s": 88.22,
+    "e": 88.52,
+    "w": " ialah"
+   },
+   {
+    "s": 88.52,
+    "e": 89.3,
+    "w": " perkhidmatan"
+   },
+   {
+    "s": 89.3,
+    "e": 90.16,
+    "w": " kesehatan"
+   },
+   {
+    "s": 90.16,
+    "e": 90.48,
+    "w": " awam"
+   },
+   {
+    "s": 90.48,
+    "e": 90.74,
+    "w": " lebih"
+   },
+   {
+    "s": 90.74,
+    "e": 91.5,
+    "w": " cekap."
+   }
+  ]
+ },
+ {
+  "start": 91.72,
+  "end": 94.26,
+  "text": " Kesehatan rakyat terus menjadi keutamaan.",
+  "words": [
+   {
+    "s": 91.72,
+    "e": 92.06,
+    "w": " Kesehatan"
+   },
+   {
+    "s": 92.06,
+    "e": 92.48,
+    "w": " rakyat"
+   },
+   {
+    "s": 92.48,
+    "e": 92.8,
+    "w": " terus"
+   },
+   {
+    "s": 92.8,
+    "e": 93.16,
+    "w": " menjadi"
+   },
+   {
+    "s": 93.16,
+    "e": 94.26,
+    "w": " keutamaan."
+   }
+  ]
+ },
+ {
+  "start": 94.58,
+  "end": 100.96,
+  "text": " Sebanyak 1 bilion ringgit disediakan bagi memperkukuh pendiditalan perkhidmatan kesehatan awam.",
+  "words": [
+   {
+    "s": 94.58,
+    "e": 94.86,
+    "w": " Sebanyak"
+   },
+   {
+    "s": 94.86,
+    "e": 95.24,
+    "w": " 1"
+   },
+   {
+    "s": 95.24,
+    "e": 95.48,
+    "w": " bilion"
+   },
+   {
+    "s": 95.48,
+    "e": 95.82,
+    "w": " ringgit"
+   },
+   {
+    "s": 95.82,
+    "e": 96.6,
+    "w": " disediakan"
+   },
+   {
+    "s": 96.6,
+    "e": 97.08,
+    "w": " bagi"
+   },
+   {
+    "s": 97.08,
+    "e": 98.04,
+    "w": " memperkukuh"
+   },
+   {
+    "s": 98.04,
+    "e": 99.56,
+    "w": " pendiditalan"
+   },
+   {
+    "s": 99.56,
+    "e": 100.14,
+    "w": " perkhidmatan"
+   },
+   {
+    "s": 100.14,
+    "e": 100.6,
+    "w": " kesehatan"
+   },
+   {
+    "s": 100.6,
+    "e": 100.96,
+    "w": " awam."
+   }
+  ]
+ },
+ {
+  "start": 101.04,
+  "end": 105.24,
+  "text": " Melibatkan 150 hospital dan lebih 2 ribu klinik kesehatan.",
+  "words": [
+   {
+    "s": 101.04,
+    "e": 101.58,
+    "w": " Melibatkan"
+   },
+   {
+    "s": 101.58,
+    "e": 102.3,
+    "w": " 150"
+   },
+   {
+    "s": 102.3,
+    "e": 102.84,
+    "w": " hospital"
+   },
+   {
+    "s": 102.84,
+    "e": 103.16,
+    "w": " dan"
+   },
+   {
+    "s": 103.16,
+    "e": 103.6,
+    "w": " lebih"
+   },
+   {
+    "s": 103.6,
+    "e": 103.96,
+    "w": " 2"
+   },
+   {
+    "s": 103.96,
+    "e": 104.26,
+    "w": " ribu"
+   },
+   {
+    "s": 104.26,
+    "e": 104.56,
+    "w": " klinik"
+   },
+   {
+    "s": 104.56,
+    "e": 105.24,
+    "w": " kesehatan."
+   }
+  ]
+ },
+ {
+  "start": 105.24,
+  "end": 114.36000000000001,
+  "text": " Penambahbaikan rekod perubatan elektronik serta campayan internet bakal membantu mempercepat urusan rawatan dan juga mengurangkan masa menunggu pesakit.",
+  "words": [
+   {
+    "s": 105.24,
+    "e": 106.18,
+    "w": " Penambahbaikan"
+   },
+   {
+    "s": 106.18,
+    "e": 106.54,
+    "w": " rekod"
+   },
+   {
+    "s": 106.54,
+    "e": 107.04,
+    "w": " perubatan"
+   },
+   {
+    "s": 107.04,
+    "e": 107.68,
+    "w": " elektronik"
+   },
+   {
+    "s": 107.68,
+    "e": 108.1,
+    "w": " serta"
+   },
+   {
+    "s": 108.1,
+    "e": 108.54,
+    "w": " campayan"
+   },
+   {
+    "s": 108.54,
+    "e": 108.98,
+    "w": " internet"
+   },
+   {
+    "s": 108.98,
+    "e": 109.32,
+    "w": " bakal"
+   },
+   {
+    "s": 109.32,
+    "e": 109.92,
+    "w": " membantu"
+   },
+   {
+    "s": 109.92,
+    "e": 110.54,
+    "w": " mempercepat"
+   },
+   {
+    "s": 110.54,
+    "e": 110.84,
+    "w": " urusan"
+   },
+   {
+    "s": 110.84,
+    "e": 111.64,
+    "w": " rawatan"
+   },
+   {
+    "s": 111.64,
+    "e": 112.02,
+    "w": " dan"
+   },
+   {
+    "s": 112.02,
+    "e": 112.38,
+    "w": " juga"
+   },
+   {
+    "s": 112.38,
+    "e": 112.98,
+    "w": " mengurangkan"
+   },
+   {
+    "s": 112.98,
+    "e": 113.28,
+    "w": " masa"
+   },
+   {
+    "s": 113.28,
+    "e": 113.64,
+    "w": " menunggu"
+   },
+   {
+    "s": 113.64,
+    "e": 114.36000000000001,
+    "w": " pesakit."
+   }
+  ]
+ },
+ {
+  "start": 115.04,
+  "end": 118.68,
+  "text": " Yang kelima ialah e-Invoice kurangkan beban perniaga kecil.",
+  "words": [
+   {
+    "s": 115.04,
+    "e": 115.16,
+    "w": " Yang"
+   },
+   {
+    "s": 115.16,
+    "e": 115.58,
+    "w": " kelima"
+   },
+   {
+    "s": 115.58,
+    "e": 115.92,
+    "w": " ialah"
+   },
+   {
+    "s": 115.92,
+    "e": 116.26,
+    "w": " e"
+   },
+   {
+    "s": 116.26,
+    "e": 116.58,
+    "w": "-Invoice"
+   },
+   {
+    "s": 116.58,
+    "e": 117.22,
+    "w": " kurangkan"
+   },
+   {
+    "s": 117.22,
+    "e": 117.68,
+    "w": " beban"
+   },
+   {
+    "s": 117.68,
+    "e": 118.04,
+    "w": " perniaga"
+   },
+   {
+    "s": 118.04,
+    "e": 118.68,
+    "w": " kecil."
+   }
+  ]
+ },
+ {
+  "start": 118.92,
+  "end": 127.76,
+  "text": " Bagi merengankan beban perniaga kecil, ambang pengecualian e-Invoice dinaikkan daripada 1 juta kepada 3 juta ringgit jualan tahunan.",
+  "words": [
+   {
+    "s": 118.92,
+    "e": 119.08,
+    "w": " Bagi"
+   },
+   {
+    "s": 119.08,
+    "e": 119.62,
+    "w": " merengankan"
+   },
+   {
+    "s": 119.62,
+    "e": 119.96,
+    "w": " beban"
+   },
+   {
+    "s": 119.96,
+    "e": 120.34,
+    "w": " perniaga"
+   },
+   {
+    "s": 120.34,
+    "e": 120.8,
+    "w": " kecil,"
+   },
+   {
+    "s": 121.06,
+    "e": 121.36,
+    "w": " ambang"
+   },
+   {
+    "s": 121.36,
+    "e": 122.12,
+    "w": " pengecualian"
+   },
+   {
+    "s": 122.12,
+    "e": 122.44,
+    "w": " e"
+   },
+   {
+    "s": 122.44,
+    "e": 122.74,
+    "w": "-Invoice"
+   },
+   {
+    "s": 122.74,
+    "e": 123.5,
+    "w": " dinaikkan"
+   },
+   {
+    "s": 123.5,
+    "e": 124.28,
+    "w": " daripada"
+   },
+   {
+    "s": 124.28,
+    "e": 124.62,
+    "w": " 1"
+   },
+   {
+    "s": 124.62,
+    "e": 124.88,
+    "w": " juta"
+   },
+   {
+    "s": 124.88,
+    "e": 125.26,
+    "w": " kepada"
+   },
+   {
+    "s": 125.26,
+    "e": 125.98,
+    "w": " 3"
+   },
+   {
+    "s": 125.98,
+    "e": 126.32,
+    "w": " juta"
+   },
+   {
+    "s": 126.32,
+    "e": 126.68,
+    "w": " ringgit"
+   },
+   {
+    "s": 126.68,
+    "e": 127.16,
+    "w": " jualan"
+   },
+   {
+    "s": 127.16,
+    "e": 127.76,
+    "w": " tahunan."
+   }
+  ]
+ },
+ {
+  "start": 127.76,
+  "end": 138.04,
+  "text": " Langkah ini juga mengurangkan beban pematuhan perniagaan sekaligus membolehkan usawan kecil memberi lebih tumpuan kepada pertumbuhan dan kemajuan perniagaan mereka.",
+  "words": [
+   {
+    "s": 127.76,
+    "e": 128.38,
+    "w": " Langkah"
+   },
+   {
+    "s": 128.38,
+    "e": 128.6,
+    "w": " ini"
+   },
+   {
+    "s": 128.6,
+    "e": 128.96,
+    "w": " juga"
+   },
+   {
+    "s": 128.96,
+    "e": 129.66,
+    "w": " mengurangkan"
+   },
+   {
+    "s": 129.66,
+    "e": 130.06,
+    "w": " beban"
+   },
+   {
+    "s": 130.06,
+    "e": 130.78,
+    "w": " pematuhan"
+   },
+   {
+    "s": 130.78,
+    "e": 131.34,
+    "w": " perniagaan"
+   },
+   {
+    "s": 131.34,
+    "e": 132.04,
+    "w": " sekaligus"
+   },
+   {
+    "s": 132.04,
+    "e": 132.66,
+    "w": " membolehkan"
+   },
+   {
+    "s": 132.66,
+    "e": 133.26,
+    "w": " usawan"
+   },
+   {
+    "s": 133.26,
+    "e": 133.7,
+    "w": " kecil"
+   },
+   {
+    "s": 133.7,
+    "e": 134.12,
+    "w": " memberi"
+   },
+   {
+    "s": 134.12,
+    "e": 134.38,
+    "w": " lebih"
+   },
+   {
+    "s": 134.38,
+    "e": 134.74,
+    "w": " tumpuan"
+   },
+   {
+    "s": 134.74,
+    "e": 135.82,
+    "w": " kepada"
+   },
+   {
+    "s": 135.82,
+    "e": 136.46,
+    "w": " pertumbuhan"
+   },
+   {
+    "s": 136.46,
+    "e": 136.76,
+    "w": " dan"
+   },
+   {
+    "s": 136.76,
+    "e": 137.16,
+    "w": " kemajuan"
+   },
+   {
+    "s": 137.16,
+    "e": 137.66,
+    "w": " perniagaan"
+   },
+   {
+    "s": 137.66,
+    "e": 138.04,
+    "w": " mereka."
+   }
+  ]
+ },
+ {
+  "start": 138.7,
+  "end": 141.98,
+  "text": " Yang ke 6 ialah bantuan penjaja dan peniaga kecil.",
+  "words": [
+   {
+    "s": 138.7,
+    "e": 138.82,
+    "w": " Yang"
+   },
+   {
+    "s": 138.82,
+    "e": 139.08,
+    "w": " ke"
+   },
+   {
+    "s": 139.08,
+    "e": 139.12,
+    "w": " 6"
+   },
+   {
+    "s": 139.12,
+    "e": 139.4,
+    "w": " ialah"
+   },
+   {
+    "s": 139.4,
+    "e": 139.92,
+    "w": " bantuan"
+   },
+   {
+    "s": 139.92,
+    "e": 140.52,
+    "w": " penjaja"
+   },
+   {
+    "s": 140.52,
+    "e": 140.84,
+    "w": " dan"
+   },
+   {
+    "s": 140.84,
+    "e": 141.22,
+    "w": " peniaga"
+   },
+   {
+    "s": 141.22,
+    "e": 141.98,
+    "w": " kecil."
+   }
+  ]
+ },
+ {
+  "start": 142.26,
+  "end": 148.16,
+  "text": " Usaha memperkasa ekonomi rakyat diteruskan melalui geran sejah termadani berjumlah 200 juta ringgit.",
+  "words": [
+   {
+    "s": 142.26,
+    "e": 142.42,
+    "w": " Usaha"
+   },
+   {
+    "s": 142.42,
+    "e": 143.12,
+    "w": " memperkasa"
+   },
+   {
+    "s": 143.12,
+    "e": 143.6,
+    "w": " ekonomi"
+   },
+   {
+    "s": 143.6,
+    "e": 143.98,
+    "w": " rakyat"
+   },
+   {
+    "s": 143.98,
+    "e": 144.6,
+    "w": " diteruskan"
+   },
+   {
+    "s": 144.6,
+    "e": 145.0,
+    "w": " melalui"
+   },
+   {
+    "s": 145.0,
+    "e": 145.36,
+    "w": " geran"
+   },
+   {
+    "s": 145.36,
+    "e": 145.62,
+    "w": " sejah"
+   },
+   {
+    "s": 145.62,
+    "e": 146.24,
+    "w": " termadani"
+   },
+   {
+    "s": 146.24,
+    "e": 146.8,
+    "w": " berjumlah"
+   },
+   {
+    "s": 146.8,
+    "e": 147.22,
+    "w": " 200"
+   },
+   {
+    "s": 147.22,
+    "e": 147.52,
+    "w": " juta"
+   },
+   {
+    "s": 147.52,
+    "e": 148.16,
+    "w": " ringgit."
+   }
+  ]
+ },
+ {
+  "start": 148.34,
+  "end": 155.24,
+  "text": " Inisiatif ini menyokong penjaja, peniaga kecil, peniaga pasar malam serta ibu yang menjalankan perniagaan daripada rumah.",
+  "words": [
+   {
+    "s": 148.34,
+    "e": 148.96,
+    "w": " Inisiatif"
+   },
+   {
+    "s": 148.96,
+    "e": 149.34,
+    "w": " ini"
+   },
+   {
+    "s": 149.34,
+    "e": 149.82,
+    "w": " menyokong"
+   },
+   {
+    "s": 149.82,
+    "e": 150.46,
+    "w": " penjaja,"
+   },
+   {
+    "s": 150.64,
+    "e": 150.84,
+    "w": " peniaga"
+   },
+   {
+    "s": 150.84,
+    "e": 151.32,
+    "w": " kecil,"
+   },
+   {
+    "s": 151.46,
+    "e": 151.68,
+    "w": " peniaga"
+   },
+   {
+    "s": 151.68,
+    "e": 151.9,
+    "w": " pasar"
+   },
+   {
+    "s": 151.9,
+    "e": 152.32,
+    "w": " malam"
+   },
+   {
+    "s": 152.32,
+    "e": 152.74,
+    "w": " serta"
+   },
+   {
+    "s": 152.74,
+    "e": 153.12,
+    "w": " ibu"
+   },
+   {
+    "s": 153.12,
+    "e": 153.28,
+    "w": " yang"
+   },
+   {
+    "s": 153.28,
+    "e": 153.72,
+    "w": " menjalankan"
+   },
+   {
+    "s": 153.72,
+    "e": 154.54,
+    "w": " perniagaan"
+   },
+   {
+    "s": 154.54,
+    "e": 154.92,
+    "w": " daripada"
+   },
+   {
+    "s": 154.92,
+    "e": 155.24,
+    "w": " rumah."
+   }
+  ]
+ },
+ {
+  "start": 155.24,
+  "end": 163.92,
+  "text": " Pembiayaan mikro ini turut ditingkatkan sebanyak 1 bilion ringgit menjadi keseruhan dana ialah 6 bilion ringgit pada tahun 2026.",
+  "words": [
+   {
+    "s": 155.24,
+    "e": 156.32,
+    "w": " Pembiayaan"
+   },
+   {
+    "s": 156.32,
+    "e": 156.72,
+    "w": " mikro"
+   },
+   {
+    "s": 156.72,
+    "e": 157.3,
+    "w": " ini"
+   },
+   {
+    "s": 157.3,
+    "e": 157.58,
+    "w": " turut"
+   },
+   {
+    "s": 157.58,
+    "e": 158.16,
+    "w": " ditingkatkan"
+   },
+   {
+    "s": 158.16,
+    "e": 158.48,
+    "w": " sebanyak"
+   },
+   {
+    "s": 158.48,
+    "e": 158.86,
+    "w": " 1"
+   },
+   {
+    "s": 158.86,
+    "e": 159.04,
+    "w": " bilion"
+   },
+   {
+    "s": 159.04,
+    "e": 159.34,
+    "w": " ringgit"
+   },
+   {
+    "s": 159.34,
+    "e": 159.7,
+    "w": " menjadi"
+   },
+   {
+    "s": 159.7,
+    "e": 160.32,
+    "w": " keseruhan"
+   },
+   {
+    "s": 160.32,
+    "e": 161.12,
+    "w": " dana"
+   },
+   {
+    "s": 161.12,
+    "e": 161.52,
+    "w": " ialah"
+   },
+   {
+    "s": 161.52,
+    "e": 161.96,
+    "w": " 6"
+   },
+   {
+    "s": 161.96,
+    "e": 162.2,
+    "w": " bilion"
+   },
+   {
+    "s": 162.2,
+    "e": 162.5,
+    "w": " ringgit"
+   },
+   {
+    "s": 162.5,
+    "e": 162.72,
+    "w": " pada"
+   },
+   {
+    "s": 162.72,
+    "e": 163.02,
+    "w": " tahun"
+   },
+   {
+    "s": 163.02,
+    "e": 163.92,
+    "w": " 2026."
+   }
+  ]
+ },
+ {
+  "start": 164.04,
+  "end": 171.06,
+  "text": " Lebih banyak peluang diwujudkan agar perniagaan kecil terus berkembang dan pendapatan rakyat terus dipetingkatkan.",
+  "words": [
+   {
+    "s": 164.04,
+    "e": 164.38,
+    "w": " Lebih"
+   },
+   {
+    "s": 164.38,
+    "e": 164.66,
+    "w": " banyak"
+   },
+   {
+    "s": 164.66,
+    "e": 165.0,
+    "w": " peluang"
+   },
+   {
+    "s": 165.0,
+    "e": 165.78,
+    "w": " diwujudkan"
+   },
+   {
+    "s": 165.78,
+    "e": 166.46,
+    "w": " agar"
+   },
+   {
+    "s": 166.46,
+    "e": 167.04,
+    "w": " perniagaan"
+   },
+   {
+    "s": 167.04,
+    "e": 167.32,
+    "w": " kecil"
+   },
+   {
+    "s": 167.32,
+    "e": 167.54,
+    "w": " terus"
+   },
+   {
+    "s": 167.54,
+    "e": 168.08,
+    "w": " berkembang"
+   },
+   {
+    "s": 168.08,
+    "e": 168.3,
+    "w": " dan"
+   },
+   {
+    "s": 168.3,
+    "e": 169.04,
+    "w": " pendapatan"
+   },
+   {
+    "s": 169.04,
+    "e": 169.44,
+    "w": " rakyat"
+   },
+   {
+    "s": 169.44,
+    "e": 169.84,
+    "w": " terus"
+   },
+   {
+    "s": 169.84,
+    "e": 171.06,
+    "w": " dipetingkatkan."
+   }
+  ]
+ }
+]

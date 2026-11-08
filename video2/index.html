@@ -68,6 +68,8 @@
 
       .photo { position: absolute; background: #f8f4ea; padding: 17px; box-shadow: 0 20px 36px rgba(40,25,8,.42), 0 2px 4px rgba(0,0,0,.25); }
       .photo img { display: block; object-fit: cover; }
+      .photo .pin { overflow: hidden; }
+      .photo .pin img { transform-origin: 50% 50%; }
       .ptag { position: absolute; background: #f3ecdc; border: 3px solid #1d1a16; padding: 10px 22px 8px;
         font: 400 40px/1 var(--f-type); color: var(--ink); letter-spacing: .04em; box-shadow: 0 6px 12px rgba(40,25,8,.3); white-space: nowrap; }
       .ptag.b { font-weight: 700; font-size: 30px; padding: 9px 18px 7px; }
@@ -90,7 +92,7 @@
       <!-- ================= SCENE 1 : MANFAAT ================= -->
       <div id="s1" class="scene clip" data-start="0" data-duration="8.6" data-track-index="1">
         <div class="cam">
-          <img class="abs" id="s1-art" src="assets/art/f1-city.png" style="left:185px; top:697px; width:895px;" />
+          <div class="abs" id="s1-artwrap" style="left:185px; top:697px; width:895px; height:895px; overflow:hidden;"><img id="s1-art" src="assets/art/f1-city.png" style="display:block; width:895px;" /></div>
           <div class="counter abs" id="s1-count" style="left:74px; top:492px; font: 400 36px/1 var(--f-mono);">01 / 04</div>
           <div class="abs" style="left:76px; top:574px;"><div class="label" id="s1-label" style="font-size:66px; padding:12px 22px 12px;">Manfaat</div></div>
           <div class="title abs" style="left:70px; top:690px; font-size:112px;">
@@ -112,9 +114,9 @@
             <div class="abs" style="left:0; right:0; top:363px; text-align:center;"><div class="label" id="s2-label" style="font-size:94px; padding:12px 64px 14px;">Hasil Merdeka</div></div>
           </div>
           <div class="layer">
-            <div class="photo" id="s2-c1" style="left:38px; top:536px;"><img src="assets/art/f2-school.jpg" style="width:693px; height:395px;" />
+            <div class="photo" id="s2-c1" style="left:38px; top:536px;"><div class="pin"><img src="assets/art/f2-school.jpg" style="width:693px; height:395px;" /></div>
               <div class="ptag" style="left:60px; bottom:-26px;">PENDIDIKAN</div></div>
-            <div class="photo" id="s2-c2" style="left:262px; top:1052px;"><img src="assets/art/f2-health.jpg" style="width:742px; height:364px;" />
+            <div class="photo" id="s2-c2" style="left:262px; top:1052px;"><div class="pin"><img src="assets/art/f2-health.jpg" style="width:742px; height:364px;" /></div>
               <div class="ptag" style="right:44px; bottom:-38px;">KESIHATAN</div></div>
           </div>
         </div>
@@ -130,13 +132,13 @@
             <div class="abs" style="left:0; right:0; top:248px; text-align:center;"><div class="label" id="s3-label" style="font: 800 104px/1 var(--f-xcond); padding:8px 56px 10px;">HASIL MERDEKA</div></div>
           </div>
           <div class="layer">
-            <div class="photo" id="s3-c1" style="left:38px; top:430px; padding:16px;"><img src="assets/art/f3-school.jpg" style="width:452px; height:400px;" />
+            <div class="photo" id="s3-c1" style="left:38px; top:430px; padding:16px;"><div class="pin"><img src="assets/art/f3-school.jpg" style="width:452px; height:400px;" /></div>
               <div class="ptag b" style="left:118px; bottom:-14px;">PENDIDIKAN</div></div>
-            <div class="photo" id="s3-c2" style="left:546px; top:434px; padding:16px;"><img src="assets/art/f3-health.jpg" style="width:452px; height:400px;" />
+            <div class="photo" id="s3-c2" style="left:546px; top:434px; padding:16px;"><div class="pin"><img src="assets/art/f3-health.jpg" style="width:452px; height:400px;" /></div>
               <div class="ptag b" style="left:100px; bottom:-14px;">KESIHATAN</div></div>
-            <div class="photo" id="s3-c3" style="left:34px; top:970px; padding:16px;"><img src="assets/art/f3-train.jpg" style="width:462px; height:420px;" />
+            <div class="photo" id="s3-c3" style="left:34px; top:970px; padding:16px;"><div class="pin"><img src="assets/art/f3-train.jpg" style="width:462px; height:420px;" /></div>
               <div class="ptag b" style="left:100px; bottom:-14px;">PENGANGKUTAN</div></div>
-            <div class="photo" id="s3-c4" style="left:560px; top:974px; padding:16px;"><img src="assets/art/f3-work.jpg" style="width:454px; height:420px;" />
+            <div class="photo" id="s3-c4" style="left:560px; top:974px; padding:16px;"><div class="pin"><img src="assets/art/f3-work.jpg" style="width:454px; height:420px;" /></div>
               <div class="ptag b" style="left:108px; bottom:-20px;">PEKERJAAN</div></div>
           </div>
         </div>
@@ -232,6 +234,31 @@
         tl.fromTo(shine, { x: -260 }, { x: sweep, duration: 0.7, ease: "power2.inOut" }, t + 0.4);
       }
 
+      // frame 1: skyline rises out of the ground, bottom edge first
+      function skylineReveal(wrap, img, t) {
+        tl.fromTo(wrap, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "power3.out" }, t);
+        tl.fromTo(img, { y: 160, scale: 1.08 }, { y: 0, scale: 1, duration: 1.8, ease: "power3.out" }, t);
+      }
+      // title word slides up into place, one at a time
+      function wordIn(word, t) {
+        tl.fromTo(word, { opacity: 0, y: 70, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, t);
+      }
+      // frame 2: photo slides in from a side, then drifts slowly like a camera move
+      function slideParallax(card, t, fromLeft, rot, until) {
+        const img = card + " .pin img";
+        tl.fromTo(card, { opacity: 0, x: fromLeft ? -900 : 900, rotation: rot + (fromLeft ? -4 : 4) },
+          { opacity: 1, x: 0, rotation: rot, duration: 0.8, ease: "power3.out" }, t);
+        tl.fromTo(card + " .ptag", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, t + 0.55);
+        tl.to(card, { x: fromLeft ? 26 : -26, y: -12, duration: until - t - 0.8, ease: "none" }, t + 0.8);
+        tl.fromTo(img, { scale: 1.16, xPercent: fromLeft ? -4 : 4 }, { scale: 1.04, xPercent: fromLeft ? 3 : -3, duration: until - t, ease: "none" }, t);
+      }
+      // frame 3: grid photo zooms in, its picture settles, label rises from below
+      function gridIn(card, t, rot) {
+        tl.fromTo(card, { opacity: 0, scale: 0.55, rotation: 0 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.6, ease: "back.out(1.6)" }, t);
+        tl.fromTo(card + " .pin img", { scale: 1.35 }, { scale: 1.0, duration: 1.4, ease: "power2.out" }, t);
+        tl.fromTo(card + " .ptag", { opacity: 0, y: 46 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, t + 0.42);
+      }
+
       // caption script follows the voice: each word appears when it is spoken
       // (times from video2/raw/words.json mapped through the cut map)
       const CAPTION_WORDS = {
@@ -265,22 +292,23 @@
       /* --- initial states --- */
       gsap.set(".word", { opacity: 0 });
       gsap.set("#s1-bar", { scaleX: 0 });
-      gsap.set([".caption", ".counter", "#s1-art", "#s4-tag", "#s4-flagwrap"], { opacity: 0 });
-      gsap.set(["#s2-c1", "#s3-c1", "#s3-c3"], { x: -1250 });
-      gsap.set(["#s2-c2", "#s3-c2", "#s3-c4"], { x: 1250 });
+      gsap.set([".caption", ".counter", "#s4-tag", "#s4-flagwrap"], { opacity: 0 });
+      gsap.set("#s1-artwrap", { clipPath: "inset(100% 0% 0% 0%)" });
+      gsap.set(["#s2-c1", "#s2-c2", "#s3-c1", "#s3-c2", "#s3-c3", "#s3-c4"], { opacity: 0 });
+      gsap.set(".ptag", { opacity: 0 });
       gsap.set(".stripe", { xPercent: -120, skewX: -14 });
 
       /* ================= SCENE 1 (0 - 8.6) ================= */
       focusIn("#s1 .cam", 0);
       fadeUp("#s1-count", 0.3);
-      tl.fromTo("#s1-art", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" }, 0.15);
-      tl.to("#s1-art", { scale: 1.05, duration: 7.4, ease: "none", transformOrigin: "60% 60%" }, 1.15);
+      skylineReveal("#s1-artwrap", "#s1-art", 0.2);
+      tl.to("#s1-artwrap", { scale: 1.04, duration: 6.4, ease: "none", transformOrigin: "60% 100%" }, 2.0);
       brush("#s1-label", 1.0, 0.45);                 // "manfaat"
       captionIn("#s1-cap", 2.3);                     // "Hasil daripada..."
-      stamp("#s1-w1", "#s1 .cam", 6.36);             // "kemajuan"
-      stamp("#s1-w2", "#s1 .cam", 6.82);             // "dan"
-      stamp("#s1-w3", "#s1 .cam", 7.1, 1.5);         // "pembangunan"
-      highlight("#s1-hl", 7.36);
+      wordIn("#s1-w1", 6.36);                        // "kemajuan"
+      wordIn("#s1-w2", 6.82);                        // "dan"
+      wordIn("#s1-w3", 7.1);                         // "pembangunan"
+      tl.fromTo("#s1-hl", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.inOut" }, 7.4);   // yellow sweeps left -> right
       tl.to("#s1-bar", { scaleX: 1, duration: 0.4, ease: "power3.out" }, 7.5);
 
       flagWipe(8.6);
@@ -291,8 +319,8 @@
       brush("#s2-label", 8.75, 0.45);
       captionIn("#s2-cap", 8.7);
       blurBg("#s2-bg", 9.5, 12.2);
-      cardIn("#s2-c1", 9.55, true, -2);              // "kemudahan pendidikan"
-      cardIn("#s2-c2", 11.3, false, 2);              // "perkhidmatan kesihatan"
+      slideParallax("#s2-c1", 9.55, true, -2, 13.15);    // "kemudahan pendidikan"
+      slideParallax("#s2-c2", 11.3, false, 2, 13.15);    // "perkhidmatan kesihatan"
 
       flagWipe(13.15);
 
@@ -302,10 +330,10 @@
       brush("#s3-label", 13.25, 0.42);
       captionIn("#s3-cap", 13.2);
       blurBg("#s3-bg", 13.3, 16.95);
-      cardIn("#s3-c1", 13.3, true, -2);              // recap: pendidikan
-      cardIn("#s3-c2", 13.55, false, 1.5);           // recap: kesihatan
-      cardIn("#s3-c3", 13.8, true, -1.5);            // "pengangkutan"
-      cardIn("#s3-c4", 15.95, false, 1.5);           // "pekerjaan"
+      gridIn("#s3-c1", 13.3, -2);                    // recap: pendidikan
+      gridIn("#s3-c2", 13.6, 1.5);                   // recap: kesihatan
+      gridIn("#s3-c3", 13.85, -1.5);                 // "pengangkutan"
+      gridIn("#s3-c4", 15.95, 1.5);                  // "pekerjaan"
 
       flagWipe(18.15);
 

@@ -24,4 +24,4 @@ node tools/render.js motion output/final_1080p.mp4 <vo_final.wav> 1920 30
 - `motion/index.html` — motion grafik (HTML/CSS/JS, `render(t)` deterministik). Masa setiap elemen ikut masa perkataan dalam VO.
 - `motion/script_data.js` — teks skrip + masa ayat. `tools/make_captions.py` hasilkan `captions.js`.
 - Tambah `#nocap` pada URL kalau tak mahu sari kata.
-- `tools/edit_audio.py` (potong jeda + retake), `tools/enhance.py` + rantai ffmpeg (dalam sejarah commit) untuk pembersihan.
+- `tools/process_vo.sh input/vo_asal.m4a work/` — pipeline penuh VO (transkripsi, potong jeda + retake, noise reduction, EQ, loudness).

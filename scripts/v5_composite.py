@@ -57,6 +57,7 @@ print("table front range", bottoms_s.min(), bottoms_s.max())
 print("table edge range", edges_s.min(), edges_s.max())
 
 yy = np.arange(H, dtype=np.float32)[:, None]
+KERNEL = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
 enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", "30",
                         "-i", "-", "-c:v", "libx264", "-crf", "15", "-preset", "medium", "-pix_fmt", "yuv420p",
                         "video5/work/comp.mp4"], stdin=subprocess.PIPE)
@@ -72,7 +73,11 @@ for i, (f, a) in enumerate(zip(frames("video5/work/edit.mov", "rgb24", 3), frame
     fg = cv2.addWeighted(fg, 1.35, cv2.GaussianBlur(fg, (0, 0), 1.6), -0.35, 0)   # sharpen
     e = edges_s[i] + 6
     table = np.clip((yy - e) / 10, 0, 1) * np.clip((bottoms_s[i] - 4 - yy) / 6, 0, 1)
-    m = np.maximum(a.astype(np.float32) / 255, np.broadcast_to(table, (H, W)))
+    # fast-moving hands come out semi-transparent (motion blur); firm them up:
+    # levels on the matte, then a small close so blurred fingers stay solid
+    al = np.clip((a.astype(np.float32) / 255 - 0.06) / 0.5, 0, 1)
+    al = cv2.morphologyEx(al, cv2.MORPH_CLOSE, KERNEL)
+    m = np.maximum(al, np.broadcast_to(table, (H, W)))
     m = cv2.GaussianBlur(m, (0, 0), 1.2)[..., None]
     # light wrap: studio light bleeding over the speaker's edges
     edge = np.clip(m * (1 - m) * 4, 0, 1)

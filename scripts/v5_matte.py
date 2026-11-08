@@ -7,10 +7,10 @@ video5/work/alpha.mkv at 1080x1920. Model path is passed as argv[1].
 import subprocess, sys, numpy as np, onnxruntime as ort
 
 MODEL = sys.argv[1]
-W, H, w, h = 1080, 1920, 540, 960
+W, H, w, h = 1080, 1920, 1080, 1920   # full resolution for cleaner hand/finger edges
 sess = ort.InferenceSession(MODEL, providers=["CPUExecutionProvider"])
 rec = [np.zeros((1, 1, 1, 1), np.float32)] * 4
-ds = np.array([0.45], np.float32)
+ds = np.array([0.25], np.float32)        # RVM recommendation for HD input
 
 dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", "video5/work/edit.mov", "-vf", f"scale={w}:{h}",
                         "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)

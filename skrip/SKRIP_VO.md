@@ -64,3 +64,19 @@
 - Ejaan sari kata telah dibetulkan (cth. “kesihatan”, “meringankan”, “penyempurnaan”, “menikmati”, “Geran Sejahtera MADANI”).
 - Foto dalam preview diambil daripada imej storyboard (resolusi rendah). Untuk versi akhir, gantikan dengan footage/B-roll atau foto resolusi tinggi.
 - Tiada muzik latar dibekalkan — boleh ditambah pada versi akhir.
+
+## Sound effect (versi HD)
+
+SFX dijana sendiri (tiada isu hak cipta) dan diletak automatik pada setiap animasi. SFX di-*duck* (diperlahankan) bila VO bercakap supaya suara kekal jelas.
+
+| SFX | Bila digunakan | Contoh |
+|---|---|---|
+| Whoosh | Transisi wipe antara ikhtiar, masuk Ikhtiar 1, sebelum end card | 0:31.2, 1:00.4 |
+| Riser → Impact | Bar “ENAM IKHTIAR UNTUK RAKYAT” (intro & end card) | 0:01.0, 2:56.4 |
+| Impact (boom) | Kad tajuk nombor ikhtiar 1–6 | 0:04.1, 0:31.5 |
+| Pop | Kotak angka & pil (200 L, 300 L, RM1.5 BILION, +50%, 3 BULAN, RM6 BILION…) | 0:13.3 |
+| Soft pop | Ikon, kad & tile | Ikon intro 1–6 |
+| Ding | Setiap tanda ✓ dalam senarai semak | SK, SJKC, Penjaja… |
+| Tick roll + ding | Count-up angka (16 JUTA, 500,000, 100,000, 150, 2,000) | 0:24.6 |
+| Swoosh | Foto masuk / bertukar | 0:08.0 |
+| Shimmer | Tile ringkasan end card | 2:57.0 |

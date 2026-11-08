@@ -5,7 +5,10 @@ Video motion grafik ikut storyboard, dengan suara latar yang dah disunting dan d
 ## Fail utama
 | Fail | Keterangan |
 |---|---|
+| `output/final_1080p.mp4` | **Versi HD** 1920×1080, 30fps — VO bersih + sound effect + sari kata |
 | `output/preview_360p.mp4` | **Preview resolusi rendah** (640×360, 15fps, 3:00.7) — visual + VO + sari kata |
+| `output/audio_mix.m4a` | Audio akhir (VO + SFX, −16 LUFS) |
+| `sfx/*.wav` | Sound effect yang dijana (whoosh, impact, pop, ding, tick, riser, shimmer) |
 | `output/vo_bersih.m4a` | Suara latar akhir (dah disunting, noise reduction, EQ, −16 LUFS) |
 | `output/AB_sebelum_selepas.m4a` | Perbandingan: ~22s audio asal → senyap 1.2s → bahagian sama selepas dibersihkan |
 | `skrip/SKRIP_VO.pdf` | Skrip lengkap (masa, VO, visual setiap babak) + senarai suntingan + nota semakan |
@@ -15,6 +18,9 @@ Video motion grafik ikut storyboard, dengan suara latar yang dah disunting dan d
 - **4 ulangan/tersasul dibuang**: "pe–penyelenggaraan", ambilan pertama "disasarkan menerima peluang pembelajaran…" (retake dikekalkan), "Bagi me–", "Pembiar–".
 - **33 jeda janggal dipendekkan** (dalam ayat ≤0.26s, antara ayat ≈0.42s, antara ikhtiar ≈0.85s), senyap di awal dan hujung dibuang.
 - 3:18.2 → 2:52.1.
+
+## Sound effect
+`tools/sfx.py` jana SFX dan letak pada setiap animasi (dari `data/events.json`), kemudian dimix dengan VO dengan sidechain ducking. Senarai penuh dalam `skrip/SKRIP_VO.md`.
 
 ## Render semula (contoh 1080p 30fps)
 ```bash

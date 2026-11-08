@@ -61,3 +61,9 @@ Dua klip (IMG_2863 + IMG_2864) digabung, take berulang dan pause janggal dibuang
 - `video5/studio/studio.html` — latar studio
 - `scripts/v5_cut.py` → `v5_matte.py` (RVM) → `v5_composite.py` → `v5_audio.py`
 - Rakaman asal & fail perantaraan tak masuk repo (`video5/raw`, `video5/work`)
+
+## Video penuh — Opening + 4 point + Closing
+
+- `final/merdeka-penuh-HD.mp4` — 1080x1920, 3:23 (opening Jiwa Merdeka → Manfaat Merdeka → Warisan Perjuangan → Patriotisme → Kesejahteraan → closing + end card)
+- `final/merdeka-penuh-lowres.mp4` — preview low res
+- `scripts/enhance_and_join_full.py` — bersihkan suara 4 point, potong opening/closing dari video 5, gabung

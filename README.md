@@ -55,7 +55,8 @@ Video menegak 1080x1920 (47.4s) dalam `video4/`, ikut storyboard `video4/raw/sto
 
 Dua klip (IMG_2863 + IMG_2864) digabung, take berulang dan pause janggal dibuang, latar bilik diganti studio, suara dibersihkan, animasi ringkas ikut video reference.
 
-- `video5/output/jiwa-merdeka-lowres.mp4` — preview low res (540x960, 51.6s)
+- `video5/output/jiwa-merdeka-HD.mp4` — video siap HD (1080x1920, 51.6s, -14 LUFS)
+- `video5/output/jiwa-merdeka-lowres.mp4` — preview low res (540x960)
 - `video5/index.html` — komposisi HyperFrames (overlay, caption ikut suara, end card)
 - `video5/studio/studio.html` — latar studio
 - `scripts/v5_cut.py` → `v5_matte.py` (RVM) → `v5_composite.py` → `v5_audio.py`

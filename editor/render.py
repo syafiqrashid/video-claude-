@@ -152,6 +152,8 @@ def build_layers(prep, key, pstart, pvo, pend):
         o.img = to_rgba_scaled(L["rgb"], L["a"])
         x0, y0, x1, y1 = o.rect
         o.x, o.y = x0 * S, y0 * S + YOFF
+        mv = d.get("move", (0, 0))
+        o.x += mv[0] * S; o.y += mv[1] * S
         o.glow_img = None
         if o.glow:
             g = o.img.copy()

@@ -76,7 +76,8 @@ run("ffmpeg", "-y", "-loglevel", "error", "-i", W + "full_voice.wav", "-i", W + 
 
 # ---------- picture
 with open(W + "concat2.txt", "w") as f:
-    for i in range(4): f.write(f"file '{CHUNKS}/c{i}.mp4'\n")
+    names = os.environ.get("CHUNK_FILES", "c0 c1 c2 c3").split()
+    for nm in names: f.write(f"file '{CHUNKS}/{nm}.mp4'\n")
 run("ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", W + "concat2.txt", "-i", HF + f"opening_render{SUFFIX}.mp4",
     "-i", HF + f"closing_render{SUFFIX}.mp4", "-i", W + "full_mix.wav", "-filter_complex",
     f"[1:v]scale={OUT_W}:{OUT_H}:flags=lanczos,fps=30,setsar=1,trim=0:{OPEN_D},setpts=PTS-STARTPTS[o];"

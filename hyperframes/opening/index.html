@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Opening — 6 Ikhtiar Kerajaan MADANI</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --accent: #e8501c;
+        --ink: #ffffff;
+        --paper: #f9dfb0;
+        --font-display: "Poppins", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font-display); }
+      .plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="13.3" data-width="1080" data-height="1920">
+      <!-- talking head (sound is mixed separately) -->
+      <video id="op-video" class="clip plate" src="assets/opening.mp4" data-start="0" data-duration="12.05"
+        data-track-index="0" muted playsinline style="z-index: 1"></video>
+
+      <!-- giant words that sit behind the speaker -->
+      <div id="op-behind" data-composition-id="op-behind" data-composition-src="compositions/op-behind.html"
+        data-start="0" data-duration="9.2" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="position: absolute; inset: 0; z-index: 2"></div>
+
+      <!-- cutout of the speaker, same framing as the plate -->
+      <video id="op-cut" class="clip plate" src="assets/cut_opening.webm" data-start="0" data-duration="12.05"
+        data-track-index="2" muted playsinline data-layout-allow-occlusion style="z-index: 3"></video>
+
+      <!-- labels, chip, logo pill in front of the speaker -->
+      <div id="op-front" data-composition-id="op-front" data-composition-src="compositions/op-front.html"
+        data-start="0" data-duration="9.2" data-track-index="3" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="position: absolute; inset: 0; z-index: 4"></div>
+
+      <!-- spoken captions -->
+      <div id="op-caps" data-composition-id="op-caps" data-composition-src="compositions/op-caps.html"
+        data-start="0" data-duration="9.2" data-track-index="4" data-track-kind="captions"
+        data-width="1080" data-height="1920" style="position: absolute; inset: 0; z-index: 5"></div>
+
+      <!-- interlude: the six chapters, then zoom through chapter 1 into the content -->
+      <div id="op-grid" data-composition-id="op-grid" data-composition-src="compositions/op-grid.html"
+        data-start="9.1" data-duration="4.2" data-track-index="5" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="position: absolute; inset: 0; z-index: 6"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

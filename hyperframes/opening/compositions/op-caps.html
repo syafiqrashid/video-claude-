@@ -1,0 +1,33 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; font-family: "Poppins", sans-serif; }
+    .cap {
+      position: absolute; left: 0; width: 1080px; top: 1170px; text-align: center; overflow: visible;
+      font-weight: 700; font-size: 62px; color: #fff; letter-spacing: -0.015em; line-height: 1.15;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
+    }
+    .cap span { display: inline-block; margin: 0 6px; }
+    .cap .key { color: #ffd23f; }
+  </style>
+  <div id="root" data-composition-id="op-caps" data-width="1080" data-height="1920">
+    <div id="opc-g1" class="cap clip" data-start="2.08" data-duration="1.02"><span data-t="2.10">pada</span><span data-t="2.78">semua</span></div>
+    <div id="opc-g2" class="cap clip" data-start="3.08" data-duration="0.86"><span data-t="3.10">yang</span><span data-t="3.36">belum</span><span data-t="3.54" class="key">tahu,</span></div>
+    <div id="opc-g3" class="cap clip" data-start="3.96" data-duration="0.9"><span data-t="4.00">saya</span><span data-t="4.24">akan</span><span data-t="4.48">terangkan</span></div>
+    <div id="opc-g4" class="cap clip" data-start="4.84" data-duration="0.58"><span data-t="4.86">serba</span><span data-t="5.04">sedikit</span></div>
+    <div id="opc-g5" class="cap clip" data-start="8.04" data-duration="1.12"><span data-t="8.06">berikut</span><span data-t="8.84">adalah</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    document.querySelectorAll("#root .cap").forEach((g) => {
+      const st = parseFloat(g.dataset.start), en = st + parseFloat(g.dataset.duration);
+      g.querySelectorAll("span").forEach((w) => {
+        const t = parseFloat(w.dataset.t);
+        tl.fromTo(w, { opacity: 0, y: 14, filter: "blur(6px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.14, ease: "power4.out" }, t);
+      });
+      tl.to(g.querySelectorAll("span"), { opacity: 0, duration: 0.1, ease: "power2.in" }, en - 0.1);
+      tl.set(g, { opacity: 0, visibility: "hidden" }, en);
+    });
+    window.__timelines["op-caps"] = tl;
+  </script>
+</template>

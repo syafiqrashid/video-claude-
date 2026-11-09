@@ -1,0 +1,32 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; font-family: "Poppins", sans-serif; }
+    .cap {
+      position: absolute; left: 0; width: 1080px; top: 1170px; text-align: center; overflow: visible;
+      font-weight: 700; font-size: 62px; color: #fff; letter-spacing: -0.015em; line-height: 1.15;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
+    }
+    .cap.up { top: 880px; }
+    .cap span { display: inline-block; margin: 0 6px; }
+    .cap .key { color: #ffd23f; }
+  </style>
+  <div id="root" data-composition-id="cl-caps" data-width="1080" data-height="1920">
+    <div id="clc-g1" class="cap clip" data-start="0.1" data-duration="1.16"><span data-t="0.12">jika</span><span data-t="0.78">anda</span><span data-t="0.96" class="key">suka</span></div>
+    <div id="clc-g2" class="cap clip" data-start="1.24" data-duration="0.96"><span data-t="1.26">dengan</span><span data-t="1.60">video</span><span data-t="1.90">saya,</span></div>
+    <div id="clc-g3" class="cap up clip" data-start="2.24" data-duration="2.2"><span data-t="2.26">anda</span><span data-t="2.42">boleh</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    document.querySelectorAll("#root .cap").forEach((g) => {
+      const st = parseFloat(g.dataset.start), en = st + parseFloat(g.dataset.duration);
+      g.querySelectorAll("span").forEach((w) => {
+        const t = parseFloat(w.dataset.t);
+        tl.fromTo(w, { opacity: 0, y: 14, filter: "blur(6px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.14, ease: "power4.out" }, t);
+      });
+      tl.to(g.querySelectorAll("span"), { opacity: 0, duration: 0.1, ease: "power2.in" }, en - 0.1);
+      tl.set(g, { opacity: 0, visibility: "hidden" }, en);
+    });
+    window.__timelines["cl-caps"] = tl;
+  </script>
+</template>

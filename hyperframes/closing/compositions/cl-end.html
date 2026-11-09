@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Poppins", sans-serif; overflow: hidden; }
+    #cle-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, #23263a 0%, #14151f 60%, #0b0b11 100%); }
+    #cle-logo {
+      position: absolute; left: 0; width: 1080px; top: 560px; display: flex; justify-content: center;
+    }
+    #cle-logo-in { background: #fff; border-radius: 34px; padding: 26px 44px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    #cle-logo-in img { height: 170px; width: auto; display: block; }
+    #cle-thanks {
+      position: absolute; left: 0; width: 1080px; top: 860px; text-align: center; color: #fff;
+      font-weight: 800; font-size: 150px; letter-spacing: -0.05em; line-height: 1;
+    }
+    #cle-thanks span { display: inline-block; }
+    #cle-thanks .dot { color: var(--accent, #e8501c); }
+    #cle-sub {
+      position: absolute; left: 0; width: 1080px; top: 1060px; text-align: center;
+      font-weight: 600; font-size: 46px; color: rgba(255, 255, 255, 0.78); letter-spacing: -0.01em;
+    }
+    #cle-sub b { color: #ffd23f; font-weight: 800; }
+    #cle-row { position: absolute; left: 0; width: 1080px; top: 1170px; display: flex; justify-content: center; gap: 22px; }
+    .pill {
+      padding: 12px 28px; border-radius: 999px; border: 3px solid rgba(255,255,255,0.85);
+      color: #fff; font-weight: 700; font-size: 34px;
+    }
+  </style>
+  <div id="root" data-composition-id="cl-end" data-width="1080" data-height="1920">
+    <div id="cle-stage" class="clip" data-start="0" data-duration="3.3">
+      <div id="cle-bg"></div>
+      <div id="cle-logo"><div id="cle-logo-in"><img src="assets/madani-logo.png" alt="Malaysia MADANI" /></div></div>
+      <div id="cle-thanks"><span>terima</span> <span>kasih<span class="dot">.</span></span></div>
+      <div id="cle-sub">6 Ikhtiar Kerajaan <b>MADANI</b></div>
+      <div id="cle-row"><div class="pill">komen</div><div class="pill">share</div><div class="pill">like</div></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // colour flood upward from the bottom edge
+    tl.fromTo("#cle-bg", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.42, ease: "power3.inOut" }, 0);
+    tl.fromTo("#cle-logo-in", { opacity: 0, scale: 0.6, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.5)" }, 0.3);
+    tl.fromTo("#cle-thanks span", { opacity: 0, filter: "blur(10px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out", stagger: 0.12 }, 0.55);
+    tl.fromTo("#cle-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.85);
+    tl.fromTo("#cle-row .pill", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "expo.out", stagger: 0.08 }, 1.0);
+    // fade to black at the very end
+    tl.to("#cle-stage > *", { opacity: 0, duration: 0.5, ease: "power2.in" }, 2.75);
+    window.__timelines["cl-end"] = tl;
+  </script>
+</template>

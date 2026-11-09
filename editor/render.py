@@ -467,8 +467,8 @@ class Scene:
             M = np.float32([[1, 0, sh * 0.6], [0, 1, sh]])
             out = cv2.warpAffine(out, M, (OUT_W, OUT_H), borderMode=cv2.BORDER_REFLECT)
         # global fade in/out
-        if t < 0.35: out = (out * (t / 0.35)).astype(np.uint8)
-        if t > TOTAL - 0.6: out = (out * clamp((TOTAL - t) / 0.6)).astype(np.uint8)
+        if t < 0.35 and not os.environ.get("NOFADE"): out = (out * (t / 0.35)).astype(np.uint8)
+        if t > TOTAL - 0.6 and not os.environ.get("NOFADE"): out = (out * clamp((TOTAL - t) / 0.6)).astype(np.uint8)
         return out
 
 def sfx_events(scene):

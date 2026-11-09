@@ -153,7 +153,7 @@ function header(sceneNo, title, a){
 }
 function sceneBadge(no,x,y,a){
   pushT(x+20,y+12,lerp(.6,1,eBack(a)),a);
-  fillRR(x,y,40,24,6,C.yellow);text(String(no).padStart(2,'0'),x+20,y+18,{size:16,weight:900,align:'center',color:C.navy});
+  fillRR(x,y,40,24,6,C.yellow);text(String(no-1).padStart(2,"0"),x+20,y+18,{size:16,weight:900,align:'center',color:C.navy});
   popT();
 }
 function card(x,y,w,h){shadow(18,'rgba(0,10,40,.5)',6);fillRR(x,y,w,h,14,'#fff');noShadow();}
@@ -182,7 +182,7 @@ function scriptPanel(sceneNo,title,a){
   ctx.save();ctx.globalAlpha=clamp(a);
   card(x,y,PW,PH);
   // header
-  text(`BABAK ${sceneNo}`,x+16,y+28,{size:12,weight:800,color:C.blue});
+  text(`IKHTIAR ${sceneNo-1} DARIPADA 6`,x+16,y+28,{size:12,weight:800,color:C.blue});
   const tl=wrap(title,PW-32,19,900);
   tl.forEach((t,i)=>text(t,x+16,y+52+i*22,{size:19,weight:900,color:C.ink}));
   let yy=y+52+tl.length*22;

@@ -79,7 +79,12 @@ def to_rgba_scaled(rgb_bgr, a):
     rgba = np.dstack([rgb_bgr[..., ::-1], (a * 255).astype(np.uint8)])
     im = Image.fromarray(rgba.astype(np.uint8), "RGBA")
     w, h = im.size
-    return im.resize((max(1, round(w * S)), max(1, round(h * S))), Image.LANCZOS)
+    im = im.resize((max(1, round(w * S)), max(1, round(h * S))), Image.LANCZOS)
+    if S > 1.5:  # upscaled storyboard art: gentle unsharp mask on colour only
+        a = im.split()[3]
+        im = im.convert("RGB").filter(ImageFilter.UnsharpMask(radius=1.6, percent=70, threshold=2)).convert("RGBA")
+        im.putalpha(a)
+    return im
 
 class Layer:
     pass

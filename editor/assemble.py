@@ -11,6 +11,9 @@ OPEN_D, CONTENT_D, CLOSE_D = 13.3, 177.7, 8.9
 T_CONTENT, T_CLOSE = OPEN_D, OPEN_D + CONTENT_D
 TOTAL = T_CLOSE + CLOSE_D
 OUT = sys.argv[1]
+CHUNKS = os.environ.get("CHUNKS", "chunks2")
+SUFFIX = os.environ.get("HF_SUFFIX", "")
+CRF = os.environ.get("CRF", "23"); PRESET = os.environ.get("PRESET", "veryfast"); ABR = os.environ.get("ABR", "160k")
 
 def run(*a): subprocess.run(list(a), check=True)
 
@@ -73,13 +76,13 @@ run("ffmpeg", "-y", "-loglevel", "error", "-i", W + "full_voice.wav", "-i", W + 
 
 # ---------- picture
 with open(W + "concat2.txt", "w") as f:
-    for i in range(4): f.write(f"file 'chunks2/c{i}.mp4'\n")
-run("ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", W + "concat2.txt", "-i", HF + "opening_render.mp4",
-    "-i", HF + "closing_render.mp4", "-i", W + "full_mix.wav", "-filter_complex",
+    for i in range(4): f.write(f"file '{CHUNKS}/c{i}.mp4'\n")
+run("ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", W + "concat2.txt", "-i", HF + f"opening_render{SUFFIX}.mp4",
+    "-i", HF + f"closing_render{SUFFIX}.mp4", "-i", W + "full_mix.wav", "-filter_complex",
     f"[1:v]scale={OUT_W}:{OUT_H}:flags=lanczos,fps=30,setsar=1,trim=0:{OPEN_D},setpts=PTS-STARTPTS[o];"
     f"[0:v]scale={OUT_W}:{OUT_H}:flags=lanczos,fps=30,setsar=1,trim=0:{CONTENT_D},setpts=PTS-STARTPTS[m];"
     f"[2:v]scale={OUT_W}:{OUT_H}:flags=lanczos,fps=30,setsar=1,trim=0:{CLOSE_D},setpts=PTS-STARTPTS[c];"
     "[o][m][c]concat=n=3:v=1:a=0[v]",
-    "-map", "[v]", "-map", "3:a", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
-    "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", OUT)
+    "-map", "[v]", "-map", "3:a", "-c:v", "libx264", "-preset", PRESET, "-crf", CRF, "-profile:v", "high", "-pix_fmt", "yuv420p",
+    "-c:a", "aac", "-b:a", ABR, "-shortest", "-movflags", "+faststart", OUT)
 print("done", OUT, TOTAL)

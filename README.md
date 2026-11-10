@@ -35,10 +35,16 @@ claude
 
 ### 4. Pasang plugin HyperFrames
 
-Dalam Claude Code, taip arahan ini:
+Dalam Claude Code, tambah marketplace rasmi dahulu (langkau kalau sudah ada), kemudian pasang plugin:
+
+```
+/plugin marketplace add anthropics/claude-plugins-official
+```
 
 ```
 /plugin install hyperframes@claude-plugins-official
 ```
+
+Selepas pasang, mulakan semula Claude Code (keluar dan taip `claude` semula) supaya plugin dimuatkan.
 
 Selepas pemasangan, taip `/plugin` untuk memastikan HyperFrames tersenarai dan aktif.

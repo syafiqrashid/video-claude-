@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Daun Lebat, Buah Sikit</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; animation-play-state: paused !important; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0c2410; }
+  body { font-family: 'Inter', sans-serif; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(circle at 78% 10%, #f4ffb0 0%, #a6d65a 12%, #4c8d2c 30%, #1f4d19 55%, #0b2210 100%); }
+  .abs { position: absolute; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  svg { overflow: visible; }
+  svg g.a { transform-box: view-box; transform-origin: 0px 0px; }
+
+  /* ---------- typography ---------- */
+  .title { position: absolute; left: 0; right: 0; text-align: center; white-space: nowrap; font-weight: 900; font-style: italic;
+    text-transform: uppercase; letter-spacing: -2px; line-height: 0.95; }
+  .w  { color: #fff; -webkit-text-stroke: 16px #24093f; paint-order: stroke fill;
+        text-shadow: 0 12px 0 #24093f, 0 18px 30px rgba(0,0,0,.55); }
+  .y  { color: #ffd60a; -webkit-text-stroke: 16px #24093f; paint-order: stroke fill;
+        text-shadow: 0 12px 0 #24093f, 0 18px 30px rgba(0,0,0,.55); }
+  .tag { display: inline-block; padding: 14px 40px 22px; border-radius: 22px; transform: skewX(-8deg) rotate(-3deg);
+         background: linear-gradient(180deg, #6d28d9, #3b0a7a); border: 5px solid #b794f6;
+         box-shadow: 0 14px 0 #1e0640, 0 24px 40px rgba(0,0,0,.5); }
+  .tag.yel { background: linear-gradient(180deg, #ffe14d, #f5b800); border-color: #fff3a0; box-shadow: 0 14px 0 #8a5a00, 0 24px 40px rgba(0,0,0,.5); }
+  .tag > span { display: inline-block; transform: skewX(8deg); }
+  .p  { color: #3b0a7a; -webkit-text-stroke: 0; text-shadow: none; }
+
+  .card { position: absolute; border-radius: 36px; border: 4px solid rgba(190,255,140,.75);
+          background: linear-gradient(180deg, rgba(18,58,20,.94), rgba(8,32,10,.94));
+          box-shadow: 0 20px 50px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.2); color: #fff; }
+  .txt { font-weight: 800; color: #fff; text-shadow: 0 3px 8px rgba(0,0,0,.6); }
+
+  /* ---------- keyframes ---------- */
+  @keyframes popIn   { 0% { transform: scale(0); opacity: 0 } 55% { transform: scale(1.12); opacity: 1 } 78% { transform: scale(.96) } 100% { transform: scale(1); opacity: 1 } }
+  @keyframes dropIn  { 0% { transform: translateY(-260px) scale(1.2); opacity: 0 } 60% { transform: translateY(18px) scale(1); opacity: 1 } 100% { transform: translateY(0); opacity: 1 } }
+  @keyframes slideL  { 0% { transform: translateX(-1200px); opacity: 0 } 70% { transform: translateX(30px); opacity: 1 } 100% { transform: translateX(0); opacity: 1 } }
+  @keyframes slideR  { 0% { transform: translateX(1200px); opacity: 0 } 70% { transform: translateX(-30px); opacity: 1 } 100% { transform: translateX(0); opacity: 1 } }
+  @keyframes slideUp { 0% { transform: translateY(160px); opacity: 0 } 100% { transform: translateY(0); opacity: 1 } }
+  @keyframes fadeIn  { 0% { opacity: 0 } 100% { opacity: 1 } }
+  @keyframes draw    { 0% { stroke-dashoffset: 1 } 100% { stroke-dashoffset: 0 } }
+  @keyframes growY   { 0% { transform: scaleY(0) } 100% { transform: scaleY(1) } }
+  @keyframes bob     { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-18px) } }
+  @keyframes bobS    { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+  @keyframes pulse   { 0%,100% { transform: scale(1) } 50% { transform: scale(1.06) } }
+  @keyframes swing   { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
+  @keyframes spin    { 0% { transform: rotate(0) } 100% { transform: rotate(360deg) } }
+  @keyframes zoomIn  { 0% { transform: scale(1) } 100% { transform: scale(1.18) } }
+  @keyframes zoomOut { 0% { transform: scale(1.12) } 100% { transform: scale(1) } }
+  @keyframes drift   { 0% { transform: translate(0,0) } 50% { transform: translate(30px,-40px) } 100% { transform: translate(0,0) } }
+  @keyframes wiggle  { 0%,100% { transform: rotate(-8deg) } 50% { transform: rotate(10deg) } }
+  @keyframes flyIn   { 0% { transform: translate(560px, 820px) rotate(25deg); opacity: 0 } 100% { transform: translate(0,0) rotate(0); opacity: 1 } }
+  @keyframes shine   { 0% { transform: translateX(-140%) skewX(-20deg) } 100% { transform: translateX(260%) skewX(-20deg) } }
+  @keyframes flash   { 0% { opacity: 0 } 40% { opacity: .55 } 100% { opacity: 0 } }
+  @keyframes bee     { 0% { transform: translate(-60px, 20px) } 25% { transform: translate(10px,-30px) } 50% { transform: translate(60px, 10px) } 75% { transform: translate(0px, 30px) } 100% { transform: translate(-60px, 20px) } }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- global defs -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#a6e05a"/><stop offset=".5" stop-color="#5fae2e"/><stop offset="1" stop-color="#2c6e1a"/>
+      </linearGradient>
+      <linearGradient id="gLeaf2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8fd04a"/><stop offset=".6" stop-color="#3f8f24"/><stop offset="1" stop-color="#1f5514"/>
+      </linearGradient>
+      <linearGradient id="gStem" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#4f8f2a"/><stop offset=".5" stop-color="#8acb4f"/><stop offset="1" stop-color="#3f7a20"/>
+      </linearGradient>
+      <radialGradient id="gEgg" cx=".35" cy=".35" r=".8">
+        <stop offset="0" stop-color="#b56be0"/><stop offset=".45" stop-color="#6a1fa0"/><stop offset="1" stop-color="#2a0748"/>
+      </radialGradient>
+      <radialGradient id="gSoil" cx=".5" cy=".3" r=".7">
+        <stop offset="0" stop-color="#6b4a2e"/><stop offset=".7" stop-color="#3a2516"/><stop offset="1" stop-color="#1c120a"/>
+      </radialGradient>
+      <radialGradient id="gBokeh" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".7" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="gSun" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff7b0"/><stop offset=".6" stop-color="#ffd60a"/><stop offset="1" stop-color="#f59e0b"/>
+      </radialGradient>
+      <!-- leaf: base at 0,0 pointing +x, length 150 -->
+      <g id="leaf">
+        <path d="M0,0 C30,-58 92,-66 128,-30 C140,-18 148,-8 152,0 C146,10 136,22 124,32 C88,64 30,56 0,0Z" fill="url(#gLeaf)" stroke="#2a6116" stroke-width="2"/>
+        <path d="M2,0 C50,-4 100,-3 150,0" stroke="#d6f5a8" stroke-width="3" fill="none" opacity=".85"/>
+        <path d="M40,-2 L62,-30 M70,-2 L94,-30 M100,-1 L118,-22 M45,1 L66,30 M76,1 L98,28 M104,1 L120,20" stroke="#c8ef94" stroke-width="2" fill="none" opacity=".6"/>
+      </g>
+      <g id="leafD">
+        <path d="M0,0 C30,-58 92,-66 128,-30 C140,-18 148,-8 152,0 C146,10 136,22 124,32 C88,64 30,56 0,0Z" fill="url(#gLeaf2)" stroke="#1d4a10" stroke-width="2"/>
+        <path d="M2,0 C50,-4 100,-3 150,0" stroke="#b9e58a" stroke-width="3" fill="none" opacity=".7"/>
+      </g>
+      <!-- eggplant: attach at 0,0, hangs down ~130 -->
+      <g id="egg">
+        <path d="M-4,8 C-28,20 -34,58 -30,90 C-26,122 -10,140 8,138 C30,136 38,112 33,80 C28,46 18,14 -4,8Z" fill="url(#gEgg)" stroke="#22053a" stroke-width="2"/>
+        <ellipse cx="-14" cy="62" rx="6" ry="26" fill="#fff" opacity=".35" transform="rotate(8 -14 62)"/>
+        <path d="M-20,14 L-6,30 L0,12 L10,30 L20,12 L6,4 L-6,4Z" fill="#4f9a2c" stroke="#24561a" stroke-width="2"/>
+        <rect x="-4" y="-10" width="7" height="20" rx="3" fill="#5a9b30"/>
+      </g>
+      <!-- flower: centre at 0,0 radius ~26 -->
+      <g id="flower">
+        <g fill="#c9a2f0" stroke="#8f5fd0" stroke-width="2">
+          <ellipse cx="0" cy="-15" rx="11" ry="16"/>
+          <ellipse cx="0" cy="-15" rx="11" ry="16" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-15" rx="11" ry="16" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-15" rx="11" ry="16" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-15" rx="11" ry="16" transform="rotate(288)"/>
+        </g>
+        <circle r="8" fill="#ffd60a" stroke="#d29a00" stroke-width="2"/>
+      </g>
+      <g id="bud">
+        <path d="M0,0 C-8,-6 -9,-20 0,-28 C9,-20 8,-6 0,0Z" fill="#7cc443" stroke="#3a7a1f" stroke-width="2"/>
+        <path d="M0,-6 C-4,-12 -3,-22 0,-26" stroke="#b78ae0" stroke-width="3" fill="none"/>
+      </g>
+      <g id="check"><path d="M-30,2 L-8,24 L32,-22" pathLength="1" stroke-dasharray="1" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </defs>
+  </svg>
+
+  <div id="bokeh" class="abs" style="inset:0"></div>
+  <div id="scenes"></div>
+  <div id="fgleaves" class="abs" style="inset:0;pointer-events:none"></div>
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.45) 100%)"></div>
+  <div id="flashes" class="abs" style="inset:0;pointer-events:none"></div>
+</div>
+
+<script>
+const T = 30;
+// ---------- helpers ----------
+const EB = 'cubic-bezier(.34,1.56,.64,1)', EO = 'cubic-bezier(.16,1,.3,1)';
+const A = (name, dur, delay, ease = EO) => `animation:${name} ${dur}s ${ease} ${delay}s both;`;
+const L = (name, dur, delay = 0, ease = 'ease-in-out') => `animation:${name} ${dur}s ${ease} ${delay}s infinite both;`;
+let seed = 7; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+// ---------- plant generator (viewBox 0 0 400 600, base at 200,580) ----------
+function plant(o) {
+  const n = o.nodes ?? 8, H = o.h ?? 420, t0 = o.t0 ?? 0, dt = o.dt ?? 0.08, ls = o.ls ?? 1;
+  const bx = 200, by = 575, topX = bx + (o.lean ?? 8);
+  let s = '';
+  // soil
+  s += `<ellipse cx="200" cy="582" rx="185" ry="26" fill="url(#gSoil)"/>`;
+  for (let i = 0; i < 14; i++) { const x = 40 + rnd() * 320, y = 572 + rnd() * 18; s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(3 + rnd() * 6).toFixed(1)}" fill="${rnd() > .5 ? '#4a3220' : '#2a1a0e'}"/>`; }
+  // stem
+  const stemD = `M${bx},${by} C${bx - 10},${by - H * .35} ${topX + 12},${by - H * .7} ${topX},${by - H}`;
+  const stemStyle = o.growStem ? `stroke-dasharray:1;${A('draw', o.growStem, t0, 'ease-out')}` : '';
+  s += `<path d="${stemD}" pathLength="1" fill="none" stroke="url(#gStem)" stroke-width="${o.sw ?? 13}" stroke-linecap="round" style="${stemStyle}"/>`;
+  const pt = f => { // approx point on stem at fraction f
+    const u = 1 - f, p0 = [bx, by], p1 = [bx - 10, by - H * .35], p2 = [topX + 12, by - H * .7], p3 = [topX, by - H];
+    return [0, 1].map(k => u * u * u * p0[k] + 3 * u * u * f * p1[k] + 3 * u * f * f * p2[k] + f * f * f * p3[k]);
+  };
+  const leaves = [], extras = [];
+  for (let i = 0; i < n; i++) {
+    const f = 0.12 + 0.84 * i / (n - 1);
+    const [x, y] = pt(f);
+    const side = i % 2 ? 1 : -1;
+    const sc = ls * (1.15 - 0.55 * i / n) * (0.9 + rnd() * .2);
+    const ang = (side > 0 ? -18 : -18) - rnd() * 22 - (i / n) * 25;
+    const px = x + side * 22, py = y - 10;
+    const delay = t0 + (o.growStem ? o.growStem * f * .9 : 0) + i * dt;
+    leaves.push(`<path d="M${x.toFixed(1)},${y.toFixed(1)} Q${(x + side * 12).toFixed(1)},${(y - 2).toFixed(1)} ${px.toFixed(1)},${py.toFixed(1)}" stroke="#5c9e33" stroke-width="5" fill="none" style="${A('fadeIn', .2, delay)}"/>` +
+      `<g transform="translate(${px.toFixed(1)},${py.toFixed(1)}) scale(${side},1) rotate(${ang.toFixed(1)})"><g class="a" style="${A('popIn', .5, delay, EB)}"><g class="a" style="${L('swing', 3 + rnd() * 2, -rnd() * 4)}"><use href="#${rnd() > .4 ? 'leaf' : 'leafD'}" transform="scale(${sc.toFixed(2)})"/></g></g></g>`);
+    if (o.flowers && o.flowers.includes(i)) {
+      const d = (o.fT ?? delay + .3) + o.flowers.indexOf(i) * .15;
+      extras.push(`<g transform="translate(${(x - side * 24).toFixed(1)},${(y - 4).toFixed(1)})"><g class="a" style="${A('popIn', .5, d, EB)}"><use href="#flower" transform="scale(${o.fs ?? 1})"/></g></g>`);
+    }
+    if (o.buds && o.buds.includes(i)) {
+      extras.push(`<g transform="translate(${(x - side * 14).toFixed(1)},${(y - 2).toFixed(1)})"><g class="a" style="${A('popIn', .4, delay + .2, EB)}"><use href="#bud" transform="scale(.8)"/></g></g>`);
+    }
+    if (o.fruits && o.fruits.includes(i)) {
+      const d = (o.eT ?? delay + .4) + o.fruits.indexOf(i) * .18;
+      extras.push(`<g transform="translate(${(x + side * 26).toFixed(1)},${(y + 4).toFixed(1)})"><g class="a" style="${A('popIn', .6, d, EB)}"><g class="a" style="${L('swing', 2.6, -i * .3)}"><use href="#egg" transform="scale(${(o.es ?? 1) * (side > 0 ? -1 : 1)},${o.es ?? 1})"/></g></g></g>`);
+    }
+  }
+  // top crown
+  const [tx, ty] = pt(1);
+  const dTop = t0 + (o.growStem ?? 0) + n * dt;
+  [-1, 1].forEach((sd, k) => leaves.push(`<g transform="translate(${tx},${ty}) scale(${sd},1) rotate(-70)"><g class="a" style="${A('popIn', .5, dTop + k * .1, EB)}"><use href="#leaf" transform="scale(${(ls * .5).toFixed(2)})"/></g></g>`));
+  return s + leaves.join('') + extras.join('') + (o.extra ?? '');
+}
+const plantSVG = (o, w, h, style = '', vb = '0 0 400 600') => `<svg class="abs" viewBox="${vb}" preserveAspectRatio="xMidYMax meet" width="${w}" height="${h}" style="${style}">${plant(o)}</svg>`;
+
+// ---------- scenes ----------
+const scenes = [];
+const S = (t0, t1, html) => scenes.push({ t0, t1, html });
+
+// BABAK 1 — 0:00–0:04 HOOK
+S(0, 4, `
+  <div class="abs" style="inset:0;transform-origin:50% 62%;${A('zoomIn', 4, 0, 'ease-in-out')}">
+    ${plantSVG({ nodes: 11, h: 440, ls: 1.25, t0: 0, dt: .04, buds: [7],
+      extra: `<g transform="translate(212,232)"><g class="a" style="${A('popIn', .5, 1.5, EB)}">
+                <g class="a" style="${L('spin', 6)}"><circle r="40" fill="none" stroke="#ffd60a" stroke-width="6" stroke-dasharray="16 10"/></g></g></g>
+              <g transform="translate(300,175)"><g class="a" style="${A('popIn', .55, 1.9, EB)}"><g class="a" style="${L('bob', 1.1)}">
+                <text x="0" y="0" text-anchor="middle" font-family="Inter" font-weight="900" font-size="120" fill="#e01e37" stroke="#fff" stroke-width="10" paint-order="stroke" transform="rotate(12)">?</text></g></g></g>` },
+      1080, 1450, 'left:0;bottom:-40px')}
+  </div>
+  <div class="title" style="top:170px;transform:rotate(-4deg)">
+    <div class="w" style="font-size:132px;${A('dropIn', .6, .15)}">DAUN LEBAT,</div>
+    <div class="y" style="font-size:146px;margin-top:6px;${A('popIn', .6, .55, EB)}">BUAH SIKIT?</div>
+    <svg width="760" height="70" viewBox="0 0 760 70" style="margin-top:4px">
+      <path d="M20,50 C220,10 520,8 740,30" pathLength="1" fill="none" stroke="#e01e37" stroke-width="18" stroke-linecap="round" style="stroke-dasharray:1;${A('draw', .5, 1.05)}"/>
+    </svg>
+  </div>`);
+
+// BABAK 2 — 0:04–0:09 PUNCA UTAMA
+S(4, 9, `
+  <div class="title" style="top:150px">
+    <div style="${A('popIn', .6, 4.25, EB)}"><div class="tag"><span class="y" style="font-size:118px">PUNCA UTAMA</span></div></div>
+  </div>
+  ${plantSVG({ nodes: 12, h: 520, ls: 1.05, t0: 4.5, growStem: 1.2, dt: .03, buds: [9, 10], lean: 4 }, 1080, 1420, 'left:40px;bottom:-30px')}
+  <svg class="abs" width="1080" height="1920" style="left:0;top:0">
+    ${[[420, 1250, 5.5], [700, 1150, 5.7]].map(([x, y, d]) => `
+      <g transform="translate(${x},${y})"><g class="a" style="${A('popIn', .5, d, EB)}"><g class="a" style="${L('bob', 1, d)}">
+        <path d="M-22,140 L-22,10 L-50,10 L0,-60 L50,10 L22,10 L22,140Z" fill="#ffe14d" stroke="#fff6b0" stroke-width="5" opacity=".95" style="filter:drop-shadow(0 0 18px #ffd60a)"/>
+      </g></g></g>`).join('')}
+  </svg>
+  <div class="card" style="left:40px;top:1290px;width:450px;height:250px;${A('slideL', .7, 6.0)}">
+    <svg class="abs" width="90" height="90" viewBox="-10 -50 170 100" style="left:26px;top:80px"><use href="#leaf"/></svg>
+    <div class="txt abs" style="left:130px;top:40px;font-size:44px;line-height:1.12">DAUN &amp; BATANG<br>TERLALU<br><span style="color:#ffd60a">DOMINAN</span></div>
+  </div>
+  <div class="abs" style="left:720px;top:1010px;width:320px;height:320px;${A('popIn', .6, 6.6, EB)}">
+    <div class="abs" style="inset:0;border-radius:50%;border:10px solid #ffd60a;box-shadow:0 0 40px #ffd60a, inset 0 0 40px rgba(0,0,0,.5);
+         background:radial-gradient(circle,#4c8d2c,#173d12);overflow:hidden">
+      <svg viewBox="-80 -90 160 160" width="300" height="300">
+        <path d="M0,70 C-2,30 2,0 0,-30" stroke="#6cae3a" stroke-width="8" fill="none"/>
+        <path d="M0,20 C-20,10 -36,-6 -44,-20" stroke="#6cae3a" stroke-width="6" fill="none"/>
+        <path d="M0,0 C20,-6 34,-20 40,-34" stroke="#6cae3a" stroke-width="6" fill="none"/>
+        <use href="#bud" transform="translate(-44,-18) scale(1.6) rotate(-20)"/>
+        <use href="#bud" transform="translate(40,-32) scale(1.4) rotate(20)"/>
+        <use href="#bud" transform="translate(0,-28) scale(1.8)"/>
+      </svg>
+    </div>
+    <div class="txt abs" style="left:-40px;right:-40px;top:330px;text-align:center;font-size:38px">Bunga <span style="color:#ffd60a">kurang</span></div>
+  </div>`);
+
+// BABAK 3 — 0:09–0:16 NUTRIEN PERLU SEIMBANG
+const bars = (vals, color, d) => `<div class="abs" style="left:60px;right:60px;top:690px;height:250px;display:flex;justify-content:space-around;align-items:flex-end;${A('fadeIn', .3, d - .1)}">
+  ${vals.map((v, i) => `<div style="width:90px;display:flex;flex-direction:column;align-items:center">
+      <div class="txt" style="font-size:30px;margin-bottom:6px;${A('fadeIn', .3, d + .3 + i * .15)}">${v}%</div>
+      <div style="width:76px;height:${v * 1.8}px;border-radius:14px 14px 4px 4px;background:linear-gradient(180deg,${color[i]},rgba(0,0,0,.25)),${color[i]};
+           box-shadow:0 0 18px ${color[i]}88;transform-origin:50% 100%;${A('growY', .7, d + i * .15, EB)}"></div>
+      <div class="txt" style="font-size:40px;margin-top:8px;font-weight:900">${'NPK'[i]}</div></div>`).join('')}</div>`;
+const badge = (ok, text, d) => `<div class="abs" style="left:24px;right:24px;top:1000px;height:170px;border-radius:30px;display:flex;align-items:center;gap:18px;padding:0 20px;
+    background:rgba(0,0,0,.45);border:4px solid ${ok ? '#4ade80' : '#f87171'};${A('popIn', .6, d, EB)}">
+    <svg width="104" height="104" viewBox="-52 -52 104 104" style="flex:none"><circle r="48" fill="${ok ? '#22a447' : '#d62828'}" stroke="#fff" stroke-width="6"/>
+      ${ok ? `<g transform="scale(.9)"><use href="#check" style="stroke:#fff;${A('draw', .4, d + .3)}"/></g>`
+           : `<path d="M-20,-20 L20,20 M20,-20 L-20,20" stroke="#fff" stroke-width="13" stroke-linecap="round"/>`}</svg>
+    <div class="txt" style="font-size:36px;line-height:1.15">${text}</div></div>`;
+const head = (bg, a, b, d) => `<div class="abs" style="left:40px;right:40px;top:34px;height:130px;border-radius:24px;background:${bg};border:4px solid rgba(255,255,255,.6);
+    text-align:center;padding-top:14px;box-shadow:0 10px 24px rgba(0,0,0,.4);${A('popIn', .5, d, EB)}">
+    <div class="txt" style="font-size:50px;font-weight:900;line-height:1">${a}</div><div class="txt" style="font-size:32px;margin-top:6px">${b}</div></div>`;
+S(9, 16, `
+  <div class="title" style="top:120px;transform:rotate(-3deg)">
+    <div class="w" style="font-size:140px;${A('dropIn', .6, 9.15)}">NUTRIEN</div>
+    <div style="margin-top:14px;${A('popIn', .6, 9.5, EB)}"><div class="tag"><span class="y" style="font-size:96px">PERLU SEIMBANG</span></div></div>
+  </div>
+  <div class="abs" style="left:40px;top:620px;width:1000px;height:1210px;border-radius:44px;background:rgba(6,26,8,.78);border:4px solid rgba(255,255,255,.28);
+       box-shadow:0 30px 60px rgba(0,0,0,.5);${A('slideUp', .6, 9.9)}">
+    <div class="abs" style="left:498px;top:40px;bottom:40px;width:4px;background:rgba(255,255,255,.25)"></div>
+    <div class="abs" style="left:0;top:0;width:500px;height:100%">
+      ${head('linear-gradient(180deg,#ef4444,#991b1b)', 'NITROGEN', '(BERLEBIHAN)', 10.2)}
+      ${plantSVG({ nodes: 12, h: 430, ls: 1.2, t0: 10.4, dt: .05, sw: 15 }, 460, 520, `left:20px;top:170px;${A('fadeIn', .3, 10.3)}`)}
+      ${bars([92, 22, 26], ['#ef4444', '#f59e0b', '#f59e0b'], 11.2)}
+      ${badge(false, 'Banyak Daun,<br>Kurang Buah', 12.0)}
+    </div>
+    <div class="abs" style="left:500px;top:0;width:500px;height:100%">
+      ${head('linear-gradient(180deg,#22c55e,#166534)', 'N, P, K', '(SEIMBANG)', 12.7)}
+      ${plantSVG({ nodes: 9, h: 400, ls: .95, t0: 12.9, dt: .05, flowers: [3, 6, 7], fT: 13.5, fruits: [2, 4, 5], eT: 13.8, es: .95 }, 460, 520, `left:20px;top:170px;${A('fadeIn', .3, 12.8)}`)}
+      ${bars([68, 64, 66], ['#22c55e', '#22c55e', '#22c55e'], 14.0)}
+      ${badge(true, 'Daun Sihat,<br>Bunga &amp; Buah Bertambah', 14.7)}
+    </div>
+  </div>`);
+
+// BABAK 4 — 0:16–0:22 FAKTOR LAIN
+const sunIcon = `<svg width="190" height="190" viewBox="-100 -100 200 200"><g class="a" style="${L('spin', 10, 0, 'linear')}">
+  ${Array.from({ length: 12 }, (_, i) => `<path d="M-8,-62 L0,-92 L8,-62Z" fill="#ffd60a" transform="rotate(${i * 30})"/>`).join('')}</g>
+  <circle r="52" fill="url(#gSun)" stroke="#fff3a0" stroke-width="4"/></svg>`;
+const thermoIcon = `<svg width="190" height="190" viewBox="-100 -100 200 200">
+  <rect x="-22" y="-88" width="44" height="130" rx="22" fill="#f8fafc" stroke="#94a3b8" stroke-width="5"/>
+  <circle cx="0" cy="56" r="34" fill="#e11d48" stroke="#94a3b8" stroke-width="5"/>
+  <rect x="-11" y="-70" width="22" height="120" rx="11" fill="#e11d48" style="transform-box:fill-box;transform-origin:50% 100%;${A('growY', 1.2, 18.1, EB)}"/>
+  ${[-60, -40, -20, 0, 20].map(y => `<line x1="24" y1="${y}" x2="40" y2="${y}" stroke="#fff" stroke-width="4"/>`).join('')}</svg>`;
+const beeSVG = `<g><ellipse cx="0" cy="0" rx="30" ry="20" fill="#ffd60a" stroke="#1f1300" stroke-width="3"/>
+  <path d="M-10,-19 L-10,19 M6,-20 L6,20" stroke="#1f1300" stroke-width="8"/>
+  <circle cx="30" cy="-2" r="13" fill="#1f1300"/>
+  <ellipse cx="-4" cy="-28" rx="16" ry="12" fill="#e0f2fe" opacity=".85" stroke="#7dd3fc" stroke-width="2"/>
+  <ellipse cx="12" cy="-26" rx="12" ry="10" fill="#e0f2fe" opacity=".85" stroke="#7dd3fc" stroke-width="2"/></g>`;
+const pollIcon = `<svg width="200" height="200" viewBox="-100 -100 200 200">
+  <use href="#flower" transform="translate(0,20) scale(2.6)"/>
+  <g transform="translate(10,-50)"><g class="a" style="${L('bee', 3, 0)}">${beeSVG}</g></g></svg>`;
+const factor = (top, d, icon, t1, t2, right) => `<div class="card" style="left:40px;top:${top}px;width:1000px;height:310px;overflow:hidden;
+    border-color:rgba(255,226,110,.85);${A('slideL', .75, d)}">
+    <div class="abs" style="right:0;top:0;bottom:0;width:520px;background:${right};-webkit-mask-image:linear-gradient(90deg,transparent,#000 60%);"></div>
+    <div class="abs" style="left:40px;top:58px;${A('popIn', .6, d + .45, EB)}">${icon}</div>
+    <div class="abs" style="left:270px;top:70px">
+      <div class="txt" style="font-size:72px;font-weight:900;letter-spacing:-1px">${t1}</div>
+      <div class="txt" style="font-size:40px;font-weight:600;margin-top:8px;line-height:1.2">${t2}</div></div>
+    <div class="abs" style="top:0;bottom:0;left:0;width:180px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);${A('shine', 1, d + .6, 'ease-in-out')}"></div>
+  </div>`;
+S(16, 22, `
+  <div class="title" style="top:150px;transform:rotate(-3deg)">
+    <div class="w" style="font-size:126px;${A('dropIn', .6, 16.15)}">FAKTOR LAIN</div>
+    <div style="margin-top:16px;${A('popIn', .6, 16.5, EB)}"><div class="tag"><span class="y" style="font-size:76px">YANG MEMPENGARUHI</span></div></div>
+  </div>
+  ${factor(640, 17.0, sunIcon, 'CAHAYA', '(≥ 6 jam sehari)', 'radial-gradient(circle at 85% 20%,#fff7c2,#ffd166 25%,#7fb3d5 55%,#3d7a3a 100%)')}
+  ${factor(1010, 17.8, thermoIcon, 'SUHU', '(24 – 32°C)', 'linear-gradient(90deg,#7f1d1d,#ea580c 50%,#65a30d)')}
+  ${factor(1380, 18.6, pollIcon, 'PENDEBUNGAAN', '(Bantu proses<br>pembentukan buah)', 'radial-gradient(circle at 80% 50%,#a3e635,#3f7a20 60%,#1a3d12)')}
+`);
+
+// BABAK 5 — 0:22–0:27 JANGAN TENGOK DAUN SAHAJA
+const chk = (top, text, d) => `<div class="abs" style="left:560px;top:${top}px;width:490px;height:124px;border-radius:26px;display:flex;align-items:center;gap:20px;padding:0 22px;
+    background:linear-gradient(180deg,rgba(18,58,20,.95),rgba(8,32,10,.95));border:4px solid rgba(190,255,140,.8);box-shadow:0 14px 30px rgba(0,0,0,.45);${A('slideR', .6, d)}">
+    <svg width="78" height="78" viewBox="-40 -40 80 80" style="flex:none"><rect x="-36" y="-36" width="72" height="72" rx="14" fill="#16a34a" stroke="#bbf7d0" stroke-width="5"/>
+      <g transform="scale(.8)"><use href="#check" style="stroke:#fff;${A('draw', .35, d + .45)}"/></g></svg>
+    <div class="txt" style="font-size:40px;line-height:1.1">${text}</div></div>`;
+S(22, 27, `
+  <div class="title" style="top:140px;transform:rotate(-3deg)">
+    <div class="w" style="font-size:112px;${A('dropIn', .6, 22.15)}">JANGAN TENGOK</div>
+    <div style="margin-top:14px;${A('popIn', .6, 22.5, EB)}"><div class="tag yel"><span class="p" style="font-size:112px">DAUN SAHAJA!</span></div></div>
+  </div>
+  <div class="abs" style="inset:0;transform-origin:30% 80%;${A('zoomOut', 5, 22, 'ease-out')}">
+    ${plantSVG({ nodes: 10, h: 470, ls: 1.15, t0: 22.3, dt: .04, flowers: [5, 8], fs: 1.3, fruits: [2, 3, 5], eT: 22.9, es: 1.1 }, 760, 1300, 'left:-110px;bottom:-30px')}
+  </div>
+  ${chk(660, 'Periksa nutrien', 23.2)}
+  ${chk(820, 'Periksa bunga', 23.8)}
+  ${chk(980, 'Periksa keadaan<br>tanaman', 24.4)}
+  <div class="abs" style="left:560px;top:1300px;${A('flyIn', 1, 24.9)}">
+    <div style="${L('bobS', 2, 25.9)}">
+      <div class="abs" style="left:250px;top:280px;width:60px;height:260px;border-radius:26px;background:linear-gradient(90deg,#3a2a1a,#8a6a4a,#3a2a1a);transform:rotate(-40deg);transform-origin:50% 0"></div>
+      <div class="abs" style="left:0;top:0;width:360px;height:360px;border-radius:50%;border:22px solid #cbd5e1;box-shadow:0 0 0 6px #475569, 0 20px 40px rgba(0,0,0,.5), inset 0 0 30px rgba(0,0,0,.35);
+           background:radial-gradient(circle at 50% 50%,#6fbf3e,#2b6a1c);overflow:hidden">
+        <svg viewBox="-60 -60 120 120" width="316" height="316" style="position:absolute;left:0;top:0"><use href="#flower" transform="scale(1.9)"/></svg>
+        <div class="abs" style="left:40px;top:30px;width:120px;height:60px;border-radius:50%;background:rgba(255,255,255,.35);transform:rotate(-30deg)"></div>
+      </div>
+    </div>
+  </div>`);
+
+// BABAK 6 — 0:27–0:30 KESIMPULAN
+const pItem = (text, d) => `<div style="display:flex;align-items:center;gap:26px;padding:22px 10px;border-bottom:3px dashed rgba(120,90,40,.35);${A('slideL', .5, d)}">
+    <svg width="76" height="76" viewBox="-40 -40 80 80" style="flex:none"><rect x="-34" y="-34" width="68" height="68" rx="10" fill="#fff" stroke="#3f6212" stroke-width="5"/>
+      <g transform="scale(.85)"><use href="#check" style="stroke:#15803d;${A('draw', .3, d + .25)}"/></g></svg>
+    <div style="font-size:44px;font-weight:800;color:#1f2a10;line-height:1.15">${text}</div></div>`;
+const basket = `<svg width="640" height="520" viewBox="-320 -300 640 520">
+  ${[[-200, -250, -50], [-90, -330, -20], [60, -340, 18], [180, -260, 45], [-150, -170, -70], [130, -180, 65], [0, -260, 0]].map(([x, y, r]) =>
+    `<use href="#egg" transform="translate(${x},${y}) rotate(${r}) scale(2.9)"/>`).join('')}
+  <path d="M-280,-40 L280,-40 L230,200 L-230,200Z" fill="#a0692e" stroke="#5a3712" stroke-width="6"/>
+  ${[0, 1, 2, 3, 4].map(i => `<path d="M${-270 + i * 4},${0 + i * 45} L${270 - i * 4},${0 + i * 45}" stroke="#6b4214" stroke-width="10"/>`).join('')}
+  ${Array.from({ length: 11 }, (_, i) => `<path d="M${-250 + i * 50},-40 L${-205 + i * 41},200" stroke="#7a4b18" stroke-width="6"/>`).join('')}
+  <rect x="-295" y="-58" width="590" height="36" rx="16" fill="#c48a43" stroke="#5a3712" stroke-width="6"/></svg>`;
+S(27, 30.5, `
+  <div class="title" style="top:180px;transform:rotate(-3deg)">
+    <div style="${A('popIn', .55, 27.05, EB)}"><div class="tag"><span class="w" style="font-size:124px">KESIMPULAN</span></div></div>
+  </div>
+  <div class="abs" style="left:70px;top:520px;width:940px;padding:30px 40px 36px;border-radius:12px;transform:rotate(-1.5deg);
+       background:repeating-linear-gradient(180deg,transparent 0 58px,rgba(150,120,70,.12) 58px 60px),linear-gradient(135deg,#fbf5e2,#efe2bf);
+       box-shadow:0 26px 50px rgba(0,0,0,.5);${A('popIn', .5, 27.25, EB)}">
+    ${pItem('Nutrien seimbang (N, P, K)', 27.45)}
+    ${pItem('Cahaya, suhu &amp;<br>pendebungaan cukup', 27.7)}
+    ${pItem('Pantau bunga &amp; buah<br>secara berkala', 27.95)}
+  </div>
+  <div class="abs" style="right:-90px;bottom:30px;transform-origin:100% 100%;scale:.85;${A('slideUp', .7, 28.1)}">${basket}</div>
+  <div class="abs" style="left:30px;top:1200px;${A('popIn', .6, 28.4, EB)}">
+    <div style="${L('pulse', 1.2, 29)};transform-origin:30% 50%">
+      <div class="tag" style="padding:22px 44px 30px;transform:skewX(-8deg) rotate(-4deg)"><span style="white-space:nowrap">
+        <div class="w" style="font-size:66px;font-weight:900;font-style:italic;-webkit-text-stroke:10px #24093f;text-shadow:0 6px 0 #24093f">Hasilnya...</div>
+        <div class="y" style="font-size:62px;font-weight:900;font-style:italic;line-height:1.05;-webkit-text-stroke:10px #24093f;text-shadow:0 6px 0 #24093f">Lebih Banyak Buah,<br>Lebih Menguntungkan!</div>
+      </span></div>
+    </div>
+  </div>`);
+
+// ---------- build ----------
+const root = document.getElementById('scenes');
+const css = [];
+scenes.forEach((s, i) => {
+  const p = t => (Math.max(0, Math.min(T, t)) / T * 100).toFixed(3) + '%';
+  const fi = 0.35, fo = 0.35;
+  css.push(`@keyframes vis${i}{0%{opacity:${i ? 0 : 1};transform:scale(1)} ${i ? `${p(s.t0)}{opacity:0;transform:scale(1.06)} ${p(s.t0 + fi)}{opacity:1;transform:scale(1)}` : ''}
+    ${p(s.t1 - fo + .2)}{opacity:1;transform:scale(1)} ${s.t1 < T ? `${p(s.t1 + .2)}{opacity:0;transform:scale(.97)}` : ''} 100%{opacity:${s.t1 < T ? 0 : 1}}}`);
+  const d = document.createElement('div');
+  d.className = 'scene';
+  d.style.animation = `vis${i} ${T}s linear 0s both`;
+  d.innerHTML = s.html;
+  root.appendChild(d);
+});
+const st = document.createElement('style'); st.textContent = css.join('\n'); document.head.appendChild(st);
+
+// transition flashes
+document.getElementById('flashes').innerHTML = [4, 9, 16, 22, 27].map(t =>
+  `<div class="abs" style="inset:0;background:radial-gradient(circle,#fffbe0,rgba(255,255,255,0) 70%);${A('flash', .45, t - .05, 'ease-out')}"></div>`).join('');
+
+// bokeh
+document.getElementById('bokeh').innerHTML = Array.from({ length: 26 }, () => {
+  const r = 30 + rnd() * 110, x = rnd() * 1080, y = rnd() * 1920;
+  return `<div class="abs" style="left:${x - r}px;top:${y - r}px;width:${2 * r}px;height:${2 * r}px;border-radius:50%;
+    background:radial-gradient(circle,rgba(${rnd() > .5 ? '255,250,190' : '200,255,150'},${(.18 + rnd() * .22).toFixed(2)}),rgba(255,255,255,0) 70%);
+    ${L('drift', 8 + rnd() * 8, -rnd() * 10)}"></div>`;
+}).join('');
+// blurred foreground leaves in corners
+document.getElementById('fgleaves').innerHTML = [[-90, 1850, 20, 2.2], [1010, 1890, 200, 2.0], [-90, 60, -30, 2.0], [1060, 20, 210, 1.8]].map(([x, y, r, s]) =>
+  `<svg class="abs" width="10" height="10" style="left:${x}px;top:${y}px;filter:blur(7px);opacity:.7"><g transform="rotate(${r}) scale(${s})"><use href="#leafD"/></g></svg>`).join('');
+
+window.seek = t => { document.getAnimations().forEach(a => { a.currentTime = t * 1000; }); };
+window.ready = document.fonts.ready.then(() => { seek(0); return true; });
+</script>
+</body>
+</html>

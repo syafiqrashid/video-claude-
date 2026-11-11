@@ -1,5 +1,5 @@
 // Service worker ringkas: app boleh dibuka walaupun tiada internet.
-const CACHE = 'buku-kedai-v1';
+const CACHE = 'buku-kedai-v2';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icons/icon.svg'];
 
 self.addEventListener('install', e => {

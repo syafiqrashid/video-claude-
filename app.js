@@ -23,6 +23,22 @@ const monthName = ym => `${BULAN[+ym.slice(5, 7) - 1]} ${ym.slice(0, 4)}`;
 const periodLabel = p => (p.length === 4 ? `Tahun ${p}` : monthName(p));
 const sumTotal = arr => round2(arr.reduce((a, r) => a + (Number(r.total) || 0), 0));
 
+/* ---------- Sokongan pelayar lama ---------- */
+// Pelayar lama (cth iOS < 15.4) tiada <dialog>.showModal — guna gantian ringkas.
+for (const d of document.querySelectorAll('dialog')) {
+  if (typeof d.showModal !== 'function') {
+    d.classList.add('dlg-fallback');
+    d.showModal = () => { d.setAttribute('open', ''); document.body.classList.add('modal-open'); };
+    d.close = () => {
+      d.removeAttribute('open');
+      if (!document.querySelector('dialog[open]')) document.body.classList.remove('modal-open');
+    };
+  }
+}
+// Papar ralat kepada pengguna supaya masalah mudah dikenal pasti.
+window.addEventListener('error', e => toast('Ralat: ' + (e.message || 'tidak diketahui')));
+window.addEventListener('unhandledrejection', e => toast('Ralat: ' + ((e.reason && e.reason.message) || e.reason || 'tidak diketahui')));
+
 /* ---------- IndexedDB ---------- */
 let db;
 const data = { sales: [], purchases: [] };

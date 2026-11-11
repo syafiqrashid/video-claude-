@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Buku Kedai</title>
+  <meta name="description" content="Rekod belian, jualan dan untung rugi perniagaan kecil">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="icons/icon.svg" alt="" class="logo">
+      <div>
+        <h1 id="bizName">Buku Kedai</h1>
+        <small>Rekod belian, jualan &amp; untung rugi</small>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Menu utama">
+    <button data-tab="dashboard" class="active"><span class="ti">📊</span><span>Utama</span></button>
+    <button data-tab="sales"><span class="ti">💰</span><span>Jualan</span></button>
+    <button data-tab="purchases"><span class="ti">🧾</span><span>Belian</span></button>
+    <button data-tab="report"><span class="ti">📑</span><span>Laporan</span></button>
+    <button data-tab="settings"><span class="ti">⚙️</span><span>Tetapan</span></button>
+  </nav>
+
+  <main>
+    <!-- UTAMA -->
+    <section id="tab-dashboard" class="tab active">
+      <div class="row-head">
+        <h2>Ringkasan bulan</h2>
+        <input type="month" id="dashMonth" aria-label="Pilih bulan">
+      </div>
+      <div class="cards">
+        <div class="card stat sales"><span>Jualan</span><strong id="statSales">RM 0.00</strong></div>
+        <div class="card stat purchases"><span>Belian</span><strong id="statPurch">RM 0.00</strong></div>
+        <div class="card stat profit" id="statProfitCard"><span id="statProfitLabel">Untung</span><strong id="statProfit">RM 0.00</strong></div>
+      </div>
+      <div class="quick">
+        <button class="btn primary" data-new="sales">+ Rekod Jualan</button>
+        <button class="btn" data-new="purchases">+ Rekod Belian / Resit</button>
+      </div>
+      <div class="card">
+        <h3>Prestasi tahun <span id="dashYear"></span></h3>
+        <div class="chart-wrap"><canvas id="chart" aria-label="Carta jualan dan belian bulanan"></canvas></div>
+        <p class="muted" id="chartFallback" hidden>Carta tidak dapat dimuatkan (semak sambungan internet).</p>
+      </div>
+      <div class="card">
+        <h3>Transaksi terkini</h3>
+        <div id="recent" class="list"></div>
+      </div>
+    </section>
+
+    <!-- JUALAN -->
+    <section id="tab-sales" class="tab" data-type="sales">
+      <div class="row-head">
+        <h2>Jualan</h2>
+        <button class="btn primary" data-new="sales">+ Tambah Jualan</button>
+      </div>
+      <div class="filters">
+        <input type="month" class="f-month" aria-label="Tapis bulan">
+        <button class="btn small f-all" type="button">Semua bulan</button>
+        <input type="search" class="f-search" placeholder="Cari barang / pelanggan…">
+      </div>
+      <div class="list-total"></div>
+      <div class="list"></div>
+    </section>
+
+    <!-- BELIAN -->
+    <section id="tab-purchases" class="tab" data-type="purchases">
+      <div class="row-head">
+        <h2>Belian &amp; Resit</h2>
+        <button class="btn primary" data-new="purchases">+ Tambah Belian</button>
+      </div>
+      <div class="filters">
+        <input type="month" class="f-month" aria-label="Tapis bulan">
+        <button class="btn small f-all" type="button">Semua bulan</button>
+        <input type="search" class="f-search" placeholder="Cari barang / kedai…">
+      </div>
+      <div class="list-total"></div>
+      <div class="list"></div>
+    </section>
+
+    <!-- LAPORAN -->
+    <section id="tab-report" class="tab">
+      <h2>Laporan Untung Rugi</h2>
+      <div class="card">
+        <div class="seg" role="radiogroup" aria-label="Tempoh laporan">
+          <label><input type="radio" name="period" value="year" checked><span>Tahunan</span></label>
+          <label><input type="radio" name="period" value="month"><span>Bulanan</span></label>
+        </div>
+        <div class="filters">
+          <select id="repYear" aria-label="Pilih tahun"></select>
+          <input type="month" id="repMonth" aria-label="Pilih bulan" hidden>
+        </div>
+        <label class="check"><input type="checkbox" id="repImages"> Sertakan gambar resit dalam PDF</label>
+        <div class="quick">
+          <button class="btn primary" id="btnXlsx" type="button">⬇ Muat turun Excel</button>
+          <button class="btn" id="btnPdf" type="button">⬇ Muat turun PDF</button>
+        </div>
+      </div>
+      <div id="repSummary" class="cards"></div>
+      <div class="card">
+        <h3 id="repTableTitle">Pecahan</h3>
+        <div class="table-wrap" id="repTable"></div>
+      </div>
+      <div class="card">
+        <h3>Barang paling laris</h3>
+        <div class="table-wrap" id="repProducts"></div>
+      </div>
+    </section>
+
+    <!-- TETAPAN -->
+    <section id="tab-settings" class="tab">
+      <h2>Tetapan</h2>
+      <div class="card">
+        <label>Nama perniagaan
+          <input id="setName" placeholder="cth: Kedai Kek Mama">
+        </label>
+        <button class="btn primary" id="saveName" type="button">Simpan nama</button>
+      </div>
+      <div class="card">
+        <h3>Sandaran data</h3>
+        <p class="muted">Semua data (termasuk gambar resit) disimpan dalam pelayar di peranti ini sahaja. Muat turun sandaran secara berkala dan simpan di Google Drive / WhatsApp sendiri supaya data tidak hilang. Sandaran juga boleh dipulihkan di telefon lain.</p>
+        <div class="quick">
+          <button class="btn" id="btnBackup" type="button">⬇ Muat turun sandaran</button>
+          <label class="btn">⬆ Pulihkan sandaran<input type="file" id="restoreFile" accept="application/json,.json" hidden></label>
+        </div>
+        <p class="muted" id="storageInfo"></p>
+      </div>
+      <div class="card danger-zone">
+        <h3>Padam semua data</h3>
+        <p class="muted">Tindakan ini tidak boleh dibatalkan. Muat turun sandaran dahulu.</p>
+        <button class="btn danger" id="btnWipe" type="button">Padam semua data</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Borang tambah / edit -->
+  <dialog id="entryDlg">
+    <form id="entryForm" novalidate>
+      <header class="dlg-head">
+        <h2 id="dlgTitle">Tambah</h2>
+        <button type="button" class="icon" data-close aria-label="Tutup">✕</button>
+      </header>
+      <div class="dlg-body">
+        <div class="grid2">
+          <label>Tarikh<input type="date" name="date" required></label>
+          <label><span id="partyLabel">Pembekal / Kedai</span><input name="party" list="partyList" placeholder="(pilihan)" autocomplete="off"></label>
+        </div>
+        <div class="receipt-box">
+          <label class="btn"><span id="receiptLabel">📷 Upload / ambil gambar resit</span><input type="file" id="receiptInput" accept="image/*" hidden></label>
+          <div id="receiptPreview"></div>
+        </div>
+        <h3>Barang</h3>
+        <div class="items-head"><span>Nama barang</span><span>Kuantiti</span><span>Harga seunit (RM)</span><span>Jumlah</span><span></span></div>
+        <div id="itemRows"></div>
+        <button type="button" class="btn small" id="addItem">+ Tambah barang</button>
+        <div class="grid2">
+          <label>Cara bayaran
+            <select name="payment">
+              <option>Tunai</option><option>Online / QR</option><option>Kad</option><option>Hutang</option>
+            </select>
+          </label>
+          <label>Catatan<input name="note" placeholder="(pilihan)"></label>
+        </div>
+      </div>
+      <footer class="dlg-foot">
+        <div class="grand">Jumlah <strong id="grandTotal">RM 0.00</strong></div>
+        <div class="foot-btns">
+          <button type="button" class="btn" data-close>Batal</button>
+          <button type="submit" class="btn primary">Simpan</button>
+        </div>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="imgDlg" class="img-dlg">
+    <img id="imgFull" alt="Gambar resit">
+    <button type="button" class="btn" data-close>Tutup</button>
+  </dialog>
+
+  <datalist id="itemList"></datalist>
+  <datalist id="partyList"></datalist>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
